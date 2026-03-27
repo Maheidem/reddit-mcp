@@ -10,17 +10,17 @@
 
 | Epic | Title | Tasks | Status | Progress |
 |------|-------|:-----:|--------|----------|
-| [E01](epics/E01-project-scaffolding.md) | Project Scaffolding | 5 | Not Started | 0/5 |
-| [E02](epics/E02-core-infrastructure.md) | Core Infrastructure | 6 | Not Started | 0/6 |
-| [E03](epics/E03-authentication-system.md) | Authentication System | 7 | Not Started | 0/7 |
-| [E04](epics/E04-phase1-read-tools.md) | Phase 1 Read Tools | 8 | Not Started | 0/8 |
-| [E05](epics/E05-phase1-write-tools.md) | Phase 1 Write Tools | 7 | Not Started | 0/7 |
-| [E06](epics/E06-phase1-moderation-tools.md) | Phase 1 Moderation Tools | 6 | Not Started | 0/6 |
-| [E07](epics/E07-mcp-resources-and-prompts.md) | MCP Resources & Prompts | 5 | Not Started | 0/5 |
-| [E08](epics/E08-testing-and-quality.md) | Testing & Quality | 6 | Not Started | 0/6 |
-| [E09](epics/E09-packaging-and-release.md) | Packaging & Release | 5 | Not Started | 0/5 |
-| [E10](epics/E10-phase2-extended-tools.md) | Phase 2 Extended Tools | TBD | Future | — |
-| [E11](epics/E11-phase3-power-user-tools.md) | Phase 3 Power User Tools | TBD | Future | — |
+| [E01](epics/E01-project-scaffolding/EPIC.md) | Project Scaffolding | 5 | Not Started | 0/5 |
+| [E02](epics/E02-core-infrastructure/EPIC.md) | Core Infrastructure | 6 | Not Started | 0/6 |
+| [E03](epics/E03-authentication-system/EPIC.md) | Authentication System | 7 | Not Started | 0/7 |
+| [E04](epics/E04-phase1-read-tools/EPIC.md) | Phase 1 Read Tools | 8 | Not Started | 0/8 |
+| [E05](epics/E05-phase1-write-tools/EPIC.md) | Phase 1 Write Tools | 7 | Not Started | 0/7 |
+| [E06](epics/E06-phase1-moderation-tools/EPIC.md) | Phase 1 Moderation Tools | 6 | Not Started | 0/6 |
+| [E07](epics/E07-mcp-resources-and-prompts/EPIC.md) | MCP Resources & Prompts | 5 | Not Started | 0/5 |
+| [E08](epics/E08-testing-and-quality/EPIC.md) | Testing & Quality | 6 | Not Started | 0/6 |
+| [E09](epics/E09-packaging-and-release/EPIC.md) | Packaging & Release | 5 | Not Started | 0/5 |
+| [E10](epics/E10-phase2-extended-tools/EPIC.md) | Phase 2 Extended Tools | TBD | Future | — |
+| [E11](epics/E11-phase3-power-user-tools/EPIC.md) | Phase 3 Power User Tools | TBD | Future | — |
 
 **Phase 1 Total**: 55 tasks | **Estimated**: 102-178 hours
 
