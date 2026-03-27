@@ -12,6 +12,7 @@
 The TypeScript MCP SDK (`@modelcontextprotocol/sdk` v1.28.0) is the most mature MCP implementation available, with 36,800+ dependents on npm and Tier 1 official support. This document provides a complete implementation guide for building a Reddit MCP server with 20-30 tools using TypeScript + direct HTTP to the Reddit API.
 
 **Key takeaways:**
+
 - Use `McpServer` (high-level API) with Zod v4 for schema validation
 - Start with **stdio transport** for development, add **Streamable HTTP** for deployment
 - Organize tools with `reddit_{action}_{resource}` naming (e.g., `reddit_search_posts`)
@@ -42,15 +43,15 @@ The TypeScript MCP SDK (`@modelcontextprotocol/sdk` v1.28.0) is the most mature 
 
 ### Current State (March 2026)
 
-| Detail | Value |
-|--------|-------|
-| **Latest Version** | v1.28.0 (March 25, 2026) |
-| **npm Dependents** | 36,864 projects |
-| **Total Releases** | 81 |
-| **Tier** | Tier 1 (Official, fully supported) |
-| **Peer Dependency** | Zod v4 |
-| **Runtime Support** | Node.js, Bun, Deno |
-| **Language** | TypeScript 96.8% |
+| Detail              | Value                              |
+| ------------------- | ---------------------------------- |
+| **Latest Version**  | v1.28.0 (March 25, 2026)           |
+| **npm Dependents**  | 36,864 projects                    |
+| **Total Releases**  | 81                                 |
+| **Tier**            | Tier 1 (Official, fully supported) |
+| **Peer Dependency** | Zod v4                             |
+| **Runtime Support** | Node.js, Bun, Deno                 |
+| **Language**        | TypeScript 96.8%                   |
 
 **Source:** [npm: @modelcontextprotocol/sdk](https://www.npmjs.com/package/@modelcontextprotocol/sdk), [GitHub: typescript-sdk](https://github.com/modelcontextprotocol/typescript-sdk)
 
@@ -71,6 +72,7 @@ The TypeScript MCP SDK (`@modelcontextprotocol/sdk` v1.28.0) is the most mature 
 ### V2 Status (Pre-Alpha)
 
 V2 will reorganize into split packages:
+
 - `@modelcontextprotocol/server` — Build MCP servers
 - `@modelcontextprotocol/client` — Build MCP clients
 - `@modelcontextprotocol/node` — Node.js HTTP transport
@@ -83,13 +85,13 @@ V2 will reorganize into split packages:
 
 ### Recent Release Highlights
 
-| Version | Date | Key Changes |
-|---------|------|-------------|
+| Version     | Date         | Key Changes                                                                                               |
+| ----------- | ------------ | --------------------------------------------------------------------------------------------------------- |
 | **v1.28.0** | Mar 25, 2026 | OAuth scopes_supported default, JSON Schema validation for inputSchema, RFC 8252 loopback port relaxation |
-| **v1.27.1** | Feb 24, 2026 | Auth conformance tests, command injection fix, silently-swallowed transport error fix |
-| **v1.27.0** | Feb 16, 2026 | Conformance test infrastructure, discoverOAuthServerInfo() caching, streaming elicitation/sampling |
-| **v1.26.0** | Feb 4, 2026 | **SECURITY: Cross-client response data leakage fix** (GHSA-345p-7cg4-v4c7), client credentials scopes |
-| **v1.25.0** | Dec 15, 2024 | Removed loose/passthrough types, Task types, Fetch transport, ES2020 target |
+| **v1.27.1** | Feb 24, 2026 | Auth conformance tests, command injection fix, silently-swallowed transport error fix                     |
+| **v1.27.0** | Feb 16, 2026 | Conformance test infrastructure, discoverOAuthServerInfo() caching, streaming elicitation/sampling        |
+| **v1.26.0** | Feb 4, 2026  | **SECURITY: Cross-client response data leakage fix** (GHSA-345p-7cg4-v4c7), client credentials scopes     |
+| **v1.25.0** | Dec 15, 2024 | Removed loose/passthrough types, Task types, Fetch transport, ES2020 target                               |
 
 **Source:** [GitHub Releases](https://github.com/modelcontextprotocol/typescript-sdk/releases)
 
@@ -100,12 +102,12 @@ V2 will reorganize into split packages:
 ### Basic Server Setup
 
 ```typescript
-import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
-import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
+import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
+import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 
 const server = new McpServer({
-  name: 'reddit-mcp-server',
-  version: '1.0.0'
+  name: "reddit-mcp-server",
+  version: "1.0.0",
 });
 
 // Register tools, resources, prompts here...
@@ -118,20 +120,20 @@ await server.connect(transport);
 
 ```typescript
 const server = new McpServer(
-  { name: 'reddit-mcp-server', version: '1.0.0' },
-  { capabilities: { logging: {} } }
+  { name: "reddit-mcp-server", version: "1.0.0" },
+  { capabilities: { logging: {} } },
 );
 ```
 
 ### McpServer vs Server (Low-Level)
 
-| Feature | `McpServer` (High-Level) | `Server` (Low-Level) |
-|---------|-------------------------|---------------------|
-| **Use when** | Almost always | Custom protocol handling |
-| **Auto-negotiation** | Yes | Manual |
-| **Input validation** | Automatic via Zod | Manual |
-| **Request routing** | Automatic | Manual handler mapping |
-| **Recommended** | **Yes** | Rarely needed |
+| Feature              | `McpServer` (High-Level) | `Server` (Low-Level)     |
+| -------------------- | ------------------------ | ------------------------ |
+| **Use when**         | Almost always            | Custom protocol handling |
+| **Auto-negotiation** | Yes                      | Manual                   |
+| **Input validation** | Automatic via Zod        | Manual                   |
+| **Request routing**  | Automatic                | Manual handler mapping   |
+| **Recommended**      | **Yes**                  | Rarely needed            |
 
 **Always use `McpServer`** unless you need custom protocol-level behavior.
 
@@ -168,11 +170,11 @@ const result = await server.createMessage({
 
 ### Transport Comparison
 
-| Transport | Use Case | Multi-Client | Network | Recommended |
-|-----------|----------|-------------|---------|-------------|
-| **stdio** | Local CLI tools, editor integrations | No (1:1) | No | Development + CLI distribution |
-| **Streamable HTTP** | Remote servers, multi-user | Yes | Yes | **Production deployment** |
-| **SSE** | Legacy clients only | Yes | Yes | **Deprecated** (March 2025) |
+| Transport           | Use Case                             | Multi-Client | Network | Recommended                    |
+| ------------------- | ------------------------------------ | ------------ | ------- | ------------------------------ |
+| **stdio**           | Local CLI tools, editor integrations | No (1:1)     | No      | Development + CLI distribution |
+| **Streamable HTTP** | Remote servers, multi-user           | Yes          | Yes     | **Production deployment**      |
+| **SSE**             | Legacy clients only                  | Yes          | Yes     | **Deprecated** (March 2025)    |
 
 **Decision rule:** If the user controls the machine → stdio. If they don't → Streamable HTTP.
 
@@ -181,10 +183,10 @@ const result = await server.createMessage({
 ### stdio Transport (Development + CLI)
 
 ```typescript
-import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
-import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
+import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
+import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 
-const server = new McpServer({ name: 'reddit-mcp', version: '1.0.0' });
+const server = new McpServer({ name: "reddit-mcp", version: "1.0.0" });
 
 // Register tools...
 
@@ -197,24 +199,24 @@ await server.connect(transport);
 ### Streamable HTTP — Stateless (Production)
 
 ```typescript
-import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
-import { createMcpExpressApp } from '@modelcontextprotocol/sdk/server/express.js';
-import { NodeStreamableHTTPServerTransport } from '@modelcontextprotocol/sdk/server/node.js';
+import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
+import { createMcpExpressApp } from "@modelcontextprotocol/sdk/server/express.js";
+import { NodeStreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/node.js";
 
 const app = createMcpExpressApp(); // Auto DNS-rebinding protection
 
-app.post('/mcp', async (req, res) => {
-  const server = new McpServer({ name: 'reddit-mcp', version: '1.0.0' });
+app.post("/mcp", async (req, res) => {
+  const server = new McpServer({ name: "reddit-mcp", version: "1.0.0" });
   // Register tools on each request (or use a factory)
 
   const transport = new NodeStreamableHTTPServerTransport({
-    sessionIdGenerator: undefined  // Stateless — no session tracking
+    sessionIdGenerator: undefined, // Stateless — no session tracking
   });
   await server.connect(transport);
   await transport.handleRequest(req, res, req.body);
 });
 
-app.listen(3000, '127.0.0.1');
+app.listen(3000, "127.0.0.1");
 ```
 
 ### Streamable HTTP — Stateful with Sessions
@@ -222,7 +224,7 @@ app.listen(3000, '127.0.0.1');
 ```typescript
 const transport = new NodeStreamableHTTPServerTransport({
   sessionIdGenerator: () => randomUUID(),
-  enableJsonResponse: false  // Allow SSE streaming for notifications
+  enableJsonResponse: false, // Allow SSE streaming for notifications
 });
 ```
 
@@ -235,12 +237,12 @@ For servers that need to support both modern and legacy clients, see the `sseAnd
 Always use when binding to localhost:
 
 ```typescript
-import { createMcpExpressApp } from '@modelcontextprotocol/sdk/server/express.js';
-const app = createMcpExpressApp({ host: '127.0.0.1' }); // Auto-protected
+import { createMcpExpressApp } from "@modelcontextprotocol/sdk/server/express.js";
+const app = createMcpExpressApp({ host: "127.0.0.1" }); // Auto-protected
 
 // Or manually:
-import { hostHeaderValidation } from '@modelcontextprotocol/sdk/server/middleware/hostHeaderValidation.js';
-app.use(hostHeaderValidation(['localhost', '127.0.0.1']));
+import { hostHeaderValidation } from "@modelcontextprotocol/sdk/server/middleware/hostHeaderValidation.js";
+app.use(hostHeaderValidation(["localhost", "127.0.0.1"]));
 ```
 
 ---
@@ -252,47 +254,54 @@ app.use(hostHeaderValidation(['localhost', '127.0.0.1']));
 The SDK uses **Zod v4 as a peer dependency** for tool input/output schemas. Zod schemas are automatically converted to JSON Schema for the MCP protocol.
 
 ```typescript
-import { z } from 'zod';
+import { z } from "zod";
 
 server.registerTool(
-  'reddit_search_posts',
+  "reddit_search_posts",
   {
-    title: 'Search Reddit Posts',
-    description: 'Search for posts across Reddit or within a specific subreddit. ' +
-      'Returns titles, scores, URLs, and comment counts. ' +
-      'Use this when the user wants to find discussions about a topic.',
+    title: "Search Reddit Posts",
+    description:
+      "Search for posts across Reddit or within a specific subreddit. " +
+      "Returns titles, scores, URLs, and comment counts. " +
+      "Use this when the user wants to find discussions about a topic.",
     inputSchema: {
-      query: z.string().describe('Search query — keywords, phrases, or Reddit search syntax'),
-      subreddit: z.string().optional().describe('Limit search to this subreddit (without r/ prefix)'),
-      sort: z.enum(['relevance', 'hot', 'top', 'new', 'comments'])
-        .default('relevance')
-        .describe('Sort order for results'),
-      time: z.enum(['hour', 'day', 'week', 'month', 'year', 'all'])
-        .default('all')
+      query: z.string().describe("Search query — keywords, phrases, or Reddit search syntax"),
+      subreddit: z
+        .string()
+        .optional()
+        .describe("Limit search to this subreddit (without r/ prefix)"),
+      sort: z
+        .enum(["relevance", "hot", "top", "new", "comments"])
+        .default("relevance")
+        .describe("Sort order for results"),
+      time: z
+        .enum(["hour", "day", "week", "month", "year", "all"])
+        .default("all")
         .describe('Time filter — only applies when sort is "top"'),
-      limit: z.number().min(1).max(100).default(25)
-        .describe('Number of results to return (1-100)')
+      limit: z.number().min(1).max(100).default(25).describe("Number of results to return (1-100)"),
     },
     outputSchema: {
-      posts: z.array(z.object({
-        title: z.string(),
-        subreddit: z.string(),
-        score: z.number(),
-        url: z.string(),
-        num_comments: z.number(),
-        created_utc: z.number()
-      })),
+      posts: z.array(
+        z.object({
+          title: z.string(),
+          subreddit: z.string(),
+          score: z.number(),
+          url: z.string(),
+          num_comments: z.number(),
+          created_utc: z.number(),
+        }),
+      ),
       has_more: z.boolean(),
-      next_after: z.string().optional()
-    }
+      next_after: z.string().optional(),
+    },
   },
   async ({ query, subreddit, sort, time, limit }) => {
     const results = await redditClient.search({ query, subreddit, sort, time, limit });
     return {
-      content: [{ type: 'text', text: JSON.stringify(results, null, 2) }],
-      structuredContent: results
+      content: [{ type: "text", text: JSON.stringify(results, null, 2) }],
+      structuredContent: results,
     };
-  }
+  },
 );
 ```
 
@@ -364,13 +373,13 @@ server.registerTool('reddit_get_post', { ... }, async ({ post_id }) => {
 Throw `McpError` for protocol violations:
 
 ```typescript
-import { McpError, ErrorCode } from '@modelcontextprotocol/sdk/types.js';
+import { McpError, ErrorCode } from "@modelcontextprotocol/sdk/types.js";
 
 // Invalid parameters
-throw new McpError(ErrorCode.InvalidParams, 'subreddit name cannot contain spaces');
+throw new McpError(ErrorCode.InvalidParams, "subreddit name cannot contain spaces");
 
 // Internal error
-throw new McpError(ErrorCode.InternalError, 'Reddit API connection failed');
+throw new McpError(ErrorCode.InternalError, "Reddit API connection failed");
 ```
 
 ### Tool Annotations
@@ -378,14 +387,18 @@ throw new McpError(ErrorCode.InternalError, 'Reddit API connection failed');
 Guide client behavior with annotations:
 
 ```typescript
-server.registerTool('reddit_search_posts', {
-  // ... schema ...
-  annotations: {
-    readOnlyHint: true,      // Does not modify state
-    destructiveHint: false,   // Does not delete anything
-    openWorldHint: true       // Interacts with external service
-  }
-}, handler);
+server.registerTool(
+  "reddit_search_posts",
+  {
+    // ... schema ...
+    annotations: {
+      readOnlyHint: true, // Does not modify state
+      destructiveHint: false, // Does not delete anything
+      openWorldHint: true, // Interacts with external service
+    },
+  },
+  handler,
+);
 ```
 
 ---
@@ -407,9 +420,9 @@ For local CLI usage, the simplest pattern is environment variables:
 interface RedditConfig {
   clientId: string;
   clientSecret: string;
-  username?: string;       // For script-type apps
-  password?: string;       // For script-type apps
-  refreshToken?: string;   // For web/installed apps
+  username?: string; // For script-type apps
+  password?: string; // For script-type apps
+  refreshToken?: string; // For web/installed apps
   userAgent: string;
 }
 
@@ -427,34 +440,34 @@ class RedditAuthManager {
   }
 
   private async refreshAccessToken(): Promise<string> {
-    const credentials = Buffer.from(
-      `${this.config.clientId}:${this.config.clientSecret}`
-    ).toString('base64');
+    const credentials = Buffer.from(`${this.config.clientId}:${this.config.clientSecret}`).toString(
+      "base64",
+    );
 
     const body = this.config.refreshToken
       ? `grant_type=refresh_token&refresh_token=${this.config.refreshToken}`
       : `grant_type=password&username=${this.config.username}&password=${this.config.password}`;
 
-    const response = await fetch('https://www.reddit.com/api/v1/access_token', {
-      method: 'POST',
+    const response = await fetch("https://www.reddit.com/api/v1/access_token", {
+      method: "POST",
       headers: {
-        'Authorization': `Basic ${credentials}`,
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'User-Agent': this.config.userAgent
+        Authorization: `Basic ${credentials}`,
+        "Content-Type": "application/x-www-form-urlencoded",
+        "User-Agent": this.config.userAgent,
       },
-      body
+      body,
     });
 
     if (!response.ok) {
       throw new McpError(
         ErrorCode.InternalError,
-        `Reddit auth failed: ${response.status} ${response.statusText}`
+        `Reddit auth failed: ${response.status} ${response.statusText}`,
       );
     }
 
     const data = await response.json();
     this.accessToken = data.access_token;
-    this.tokenExpiry = Date.now() + (data.expires_in * 1000);
+    this.tokenExpiry = Date.now() + data.expires_in * 1000;
     return this.accessToken;
   }
 }
@@ -471,15 +484,22 @@ For multi-user deployments, use the MCP auth spec's OAuth flow:
 
 ```typescript
 // Protected Resource Metadata endpoint
-app.get('/.well-known/oauth-protected-resource', (req, res) => {
+app.get("/.well-known/oauth-protected-resource", (req, res) => {
   res.json({
-    resource: 'https://your-reddit-mcp-server.com',
-    authorization_servers: ['https://www.reddit.com/api/v1'],
+    resource: "https://your-reddit-mcp-server.com",
+    authorization_servers: ["https://www.reddit.com/api/v1"],
     scopes_supported: [
-      'read', 'identity', 'submit', 'vote', 'edit',
-      'subscribe', 'modposts', 'modflair', 'modlog'
+      "read",
+      "identity",
+      "submit",
+      "vote",
+      "edit",
+      "subscribe",
+      "modposts",
+      "modflair",
+      "modlog",
     ],
-    bearer_methods_supported: ['header']
+    bearer_methods_supported: ["header"],
   });
 });
 ```
@@ -522,6 +542,7 @@ This pattern works well for Reddit where the user needs to grant specific OAuth 
 ### The Problem
 
 Reddit's free tier allows **100 queries per minute (QPM)** per OAuth client ID, averaged over a 10-minute window. The MCP server must:
+
 1. Respect this limit
 2. Communicate rate limit status to the LLM when hit
 3. Help the LLM decide whether to retry or give up
@@ -546,7 +567,7 @@ class RedditRateLimiter {
     this.refill();
     if (this.tokens < 1) {
       const waitMs = Math.ceil((1 - this.tokens) / this.refillRate);
-      await new Promise(resolve => setTimeout(resolve, waitMs));
+      await new Promise((resolve) => setTimeout(resolve, waitMs));
       this.refill();
     }
     this.tokens -= 1;
@@ -575,23 +596,26 @@ async function makeRedditRequest(path: string, rateLimiter: RedditRateLimiter): 
   await rateLimiter.acquire();
 
   const response = await fetch(`https://oauth.reddit.com${path}`, {
-    headers: { 'Authorization': `Bearer ${token}`, 'User-Agent': userAgent }
+    headers: { Authorization: `Bearer ${token}`, "User-Agent": userAgent },
   });
 
   // Reddit returns rate limit headers
-  const remaining = parseInt(response.headers.get('x-ratelimit-remaining') || '0');
-  const resetSeconds = parseInt(response.headers.get('x-ratelimit-reset') || '0');
+  const remaining = parseInt(response.headers.get("x-ratelimit-remaining") || "0");
+  const resetSeconds = parseInt(response.headers.get("x-ratelimit-reset") || "0");
 
   if (response.status === 429) {
     return {
       isError: true,
-      content: [{
-        type: 'text',
-        text: `Reddit API rate limit reached. ${remaining} requests remaining. ` +
-          `Rate limit resets in ${resetSeconds} seconds. ` +
-          `Please wait before making more Reddit API calls, or try a more specific query ` +
-          `to reduce the number of API calls needed.`
-      }]
+      content: [
+        {
+          type: "text",
+          text:
+            `Reddit API rate limit reached. ${remaining} requests remaining. ` +
+            `Rate limit resets in ${resetSeconds} seconds. ` +
+            `Please wait before making more Reddit API calls, or try a more specific query ` +
+            `to reduce the number of API calls needed.`,
+        },
+      ],
     };
   }
 
@@ -602,6 +626,7 @@ async function makeRedditRequest(path: string, rateLimiter: RedditRateLimiter): 
 ### Rate Limit Headers from Reddit
 
 Reddit's API returns these headers on every response:
+
 - `x-ratelimit-remaining` — requests left in current window
 - `x-ratelimit-reset` — seconds until window resets
 - `x-ratelimit-used` — requests used in current window
@@ -616,13 +641,14 @@ function wrapResponse(data: any, rateLimiter: RedditRateLimiter): CallToolResult
   let text = JSON.stringify(data, null, 2);
 
   if (remaining < 10) {
-    text += `\n\n⚠️ Rate limit warning: Only ${remaining} Reddit API calls remaining ` +
+    text +=
+      `\n\n⚠️ Rate limit warning: Only ${remaining} Reddit API calls remaining ` +
       `in the current window. Consider batching requests or waiting.`;
   }
 
   return {
-    content: [{ type: 'text', text }],
-    structuredContent: data
+    content: [{ type: "text", text }],
+    structuredContent: data,
   };
 }
 ```
@@ -641,6 +667,7 @@ function wrapResponse(data: any, rateLimiter: RedditRateLimiter): CallToolResult
 ### MCP Inspector (Development)
 
 **Install & Run:**
+
 ```bash
 npx @modelcontextprotocol/inspector
 # Opens UI at http://localhost:6274
@@ -653,6 +680,7 @@ npx @modelcontextprotocol/inspector --cli node build/index.js --method tools/lis
 ```
 
 **Features:**
+
 - Visual testing of tools, resources, prompts
 - Real-time communication logs
 - Protocol validation
@@ -667,17 +695,17 @@ npx @modelcontextprotocol/inspector --cli node build/index.js --method tools/lis
 The key pattern: create server and client in-memory, bypassing transport:
 
 ```typescript
-import { describe, it, expect, beforeEach } from 'vitest';
-import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
-import { InMemoryTransport } from '@modelcontextprotocol/sdk/inMemory.js';
-import { Client } from '@modelcontextprotocol/sdk/client/index.js';
+import { describe, it, expect, beforeEach } from "vitest";
+import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
+import { InMemoryTransport } from "@modelcontextprotocol/sdk/inMemory.js";
+import { Client } from "@modelcontextprotocol/sdk/client/index.js";
 
-describe('Reddit MCP Server', () => {
+describe("Reddit MCP Server", () => {
   let server: McpServer;
   let client: Client;
 
   beforeEach(async () => {
-    server = new McpServer({ name: 'test-reddit', version: '1.0.0' });
+    server = new McpServer({ name: "test-reddit", version: "1.0.0" });
 
     // Register tools with mocked Reddit client
     registerRedditTools(server, mockRedditClient);
@@ -685,44 +713,44 @@ describe('Reddit MCP Server', () => {
     const [clientTransport, serverTransport] = InMemoryTransport.createLinkedPair();
     await server.connect(serverTransport);
 
-    client = new Client({ name: 'test-client', version: '1.0.0' });
+    client = new Client({ name: "test-client", version: "1.0.0" });
     await client.connect(clientTransport);
   });
 
-  it('should list all tools', async () => {
+  it("should list all tools", async () => {
     const result = await client.listTools();
     expect(result.tools.length).toBeGreaterThan(0);
-    expect(result.tools.map(t => t.name)).toContain('reddit_search_posts');
+    expect(result.tools.map((t) => t.name)).toContain("reddit_search_posts");
   });
 
-  it('should search posts', async () => {
-    const result = await client.callTool('reddit_search_posts', {
-      query: 'typescript',
-      subreddit: 'programming',
-      limit: 5
+  it("should search posts", async () => {
+    const result = await client.callTool("reddit_search_posts", {
+      query: "typescript",
+      subreddit: "programming",
+      limit: 5,
     });
     expect(result.isError).toBeFalsy();
     const content = JSON.parse(result.content[0].text);
     expect(content.posts).toHaveLength(5);
   });
 
-  it('should handle 404 gracefully', async () => {
-    const result = await client.callTool('reddit_get_post', {
-      post_id: 'nonexistent123'
+  it("should handle 404 gracefully", async () => {
+    const result = await client.callTool("reddit_get_post", {
+      post_id: "nonexistent123",
     });
     expect(result.isError).toBe(true);
-    expect(result.content[0].text).toContain('not found');
+    expect(result.content[0].text).toContain("not found");
   });
 
-  it('should communicate rate limits', async () => {
+  it("should communicate rate limits", async () => {
     // Exhaust rate limit in mock
     mockRedditClient.setRateLimitRemaining(0);
 
-    const result = await client.callTool('reddit_search_posts', {
-      query: 'test'
+    const result = await client.callTool("reddit_search_posts", {
+      query: "test",
     });
     expect(result.isError).toBe(true);
-    expect(result.content[0].text).toContain('rate limit');
+    expect(result.content[0].text).toContain("rate limit");
   });
 });
 ```
@@ -734,20 +762,24 @@ class MockRedditClient implements RedditClientInterface {
   private rateLimitRemaining = 100;
   private mockData: Map<string, any> = new Map();
 
-  setRateLimitRemaining(n: number) { this.rateLimitRemaining = n; }
-  setMockData(key: string, data: any) { this.mockData.set(key, data); }
+  setRateLimitRemaining(n: number) {
+    this.rateLimitRemaining = n;
+  }
+  setMockData(key: string, data: any) {
+    this.mockData.set(key, data);
+  }
 
   async search(params: SearchParams): Promise<SearchResult> {
     if (this.rateLimitRemaining <= 0) {
-      throw new RateLimitError('Rate limit exceeded', 60);
+      throw new RateLimitError("Rate limit exceeded", 60);
     }
     this.rateLimitRemaining--;
-    return this.mockData.get('search') || { posts: [], has_more: false };
+    return this.mockData.get("search") || { posts: [], has_more: false };
   }
 
   async getPost(id: string): Promise<Post> {
     if (this.rateLimitRemaining <= 0) {
-      throw new RateLimitError('Rate limit exceeded', 60);
+      throw new RateLimitError("Rate limit exceeded", 60);
     }
     this.rateLimitRemaining--;
     const post = this.mockData.get(`post:${id}`);
@@ -774,20 +806,20 @@ npx @modelcontextprotocol/inspector --cli node dist/index.js \
 ### Integration Test (Full Transport)
 
 ```typescript
-import { spawn } from 'child_process';
+import { spawn } from "child_process";
 
-describe('Integration: stdio transport', () => {
-  it('should handle full request/response cycle', async () => {
-    const proc = spawn('node', ['dist/index.js'], {
-      env: { ...process.env, REDDIT_CLIENT_ID: 'test', /* ... */ }
+describe("Integration: stdio transport", () => {
+  it("should handle full request/response cycle", async () => {
+    const proc = spawn("node", ["dist/index.js"], {
+      env: { ...process.env, REDDIT_CLIENT_ID: "test" /* ... */ },
     });
 
     const transport = new StdioClientTransport({
       reader: proc.stdout,
-      writer: proc.stdin
+      writer: proc.stdin,
     });
 
-    const client = new Client({ name: 'integration-test', version: '1.0.0' });
+    const client = new Client({ name: "integration-test", version: "1.0.0" });
     await client.connect(transport);
 
     const tools = await client.listTools();
@@ -806,13 +838,13 @@ describe('Integration: stdio transport', () => {
 
 Research from [PagerDuty](https://www.pagerduty.com/eng/lessons-learned-while-building-pagerduty-mcp-server/) and [Speakeasy](https://www.speakeasy.com/mcp/tool-design/less-is-more):
 
-| Tool Count | Effect |
-|-----------|--------|
-| 1-15 | Optimal — models select accurately |
-| 15-25 | Good with clear naming — minor overlap |
-| **25-30** | **Sweet spot ceiling — descriptions begin to overlap** |
-| 30+ | Model confusion increases sharply |
-| 80+ | Reported failures in tool selection |
+| Tool Count | Effect                                                 |
+| ---------- | ------------------------------------------------------ |
+| 1-15       | Optimal — models select accurately                     |
+| 15-25      | Good with clear naming — minor overlap                 |
+| **25-30**  | **Sweet spot ceiling — descriptions begin to overlap** |
+| 30+        | Model confusion increases sharply                      |
+| 80+        | Reported failures in tool selection                    |
 
 **Source:** [GitHub Discussion #1251](https://github.com/modelcontextprotocol/modelcontextprotocol/discussions/1251)
 
@@ -834,6 +866,7 @@ getRedditPost              ✗ CamelCase, no service prefix
 ### Proposed Reddit MCP Tool Set (25 tools)
 
 #### Read Operations (~15 tools)
+
 ```
 reddit_search_posts          — Search posts across Reddit
 reddit_get_post              — Get a specific post by ID/URL
@@ -851,6 +884,7 @@ reddit_get_multireddit       — Get posts from a multireddit
 ```
 
 #### Write Operations (~7 tools)
+
 ```
 reddit_submit_post           — Submit a new text or link post
 reddit_submit_comment        — Reply to a post or comment
@@ -862,6 +896,7 @@ reddit_delete                — Delete own post or comment
 ```
 
 #### Moderation Operations (~5 tools)
+
 ```
 reddit_mod_remove            — Remove a post or comment (mod)
 reddit_mod_approve           — Approve a post or comment (mod)
@@ -975,6 +1010,7 @@ reddit-mcp-server/
 ### Multi-Node Deployment (Streamable HTTP)
 
 Three patterns from SDK docs:
+
 1. **Stateless:** Any node handles any request (simplest, works for Reddit MCP)
 2. **Persistent storage:** Shared DB for session state (PostgreSQL/Redis)
 3. **Local state + routing:** Message queue for session affinity
@@ -1006,25 +1042,25 @@ class RedditClient {
     const response = await fetch(`https://oauth.reddit.com${path}`, {
       ...options,
       headers: {
-        'Authorization': `Bearer ${token}`,
-        'User-Agent': this.userAgent,
-        ...options?.headers
-      }
+        Authorization: `Bearer ${token}`,
+        "User-Agent": this.userAgent,
+        ...options?.headers,
+      },
     });
 
     // Update rate limiter from response headers
-    const remaining = response.headers.get('x-ratelimit-remaining');
+    const remaining = response.headers.get("x-ratelimit-remaining");
     if (remaining) {
       this.rateLimiter.updateFromHeaders(
         parseInt(remaining),
-        parseInt(response.headers.get('x-ratelimit-reset') || '0')
+        parseInt(response.headers.get("x-ratelimit-reset") || "0"),
       );
     }
 
     if (response.status === 429) {
       throw new RateLimitError(
-        'Reddit API rate limit exceeded',
-        parseInt(response.headers.get('x-ratelimit-reset') || '60')
+        "Reddit API rate limit exceeded",
+        parseInt(response.headers.get("x-ratelimit-reset") || "60"),
       );
     }
 
@@ -1039,12 +1075,12 @@ class RedditClient {
   async searchPosts(params: SearchParams): Promise<SearchResult> {
     const query = new URLSearchParams({
       q: params.query,
-      sort: params.sort || 'relevance',
-      t: params.time || 'all',
+      sort: params.sort || "relevance",
+      t: params.time || "all",
       limit: String(params.limit || 25),
-      ...(params.after && { after: params.after })
+      ...(params.after && { after: params.after }),
     });
-    const sub = params.subreddit ? `/r/${params.subreddit}` : '';
+    const sub = params.subreddit ? `/r/${params.subreddit}` : "";
     return this.request<SearchResult>(`${sub}/search.json?${query}`);
   }
 }
@@ -1052,16 +1088,16 @@ class RedditClient {
 
 ### Mapping Reddit API to MCP Tools
 
-| Reddit API Endpoint | MCP Tool | Notes |
-|---------------------|----------|-------|
-| `GET /search` | `reddit_search_posts` | Combine with subreddit scoping |
-| `GET /r/{sub}/hot` | `reddit_get_subreddit_posts` | Parameterize sort (hot/new/top/rising) |
-| `GET /api/info?id=t3_{id}` | `reddit_get_post` | Accept URL or ID |
-| `GET /r/{sub}/comments/{id}` | `reddit_get_comments` | Include sort, depth, limit |
-| `POST /api/submit` | `reddit_submit_post` | type=self or link |
-| `POST /api/comment` | `reddit_submit_comment` | thing_id = parent fullname |
-| `POST /api/vote` | `reddit_vote` | dir: 1, 0, -1 |
-| `GET /user/{user}/about` | `reddit_get_user_profile` | Public profile data |
+| Reddit API Endpoint          | MCP Tool                     | Notes                                  |
+| ---------------------------- | ---------------------------- | -------------------------------------- |
+| `GET /search`                | `reddit_search_posts`        | Combine with subreddit scoping         |
+| `GET /r/{sub}/hot`           | `reddit_get_subreddit_posts` | Parameterize sort (hot/new/top/rising) |
+| `GET /api/info?id=t3_{id}`   | `reddit_get_post`            | Accept URL or ID                       |
+| `GET /r/{sub}/comments/{id}` | `reddit_get_comments`        | Include sort, depth, limit             |
+| `POST /api/submit`           | `reddit_submit_post`         | type=self or link                      |
+| `POST /api/comment`          | `reddit_submit_comment`      | thing_id = parent fullname             |
+| `POST /api/vote`             | `reddit_vote`                | dir: 1, 0, -1                          |
+| `GET /user/{user}/about`     | `reddit_get_user_profile`    | Public profile data                    |
 
 ### Response Formatting for LLMs
 
@@ -1094,6 +1130,7 @@ return {
 ## 11. Sources
 
 ### Official SDK Documentation
+
 1. **[TypeScript SDK npm](https://www.npmjs.com/package/@modelcontextprotocol/sdk)** — v1.28.0, 36.8K dependents — Accessed: 2026-03-27 — Reliability: 5/5
 2. **[TypeScript SDK GitHub](https://github.com/modelcontextprotocol/typescript-sdk)** — Source, releases, docs — Accessed: 2026-03-27 — Reliability: 5/5
 3. **[SDK Server Documentation](https://ts.sdk.modelcontextprotocol.io/documents/server.html)** — McpServer API reference — Accessed: 2026-03-27 — Reliability: 5/5
@@ -1103,11 +1140,13 @@ return {
 7. **[MCP Inspector GitHub](https://github.com/modelcontextprotocol/inspector)** — Testing tool — Accessed: 2026-03-27 — Reliability: 5/5
 
 ### Transport & Architecture
+
 8. **[MCP Transport Protocols Comparison](https://mcpcat.io/guides/comparing-stdio-sse-streamablehttp/)** — stdio vs SSE vs Streamable HTTP — Accessed: 2026-03-27 — Reliability: 4/5
 9. **[Why MCP Deprecated SSE](https://blog.fka.dev/blog/2025-06-06-why-mcp-deprecated-sse-and-go-with-streamable-http/)** — SSE → Streamable HTTP rationale — Accessed: 2026-03-27 — Reliability: 4/5
 10. **[MCP Transports Explained (DEV)](https://dev.to/jefe_cool/mcp-transports-explained-stdio-vs-streamable-http-and-when-to-use-each-3lco)** — Decision framework — Accessed: 2026-03-27 — Reliability: 3/5
 
 ### Best Practices & Design
+
 11. **[MCP Server Best Practices — philschmid.de](https://www.philschmid.de/mcp-best-practices)** — Six core principles — Accessed: 2026-03-27 — Reliability: 4/5
 12. **[PagerDuty MCP Server Lessons](https://www.pagerduty.com/eng/lessons-learned-while-building-pagerduty-mcp-server/)** — Production lessons — Accessed: 2026-03-27 — Reliability: 4/5
 13. **[Why Less is More for MCP — Speakeasy](https://www.speakeasy.com/mcp/tool-design/less-is-more)** — Tool count management — Accessed: 2026-03-27 — Reliability: 4/5
@@ -1116,21 +1155,25 @@ return {
 16. **[Too Many Tools Discussion #1251](https://github.com/modelcontextprotocol/modelcontextprotocol/discussions/1251)** — Community data on tool limits — Accessed: 2026-03-27 — Reliability: 4/5
 
 ### Authentication
+
 17. **[MCP Auth Implementation Guide — Logto](https://blog.logto.io/mcp-auth-implementation-guide-2025-06-18)** — OAuth 2.1 MCP spec implementation — Accessed: 2026-03-27 — Reliability: 4/5
 18. **[Duolingo Slack MCP (OAuth reference)](https://github.com/duolingo/slack-mcp)** — Production OAuth MCP server — Accessed: 2026-03-27 — Reliability: 4/5
 19. **[MCP Server Development Guide](https://github.com/cyanheads/model-context-protocol-resources/blob/main/guides/mcp-server-development-guide.md)** — Auth, error handling, logging — Accessed: 2026-03-27 — Reliability: 4/5
 
 ### Testing
+
 20. **[MCP Inspector Documentation](https://modelcontextprotocol.io/docs/tools/inspector)** — Official testing tool — Accessed: 2026-03-27 — Reliability: 5/5
 21. **[Unit Testing MCP Servers — MCPcat](https://mcpcat.io/guides/writing-unit-tests-mcp-servers/)** — In-memory testing patterns — Accessed: 2026-03-27 — Reliability: 4/5
 22. **[MCP Integration Testing — MCPcat](https://mcpcat.io/guides/integration-tests-mcp-flows/)** — E2E testing guide — Accessed: 2026-03-27 — Reliability: 4/5
 23. **[Testing MCP Servers Complete Guide — Agnost](https://agnost.ai/blog/testing-mcp-servers-complete-guide/)** — Inspector + alternatives — Accessed: 2026-03-27 — Reliability: 3/5
 
 ### Rate Limiting
+
 24. **[MCP Server Rate Limiting — Fast.io](https://fast.io/resources/mcp-server-rate-limiting/)** — Token bucket patterns — Accessed: 2026-03-27 — Reliability: 3/5
 25. **[API Gateway for MCP — API7.ai](https://api7.ai/learning-center/api-gateway-guide/api-gateway-enhance-mcp-server)** — Gateway-level rate limiting — Accessed: 2026-03-27 — Reliability: 3/5
 
 ### Tutorials & Guides
+
 26. **[Complete MCP TypeScript SDK Guide — Agentailor](https://blog.agentailor.com/posts/mcp-typescript-sdk-complete-guide)** — Tools, resources, prompts — Accessed: 2026-03-27 — Reliability: 4/5
 27. **[Build MCP Server Tutorial 2026 — DevTk](https://devtk.ai/en/blog/build-mcp-server-tutorial-2026/)** — Step-by-step tutorial — Accessed: 2026-03-27 — Reliability: 3/5
 28. **[Production-Ready MCP Servers (DEV)](https://dev.to/quantbit/building-production-ready-mcp-servers-with-typescript-a-complete-guide-2mg1)** — Production patterns — Accessed: 2026-03-27 — Reliability: 3/5

@@ -21,9 +21,9 @@ This document covers the practical pitfalls, undocumented behaviors, and "senior
 
 The conflicting numbers (60 vs 100) appear in different sources because **they come from different eras of Reddit's API policy**:
 
-| Source | Limit | Date | Context |
-|--------|-------|------|---------|
-| [Reddit API Wiki (archived)](https://github.com/reddit-archive/reddit/wiki/API) | **60 requests/minute** | Pre-2023 | Original rate limit documentation |
+| Source                                                                                                                  | Limit                                      | Date       | Context                             |
+| ----------------------------------------------------------------------------------------------------------------------- | ------------------------------------------ | ---------- | ----------------------------------- |
+| [Reddit API Wiki (archived)](https://github.com/reddit-archive/reddit/wiki/API)                                         | **60 requests/minute**                     | Pre-2023   | Original rate limit documentation   |
 | [Reddit Data API Wiki (official)](https://support.reddithelp.com/hc/en-us/articles/16160319875092-Reddit-Data-API-Wiki) | **100 queries/minute per OAuth client ID** | July 2023+ | Post-pricing-change official policy |
 
 **Conclusion:** The **current** limit for OAuth-authenticated apps is **100 requests per minute per OAuth client ID**, announced as part of the July 2023 API changes. The 60 RPM figure is from the pre-2023 archived documentation and is outdated.
@@ -37,6 +37,7 @@ The conflicting numbers (60 vs 100) appear in different sources because **they c
 - **Rate limit headers** are the authoritative source — always read `X-Ratelimit-Remaining` from the actual response rather than hardcoding assumptions.
 
 **Sources:**
+
 - [Reddit Data API Wiki](https://support.reddithelp.com/hc/en-us/articles/16160319875092-Reddit-Data-API-Wiki)
 - [Reddit API Rate Limits 2026 — PainOnSocial](https://painonsocial.com/blog/reddit-api-rate-limits-guide)
 - [Reddit API Limits — Data365](https://data365.co/blog/reddit-api-limits)
@@ -55,11 +56,13 @@ Gallery posts use a **separate endpoint** from the standard `/api/submit`:
 **This is NOT the same as `/api/submit`.** It was discovered via PRAW's `endpoints.py` file.
 
 **Flow:**
+
 1. Upload each image via `POST /api/media/asset.json` (see Section 4)
 2. Collect the `asset_id` (which becomes the `media_id`) for each upload
 3. Submit gallery post with all media IDs
 
 **JSON Body Structure (reconstructed from PRAW and community implementations):**
+
 ```json
 {
   "sr": "subreddit_name",
@@ -86,11 +89,13 @@ Gallery posts use a **separate endpoint** from the standard `/api/submit`:
 ```
 
 **Constraints:**
+
 - Maximum **20 images** per gallery post (since July 2020)
 - Only `image_path` / `media_id` is required per item; `caption` and `outbound_url` are optional
 - `selftext` support was added later (as of 2025) — gallery posts can now include a text body
 
 **Sources:**
+
 - [PRAW endpoints.py](https://github.com/praw-dev/praw/blob/main/praw/endpoints.py) — `submit_gallery_post`: `"api/submit_gallery_post.json"`
 - [Postiz Gallery Issue #1177](https://github.com/gitroomhq/postiz-app/issues/1177)
 - [PRAW Subreddit.submit_gallery](https://praw.readthedocs.io/en/latest/code_overview/models/subreddit.html)
@@ -103,27 +108,28 @@ Polls also use a **separate endpoint**:
 
 **Parameters (derived from PRAW's `submit_poll` method):**
 
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| `sr` | string | Yes | Subreddit name |
-| `title` | string | Yes | Post title |
-| `selftext` | string | No | Text body (markdown). Use `""` for no text. |
-| `options` | array of strings | Yes | 2-6 poll options |
-| `duration` | int | Yes | Voting period in days (1-7 inclusive) |
-| `flair_id` | string | No | Flair template ID |
-| `flair_text` | string | No | Flair text |
-| `nsfw` | boolean | No | Mark as NSFW |
-| `spoiler` | boolean | No | Mark as spoiler |
-| `sendreplies` | boolean | No | Receive inbox replies |
-| `discussion_type` | string | No | Set to `"CHAT"` for live discussion mode instead of traditional comments |
+| Parameter         | Type             | Required | Description                                                              |
+| ----------------- | ---------------- | -------- | ------------------------------------------------------------------------ |
+| `sr`              | string           | Yes      | Subreddit name                                                           |
+| `title`           | string           | Yes      | Post title                                                               |
+| `selftext`        | string           | No       | Text body (markdown). Use `""` for no text.                              |
+| `options`         | array of strings | Yes      | 2-6 poll options                                                         |
+| `duration`        | int              | Yes      | Voting period in days (1-7 inclusive)                                    |
+| `flair_id`        | string           | No       | Flair template ID                                                        |
+| `flair_text`      | string           | No       | Flair text                                                               |
+| `nsfw`            | boolean          | No       | Mark as NSFW                                                             |
+| `spoiler`         | boolean          | No       | Mark as spoiler                                                          |
+| `sendreplies`     | boolean          | No       | Receive inbox replies                                                    |
+| `discussion_type` | string           | No       | Set to `"CHAT"` for live discussion mode instead of traditional comments |
 
 **Poll Data Object (returned on poll submissions):**
+
 ```json
 {
   "poll_data": {
     "options": [
-      {"id": "option_id_1", "text": "Option text 1", "vote_count": 42},
-      {"id": "option_id_2", "text": "Option text 2", "vote_count": 17}
+      { "id": "option_id_1", "text": "Option text 1", "vote_count": 42 },
+      { "id": "option_id_2", "text": "Option text 2", "vote_count": 17 }
     ],
     "total_vote_count": 59,
     "voting_end_timestamp": 1700000000.0,
@@ -136,6 +142,7 @@ Polls also use a **separate endpoint**:
 **Gotcha:** You cannot read individual vote counts until the poll has closed, unless you are the post author. Before closing, `vote_count` may be null for non-authors.
 
 **Sources:**
+
 - [PRAW endpoints.py](https://github.com/praw-dev/praw/blob/main/praw/endpoints.py) — `submit_poll_post`: `"api/submit_poll_post"`
 - [PRAW PollData docs](https://praw.readthedocs.io/en/stable/code_overview/other/polldata.html)
 - [PRAW Polls (v7.4.0)](https://praw.readthedocs.io/en/v7.4.0/code_overview/other/poll.html)
@@ -144,31 +151,31 @@ Polls also use a **separate endpoint**:
 
 PRAW reveals draft management endpoints not in official docs:
 
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET/POST/PUT/DELETE | `/api/v1/draft` | Single draft CRUD |
-| GET | `/api/v1/drafts` | List all drafts |
+| Method              | Endpoint         | Description       |
+| ------------------- | ---------------- | ----------------- |
+| GET/POST/PUT/DELETE | `/api/v1/draft`  | Single draft CRUD |
+| GET                 | `/api/v1/drafts` | List all drafts   |
 
 ### 2.4 Additional Undocumented/Semi-Public Endpoints
 
-| Endpoint | Description | Source |
-|----------|-------------|--------|
-| `GET /api/v1/user/{username}/trophies` | User's trophies (documented in some versions, missing in others) | PRAW |
-| `POST /api/submit_gallery_post.json` | Gallery post submission | PRAW endpoints.py |
-| `POST /api/submit_poll_post` | Poll post submission | PRAW endpoints.py |
-| `GET /api/mod/notes/recent` | Bulk mod notes retrieval | PRAW endpoints.py |
-| `GET /api/v1/{subreddit}/removal_reasons` | List removal reasons | PRAW endpoints.py |
-| `DELETE /api/v1/{subreddit}/removal_reasons/{id}` | Delete removal reason | PRAW endpoints.py |
-| `GET /api/live/happening_now` | Currently active live threads | PRAW endpoints.py |
-| `GET /live/{thread_id}/updates/{update_id}` | Specific live thread update | PRAW endpoints.py |
-| `POST /api/live/{id}/rm_contributor_invite` | Revoke live thread contributor invite | PRAW endpoints.py |
-| `POST /api/live/{id}/report` | Report a live thread | PRAW endpoints.py |
-| `GET /api/mod/conversations/unread/count` | Unread modmail count | PRAW endpoints.py |
-| `POST /api/mod/conversations/read` | Mark modmail read (non-bulk) | PRAW endpoints.py |
-| `POST /api/mod/conversations/unread` | Mark modmail unread | PRAW endpoints.py |
-| `GET /api/v1/collections/update_collection_display_layout` | Update collection display layout | PRAW endpoints.py |
-| `POST /r/{subreddit}/api/upload_sr_img` | Upload subreddit image (legacy) | PRAW endpoints.py |
-| `GET /api/v1/style_asset_upload_s3/{subreddit}` | Style asset S3 upload lease | PRAW endpoints.py |
+| Endpoint                                                   | Description                                                      | Source            |
+| ---------------------------------------------------------- | ---------------------------------------------------------------- | ----------------- |
+| `GET /api/v1/user/{username}/trophies`                     | User's trophies (documented in some versions, missing in others) | PRAW              |
+| `POST /api/submit_gallery_post.json`                       | Gallery post submission                                          | PRAW endpoints.py |
+| `POST /api/submit_poll_post`                               | Poll post submission                                             | PRAW endpoints.py |
+| `GET /api/mod/notes/recent`                                | Bulk mod notes retrieval                                         | PRAW endpoints.py |
+| `GET /api/v1/{subreddit}/removal_reasons`                  | List removal reasons                                             | PRAW endpoints.py |
+| `DELETE /api/v1/{subreddit}/removal_reasons/{id}`          | Delete removal reason                                            | PRAW endpoints.py |
+| `GET /api/live/happening_now`                              | Currently active live threads                                    | PRAW endpoints.py |
+| `GET /live/{thread_id}/updates/{update_id}`                | Specific live thread update                                      | PRAW endpoints.py |
+| `POST /api/live/{id}/rm_contributor_invite`                | Revoke live thread contributor invite                            | PRAW endpoints.py |
+| `POST /api/live/{id}/report`                               | Report a live thread                                             | PRAW endpoints.py |
+| `GET /api/mod/conversations/unread/count`                  | Unread modmail count                                             | PRAW endpoints.py |
+| `POST /api/mod/conversations/read`                         | Mark modmail read (non-bulk)                                     | PRAW endpoints.py |
+| `POST /api/mod/conversations/unread`                       | Mark modmail unread                                              | PRAW endpoints.py |
+| `GET /api/v1/collections/update_collection_display_layout` | Update collection display layout                                 | PRAW endpoints.py |
+| `POST /r/{subreddit}/api/upload_sr_img`                    | Upload subreddit image (legacy)                                  | PRAW endpoints.py |
+| `GET /api/v1/style_asset_upload_s3/{subreddit}`            | Style asset S3 upload lease                                      | PRAW endpoints.py |
 
 **Source:** [PRAW endpoints.py — Full listing of 180+ endpoint paths](https://github.com/praw-dev/praw/blob/main/praw/endpoints.py)
 
@@ -190,18 +197,19 @@ Reddit's API has significant inconsistencies in how it returns data. This is one
 
 There is **no single field** that tells you the post type. You must check multiple fields:
 
-| Post Type | Detection Logic |
-|-----------|----------------|
-| Text/self post | `is_self === true` |
-| Link post | `is_self === false && !is_video && post_hint !== 'image'` |
-| Image post | `post_hint === 'image'` OR check `preview.images` |
-| Video post | `is_video === true` OR `media.reddit_video` exists |
-| Embedded video | `post_hint === 'rich:video'` AND `domain === 'v.redd.it'` |
-| Gallery post | `is_gallery === true`, data in `media_metadata` + `gallery_data` |
-| Poll post | `poll_data` attribute exists |
-| Crosspost | `crosspost_parent` exists |
+| Post Type      | Detection Logic                                                  |
+| -------------- | ---------------------------------------------------------------- |
+| Text/self post | `is_self === true`                                               |
+| Link post      | `is_self === false && !is_video && post_hint !== 'image'`        |
+| Image post     | `post_hint === 'image'` OR check `preview.images`                |
+| Video post     | `is_video === true` OR `media.reddit_video` exists               |
+| Embedded video | `post_hint === 'rich:video'` AND `domain === 'v.redd.it'`        |
+| Gallery post   | `is_gallery === true`, data in `media_metadata` + `gallery_data` |
+| Poll post      | `poll_data` attribute exists                                     |
+| Crosspost      | `crosspost_parent` exists                                        |
 
 **Media URL location varies by post type:**
+
 - Self-hosted video: `media.reddit_video.fallback_url`
 - Embedded video: `media_embed` or `secure_media_embed`
 - Images: `preview.images[0].source.url` (HTML-encoded!)
@@ -212,30 +220,31 @@ There is **no single field** that tells you the post type. You must check multip
 
 #### Field Naming Inconsistencies
 
-| Field | Appears as | Context |
-|-------|-----------|---------|
-| NSFW flag | `over_18` | Post objects |
-| NSFW flag | `over18` | Subreddit objects (note: no underscore!) |
-| Community icon | `community_icon` | Some contexts |
-| Community icon | `icon_img` | Other contexts |
-| Description | `description` | Subreddit searches — MISSING from user searches |
+| Field          | Appears as       | Context                                         |
+| -------------- | ---------------- | ----------------------------------------------- |
+| NSFW flag      | `over_18`        | Post objects                                    |
+| NSFW flag      | `over18`         | Subreddit objects (note: no underscore!)        |
+| Community icon | `community_icon` | Some contexts                                   |
+| Community icon | `icon_img`       | Other contexts                                  |
+| Description    | `description`    | Subreddit searches — MISSING from user searches |
 
 #### The `replies` Field Inconsistency
 
 This is one of the most confusing aspects of the Reddit API:
 
-| Context | `replies` field value |
-|---------|----------------------|
-| Comment in threaded view (has replies) | Listing object with nested comments |
-| Comment in threaded view (no replies) | **Empty string `""`** (not null, not empty array, not empty listing) |
-| Comment from `/api/morechildren` | **Always empty string `""`** — you must rebuild the tree manually |
-| Comment from user profile | **Always empty string `""`** |
+| Context                                | `replies` field value                                                |
+| -------------------------------------- | -------------------------------------------------------------------- |
+| Comment in threaded view (has replies) | Listing object with nested comments                                  |
+| Comment in threaded view (no replies)  | **Empty string `""`** (not null, not empty array, not empty listing) |
+| Comment from `/api/morechildren`       | **Always empty string `""`** — you must rebuild the tree manually    |
+| Comment from user profile              | **Always empty string `""`**                                         |
 
 **Your code MUST handle both `""` and listing objects for the `replies` field.**
 
 ### 3.2 The `raw_json=1` Parameter
 
 **Without `raw_json=1`:** Reddit HTML-encodes special characters in all text fields:
+
 - `&` becomes `&amp;`
 - `<` becomes `&lt;`
 - `>` becomes `&gt;`
@@ -261,6 +270,7 @@ Without this, the response is an array of jQuery commands, not a JSON object.
 ### 3.4 Vote Fuzzing
 
 Reddit intentionally fuzzes vote counts for anti-spam purposes:
+
 - `ups` and `downs` are **never exact** on posts with significant activity
 - `score` is more reliable but still fuzzy
 - `upvote_ratio` (0.0-1.0) is the most stable metric
@@ -276,12 +286,12 @@ Reddit intentionally fuzzes vote counts for anti-spam purposes:
 
 ### 3.6 Deleted/Removed Content
 
-| State | `author` field | `body`/`selftext` | `[deleted]` vs `[removed]` |
-|-------|---------------|--------------------|----|
-| User deleted their content | `"[deleted]"` | `"[deleted]"` | User action |
-| Mod/admin removed content | `"[deleted]"` | `"[removed]"` | Moderator action |
-| Suspended account's content | `"[deleted]"` | Content may still show | Account-level action |
-| Shadowbanned user | `null` or missing | May return 404 | Not visible to others |
+| State                       | `author` field    | `body`/`selftext`      | `[deleted]` vs `[removed]` |
+| --------------------------- | ----------------- | ---------------------- | -------------------------- |
+| User deleted their content  | `"[deleted]"`     | `"[deleted]"`          | User action                |
+| Mod/admin removed content   | `"[deleted]"`     | `"[removed]"`          | Moderator action           |
+| Suspended account's content | `"[deleted]"`     | Content may still show | Account-level action       |
+| Shadowbanned user           | `null` or missing | May return 404         | Not visible to others      |
 
 **Gotcha:** The `author` field becomes the literal string `"[deleted]"`, not null. Check for this string explicitly.
 
@@ -323,6 +333,7 @@ filepath=my_image.png&mimetype=image/png
 ```
 
 **Parameters:**
+
 - `filepath`: Filename with extension (basename only, not full path)
 - `mimetype`: MIME type of the file
 
@@ -336,28 +347,29 @@ filepath=my_image.png&mimetype=image/png
 | `.mov` | `video/quicktime` |
 
 **Response:**
+
 ```json
 {
   "args": {
     "action": "//reddit-uploaded-media.s3-accelerate.amazonaws.com",
     "fields": [
-      {"name": "acl", "value": "private"},
-      {"name": "key", "value": "rte_images/unique-key"},
-      {"name": "X-Amz-Credential", "value": "..."},
-      {"name": "X-Amz-Algorithm", "value": "AWS4-HMAC-SHA256"},
-      {"name": "X-Amz-Date", "value": "..."},
-      {"name": "success_action_status", "value": "201"},
-      {"name": "content-type", "value": "image/png"},
-      {"name": "x-amz-storage-class", "value": "INTELLIGENT_TIERING"},
-      {"name": "x-amz-meta-ext", "value": "png"},
-      {"name": "policy", "value": "..."},
-      {"name": "X-Amz-Signature", "value": "..."}
+      { "name": "acl", "value": "private" },
+      { "name": "key", "value": "rte_images/unique-key" },
+      { "name": "X-Amz-Credential", "value": "..." },
+      { "name": "X-Amz-Algorithm", "value": "AWS4-HMAC-SHA256" },
+      { "name": "X-Amz-Date", "value": "..." },
+      { "name": "success_action_status", "value": "201" },
+      { "name": "content-type", "value": "image/png" },
+      { "name": "x-amz-storage-class", "value": "INTELLIGENT_TIERING" },
+      { "name": "x-amz-meta-ext", "value": "png" },
+      { "name": "policy", "value": "..." },
+      { "name": "X-Amz-Signature", "value": "..." }
     ]
   },
   "asset": {
     "asset_id": "unique-asset-id",
     "processing_state": "incomplete",
-    "payload": {"filepath": "my_image.png"},
+    "payload": { "filepath": "my_image.png" },
     "websocket_url": "wss://ws-xxxxx.wss.redditmedia.com/rte_images/unique-key?m=TOKEN"
   }
 }
@@ -376,6 +388,7 @@ file=<binary file data>
 ```
 
 **Critical rules:**
+
 - Use `multipart/form-data` — NOT JSON, NOT URL-encoded
 - Include ALL fields from the response in the exact order
 - The `file` field must be **last** in the multipart body
@@ -390,12 +403,14 @@ file=<binary file data>
 ### 4.4 Step 3: Submit Post Using Uploaded Media
 
 **For single image posts:**
+
 ```
 POST https://oauth.reddit.com/api/submit
   kind=image&sr=subreddit&title=Title&url=<decoded_cdn_url>
 ```
 
 **For gallery posts:**
+
 ```
 POST https://oauth.reddit.com/api/submit_gallery_post.json
 Content-Type: application/json
@@ -411,6 +426,7 @@ Content-Type: application/json
 ```
 
 **For video posts:**
+
 ```
 POST https://oauth.reddit.com/api/submit
   kind=video&sr=subreddit&title=Title&url=<decoded_cdn_url>&video_poster_url=<thumbnail_url>
@@ -429,6 +445,7 @@ ws.onmessage = (event) => {
 ```
 
 **Notes:**
+
 - WebSocket ignores sent messages (read-only)
 - Does not auto-disconnect after submission
 - Useful for confirming post creation and getting the final URL
@@ -450,6 +467,7 @@ ws.onmessage = (event) => {
 **Average total time:** ~950ms per image upload + submit.
 
 **Sources:**
+
 - [reddit-api-image-upload library (reverse-engineered)](https://github.com/VityaSchel/reddit-api-image-upload)
 - [PRAW endpoints.py](https://github.com/praw-dev/praw/blob/main/praw/endpoints.py) — `media_asset`: `"api/media/asset.json"`
 - [PRAW submit_image issue #1359](https://github.com/praw-dev/praw/issues/1359)
@@ -460,10 +478,10 @@ ws.onmessage = (event) => {
 
 ### 5.1 Two Types of "more" Objects
 
-| Type | `count` | `children` | `id` | Meaning | How to Expand |
-|------|---------|-----------|------|---------|---------------|
-| **"Load more comments"** | > 0 (total descendants) | Array of comment IDs | Valid ID | More comments exist at this level | Call `/api/morechildren` with the `children` IDs |
-| **"Continue this thread"** | Always 0 | Empty array `[]` | `"_"` | Thread too deep, re-fetch needed | Fetch the parent comment's permalink directly |
+| Type                       | `count`                 | `children`           | `id`     | Meaning                           | How to Expand                                    |
+| -------------------------- | ----------------------- | -------------------- | -------- | --------------------------------- | ------------------------------------------------ |
+| **"Load more comments"**   | > 0 (total descendants) | Array of comment IDs | Valid ID | More comments exist at this level | Call `/api/morechildren` with the `children` IDs |
+| **"Continue this thread"** | Always 0                | Empty array `[]`     | `"_"`    | Thread too deep, re-fetch needed  | Fetch the parent comment's permalink directly    |
 
 ### 5.2 Edge Case: `children` Count vs Array Length
 
@@ -480,27 +498,28 @@ A 200 OK response with an empty comment list means the comment no longer exists.
 ### 5.4 `/api/morechildren` Return Format
 
 The response is a **flat array** in pre-order DFS traversal order, NOT a nested tree:
+
 - All `replies` fields are **empty strings**
 - You must manually reconstruct the tree using each comment's `parent_id`
 - Depth values are included but the nesting must be rebuilt
 
 ### 5.5 `truncate` vs `limit` Parameter
 
-| Parameter | Behavior | "more" object? |
-|-----------|----------|----------------|
-| `limit` | Limits comment count, includes "more" object for remaining | Yes |
-| `truncate` | Limits comment count, does NOT return a top-level "more" object | No |
+| Parameter  | Behavior                                                        | "more" object? |
+| ---------- | --------------------------------------------------------------- | -------------- |
+| `limit`    | Limits comment count, includes "more" object for remaining      | Yes            |
+| `truncate` | Limits comment count, does NOT return a top-level "more" object | No             |
 
 `truncate` range: 0-50. Useful when you want a preview without the overhead of "more" stubs.
 
 ### 5.6 Depth Parameter Behavior
 
-| Value | Behavior |
-|-------|----------|
-| 0 | Ignored (returns default depth ~10) |
-| 1 | Top-level comments only |
-| 2-10 | Incrementally deeper |
-| > 10 | Capped at 10 (API max) |
+| Value | Behavior                            |
+| ----- | ----------------------------------- |
+| 0     | Ignored (returns default depth ~10) |
+| 1     | Top-level comments only             |
+| 2-10  | Incrementally deeper                |
+| > 10  | Capped at 10 (API max)              |
 
 ### 5.7 Sort Parameter Options
 
@@ -516,26 +535,27 @@ If an invalid sort value is provided, it silently falls back to the user's prefe
 
 ### 6.1 Fully Removed / Non-Functional
 
-| Endpoint | Status | When |
-|----------|--------|------|
-| `GET /api/trending_subreddits.json` | **Non-functional** — returns empty/errors | Unknown, documented as deprecated |
-| Cookie-based authentication | **Removed** | July 2023 |
-| Unauthenticated API access (most endpoints) | **Effectively removed** (10 RPM, heavily throttled) | July 2023 |
+| Endpoint                                    | Status                                              | When                              |
+| ------------------------------------------- | --------------------------------------------------- | --------------------------------- |
+| `GET /api/trending_subreddits.json`         | **Non-functional** — returns empty/errors           | Unknown, documented as deprecated |
+| Cookie-based authentication                 | **Removed**                                         | July 2023                         |
+| Unauthenticated API access (most endpoints) | **Effectively removed** (10 RPM, heavily throttled) | July 2023                         |
 
 ### 6.2 Deprecated but Still Functional
 
-| Endpoint/Feature | Status | Notes |
-|------------------|--------|-------|
-| Awards/Gilding endpoints (`/api/v1/gold/gild`, etc.) | **Deprecated** — awards system sunset Sept 2023 | May still return data for historical awards but no new awards can be given |
-| `gilded` field on posts/comments | **Deprecated** | Returns historical data; `all_awardings` may still contain legacy data |
-| `/api/v1/me/gilded` | **Deprecated** | Was for gilded content; limited utility post-sunset |
-| `modhash` in responses | **Legacy** | Irrelevant for OAuth (used for cookie-based CSRF); still returned but not needed |
-| `ups` and `downs` exact counts | **Deprecated accuracy** | Always fuzzed; `upvote_ratio` is more reliable |
-| Non-OAuth API access | **Deprecated** | The `.json` suffix trick still works but is rate-limited to 10 RPM and unreliable |
+| Endpoint/Feature                                     | Status                                          | Notes                                                                             |
+| ---------------------------------------------------- | ----------------------------------------------- | --------------------------------------------------------------------------------- |
+| Awards/Gilding endpoints (`/api/v1/gold/gild`, etc.) | **Deprecated** — awards system sunset Sept 2023 | May still return data for historical awards but no new awards can be given        |
+| `gilded` field on posts/comments                     | **Deprecated**                                  | Returns historical data; `all_awardings` may still contain legacy data            |
+| `/api/v1/me/gilded`                                  | **Deprecated**                                  | Was for gilded content; limited utility post-sunset                               |
+| `modhash` in responses                               | **Legacy**                                      | Irrelevant for OAuth (used for cookie-based CSRF); still returned but not needed  |
+| `ups` and `downs` exact counts                       | **Deprecated accuracy**                         | Always fuzzed; `upvote_ratio` is more reliable                                    |
+| Non-OAuth API access                                 | **Deprecated**                                  | The `.json` suffix trick still works but is rate-limited to 10 RPM and unreliable |
 
 ### 6.3 Endpoints at Risk
 
 These work today but are based on features Reddit has de-emphasized:
+
 - Live threads (largely replaced by Reddit Talk / live video)
 - Old-style custom CSS (`/about/stylesheet`)
 - Gold/premium-related endpoints
@@ -566,16 +586,16 @@ Reddit returns errors in inconsistent formats depending on the endpoint:
 
 ### 7.2 HTTP Status Code Surprises
 
-| Scenario | Expected | Actual |
-|----------|----------|--------|
-| Private subreddit | 403 | Sometimes 302 redirect |
-| Banned subreddit | 404 | Sometimes 403 |
-| Nonexistent subreddit | 404 | Sometimes 302 redirect to search |
-| Rate limited | 429 | Correct |
-| Bot detection | 403 | 403 (not 429) — looks like permissions error |
-| Subscribe with 250+ items | 200 | 503 (but operation may succeed!) |
-| Subscribe with 460+ items | 200 | 400 (genuine failure) |
-| Nonexistent user endpoint | 404 | Sometimes 200 with empty listing |
+| Scenario                  | Expected | Actual                                       |
+| ------------------------- | -------- | -------------------------------------------- |
+| Private subreddit         | 403      | Sometimes 302 redirect                       |
+| Banned subreddit          | 404      | Sometimes 403                                |
+| Nonexistent subreddit     | 404      | Sometimes 302 redirect to search             |
+| Rate limited              | 429      | Correct                                      |
+| Bot detection             | 403      | 403 (not 429) — looks like permissions error |
+| Subscribe with 250+ items | 200      | 503 (but operation may succeed!)             |
+| Subscribe with 460+ items | 200      | 400 (genuine failure)                        |
+| Nonexistent user endpoint | 404      | Sometimes 200 with empty listing             |
 
 ### 7.3 Timing-Sensitive Operations
 
@@ -595,22 +615,23 @@ Reddit returns errors in inconsistent formats depending on the endpoint:
 
 Reddit is inconsistent about how it represents "no value":
 
-| Field | No Value Representation |
-|-------|------------------------|
-| `author` (deleted) | `"[deleted]"` (string) |
-| `replies` (none) | `""` (empty string) |
-| `edited` (never) | `false` (boolean) |
-| `edited` (was edited) | `1234567890.0` (float timestamp) |
-| `distinguished` (none) | `null` |
-| `likes` (no vote) | `null` |
-| `active_user_count` (from search) | `null` |
-| `suggested_comment_sort` (none) | `null` OR `""` depending on endpoint |
-| `description` (empty) | `""` |
-| `banned_by` (not banned) | `null` |
+| Field                             | No Value Representation              |
+| --------------------------------- | ------------------------------------ |
+| `author` (deleted)                | `"[deleted]"` (string)               |
+| `replies` (none)                  | `""` (empty string)                  |
+| `edited` (never)                  | `false` (boolean)                    |
+| `edited` (was edited)             | `1234567890.0` (float timestamp)     |
+| `distinguished` (none)            | `null`                               |
+| `likes` (no vote)                 | `null`                               |
+| `active_user_count` (from search) | `null`                               |
+| `suggested_comment_sort` (none)   | `null` OR `""` depending on endpoint |
+| `description` (empty)             | `""`                                 |
+| `banned_by` (not banned)          | `null`                               |
 
 ### 7.6 The `limit_children` Boolean Quirk
 
 In `/api/morechildren`, the `limit_children` parameter has unusual truthy/falsy handling:
+
 - Strings matching `/^[0Ff]/` (starts with 0, F, or f) are treated as **falsy**
 - All other strings are truthy
 - This is a backend Pylons framework artifact, not standard boolean parsing
@@ -618,6 +639,7 @@ In `/api/morechildren`, the `limit_children` parameter has unusual truthy/falsy 
 ### 7.7 Subreddit Name Validation
 
 Subreddit names (`display_name`) have strict rules:
+
 - 3-21 characters
 - Only letters, numbers, and underscores
 - Cannot start with underscore
@@ -633,11 +655,11 @@ But the API sometimes accepts names that shouldn't work (like special subreddits
 
 Reddit has limited real-time capabilities accessible via the public API:
 
-| Feature | Mechanism | Access |
-|---------|-----------|--------|
+| Feature             | Mechanism                                                  | Access                         |
+| ------------------- | ---------------------------------------------------------- | ------------------------------ |
 | Media upload status | WebSocket (`wss://`) returned from `/api/media/asset.json` | Per-upload, auto-generated URL |
-| Live threads | HTTP long-polling on `/live/{id}` | Public API |
-| Live thread updates | WebSocket at `wss://` URL in thread metadata | Public, limited |
+| Live threads        | HTTP long-polling on `/live/{id}`                          | Public API                     |
+| Live thread updates | WebSocket at `wss://` URL in thread metadata               | Public, limited                |
 
 ### 8.2 What Does NOT Exist in the Public API
 
@@ -649,6 +671,7 @@ Reddit has limited real-time capabilities accessible via the public API:
 ### 8.3 Community Workarounds for Real-Time
 
 The common pattern for near-real-time monitoring:
+
 1. Poll `/r/{subreddit}/new.json` every 2-5 seconds
 2. Track seen post IDs to detect new content
 3. Stay under rate limits (100 RPM = ~1.6 requests/second max)
@@ -660,12 +683,14 @@ The common pattern for near-real-time monitoring:
 ## References
 
 ### Primary Sources
+
 1. **[Reddit Data API Wiki](https://support.reddithelp.com/hc/en-us/articles/16160319875092-Reddit-Data-API-Wiki)** — Accessed: 2026-03-27 — Reliability: 5/5
 2. **[Pyprohly/reddit-api-doc-notes — comment_tree.rst](https://github.com/Pyprohly/reddit-api-doc-notes/blob/main/docs/api-reference/comment_tree.rst)** — Accessed: 2026-03-27 — Reliability: 5/5
 3. **[PRAW endpoints.py](https://github.com/praw-dev/praw/blob/main/praw/endpoints.py)** — Accessed: 2026-03-27 — Reliability: 5/5
 4. **[Reddit API Wiki (archived)](https://github.com/reddit-archive/reddit/wiki/API)** — Accessed: 2026-03-27 — Reliability: 4/5 (outdated rate limits)
 
 ### Community & Developer Sources
+
 5. **[reddit-api-image-upload (reverse-engineered)](https://github.com/VityaSchel/reddit-api-image-upload)** — Accessed: 2026-03-27 — Reliability: 4/5
 6. **[Reddit API is such a mess — DEV Community](https://dev.to/pilcrowonpaper/reddit-api-is-such-a-mess-me2)** — Accessed: 2026-03-27 — Reliability: 4/5
 7. **[Reddit Modmail API Tips — leviroth](https://gist.github.com/leviroth/dafcf1331737e2b55dd6fb86257dcb8d)** — Accessed: 2026-03-27 — Reliability: 4/5
@@ -684,4 +709,5 @@ The common pattern for near-real-time monitoring:
 ---
 
 ## Version History
+
 - v1.0 (2026-03-27): Initial comprehensive research covering rate limit clarification, undocumented endpoints (gallery, poll, drafts, media upload, 15+ additional endpoints), 15+ gotchas, complete media upload flow, comment tree edge cases, deprecated endpoints, and WebSocket capabilities

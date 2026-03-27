@@ -72,33 +72,33 @@ Before proceeding, verify the task file meets quality standards. Check every rul
 
 **DoR Quality Checks:**
 
-| # | Check | Rule |
-|---|-------|------|
-| Q1 | Item count | DoR has 4+ checklist items (3 or fewer = likely boilerplate) |
-| Q2 | Dependency specificity | DoR references specific dependency task IDs (e.g., "E01-T02 is Done"), not just "Dependencies completed" |
-| Q3 | Research specificity | DoR references specific research section numbers with topic descriptions (e.g., "Read section 6 -- Technology Stack Decision"), not just "Research sections read:" |
-| Q4 | Understanding items | DoR includes task-specific understanding requirements (items that show the implementer must internalize something specific to this task) |
-| Q5 | AC review item | DoR includes an ACs-reviewed item that states the count and scope of ACs |
+| #   | Check                  | Rule                                                                                                                                                               |
+| --- | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Q1  | Item count             | DoR has 4+ checklist items (3 or fewer = likely boilerplate)                                                                                                       |
+| Q2  | Dependency specificity | DoR references specific dependency task IDs (e.g., "E01-T02 is Done"), not just "Dependencies completed"                                                           |
+| Q3  | Research specificity   | DoR references specific research section numbers with topic descriptions (e.g., "Read section 6 -- Technology Stack Decision"), not just "Research sections read:" |
+| Q4  | Understanding items    | DoR includes task-specific understanding requirements (items that show the implementer must internalize something specific to this task)                           |
+| Q5  | AC review item         | DoR includes an ACs-reviewed item that states the count and scope of ACs                                                                                           |
 
 **DoD Quality Checks:**
 
-| # | Check | Rule |
-|---|-------|------|
-| Q6 | Item count | DoD has 6+ checklist items |
-| Q7 | AC restatement | DoD restates each AC as a verifiable checklist item (e.g., "AC1: `npm run build` succeeds without errors"), not just "All acceptance criteria met" |
-| Q8 | Type-appropriate gates | DoD gates match the task type -- see Task Type Gates table below |
-| Q9 | Build gate | DoD includes `tsc --noEmit` or equivalent build verification |
-| Q10 | Specificity | DoD items reference concrete artifacts (file names, command outputs, export names), not vague outcomes |
+| #   | Check                  | Rule                                                                                                                                               |
+| --- | ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Q6  | Item count             | DoD has 6+ checklist items                                                                                                                         |
+| Q7  | AC restatement         | DoD restates each AC as a verifiable checklist item (e.g., "AC1: `npm run build` succeeds without errors"), not just "All acceptance criteria met" |
+| Q8  | Type-appropriate gates | DoD gates match the task type -- see Task Type Gates table below                                                                                   |
+| Q9  | Build gate             | DoD includes `tsc --noEmit` or equivalent build verification                                                                                       |
+| Q10 | Specificity            | DoD items reference concrete artifacts (file names, command outputs, export names), not vague outcomes                                             |
 
 **Task Type Gates (for Q8):**
 
-| Task Type | Required DoD Gates | NOT Required |
-|-----------|-------------------|--------------|
-| Config/scaffolding | Config files created, commands work, no lint warnings | Barrel exports, TSDoc |
-| Source code (tool, module, class) | Barrel export, TSDoc on public API, tests | -- |
-| Test infrastructure | Test runner works, sample test passes | Barrel exports |
-| Tool implementation | Zod schema defined, tool registered, barrel export, TSDoc | -- |
-| Integration/packaging | End-to-end verification, all components wired | TSDoc on internals |
+| Task Type                         | Required DoD Gates                                        | NOT Required          |
+| --------------------------------- | --------------------------------------------------------- | --------------------- |
+| Config/scaffolding                | Config files created, commands work, no lint warnings     | Barrel exports, TSDoc |
+| Source code (tool, module, class) | Barrel export, TSDoc on public API, tests                 | --                    |
+| Test infrastructure               | Test runner works, sample test passes                     | Barrel exports        |
+| Tool implementation               | Zod schema defined, tool registered, barrel export, TSDoc | --                    |
+| Integration/packaging             | End-to-end verification, all components wired             | TSDoc on internals    |
 
 **Scoring:**
 
@@ -125,6 +125,7 @@ Walk each DoR checklist item individually. For each item, collect evidence:
 - **AC review items**: Count the ACs and confirm they are clear and testable.
 
 If ANY DoR item fails:
+
 - Explain what is blocking
 - If a dependency is not Done, suggest working on that task instead
 - Do NOT proceed to implementation
@@ -197,6 +198,7 @@ Result: [N]/[total] passed
 ### Step 3 -- Handle Failures
 
 If ANY DoD item fails:
+
 - Report which items failed and why
 - Do NOT mark as Done
 - Suggest specific fixes for each failure

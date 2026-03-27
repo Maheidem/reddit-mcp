@@ -1,22 +1,25 @@
 # E02-T05: Response Normalization Utilities
 
-| Field | Value |
-|-------|-------|
-| **Epic** | [E02 — Core Infrastructure](EPIC.md) |
-| **Status** | Not Started |
-| **Size** | S |
-| **Dependencies** | E02-T04 |
+| Field            | Value                                |
+| ---------------- | ------------------------------------ |
+| **Epic**         | [E02 — Core Infrastructure](EPIC.md) |
+| **Status**       | Done                                 |
+| **Size**         | S                                    |
+| **Dependencies** | E02-T04                              |
 
 ## Description
+
 Build `src/utils/normalize.ts`: decode HTML-encoded URLs, normalize deleted content detection, detect post type from raw response, handle listing pagination.
 
 ## Acceptance Criteria
+
 1. `decodeRedditUrl()` handles `&amp;` to `&`
 2. `isDeleted()` / `isRemoved()` correctly identify content state
 3. `detectPostType()` returns enum from raw post data
 4. `extractPagination()` returns `{after, before, count}`
 
 ## Definition of Ready
+
 - [ ] Dependency: E02-T04 (Reddit Thing Types) is Done -- normalization utilities depend on the Thing types for post type detection and pagination
 - [ ] Research: Read research/07-api-edge-cases-and-gotchas.md section 3.2 -- The `raw_json=1` parameter (some fields still need decoding even with `raw_json=1`)
 - [ ] Research: Read research/07-api-edge-cases-and-gotchas.md section 3.6 -- Deleted/Removed Content (author `"[deleted]"`, body `"[deleted]"` vs `"[removed]"`)
@@ -29,6 +32,7 @@ Build `src/utils/normalize.ts`: decode HTML-encoded URLs, normalize deleted cont
 - [ ] ACs reviewed: 4 acceptance criteria covering URL decode, deleted detection, post type enum, pagination extraction
 
 ## Definition of Done
+
 - [ ] AC1: `decodeRedditUrl()` decodes `&amp;` to `&` (and any other HTML entities in URLs)
 - [ ] AC2: `isDeleted()` returns true when author is `"[deleted]"` AND body is `"[deleted]"`; `isRemoved()` returns true when body is `"[removed]"`
 - [ ] AC3: `detectPostType()` returns a PostType enum value based on raw post data fields (`is_self`, `is_gallery`, `poll_data`, `is_video`, `crosspost_parent`)
@@ -40,15 +44,18 @@ Build `src/utils/normalize.ts`: decode HTML-encoded URLs, normalize deleted cont
 - [ ] No lint warnings introduced
 
 ## Out of Scope
+
 Full response transformation (tools do their own formatting).
 
 ## Implementation Notes
+
 - Deleted = author is `[deleted]` AND body is `[deleted]`
 - Removed = body is `[removed]`
 - Reddit HTML-encodes URLs in JSON responses; `raw_json=1` mitigates this but some fields still need decoding
 - Pagination uses cursor-based `after`/`before` tokens with optional `count`
 
 ## Files to Create/Modify
+
 - `src/utils/normalize.ts` — normalization utility functions
 - `src/utils/index.ts` — export utilities
 - `src/__tests__/utils/normalize.test.ts` — unit tests for all helpers

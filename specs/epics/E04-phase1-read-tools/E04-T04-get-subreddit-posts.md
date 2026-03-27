@@ -1,22 +1,25 @@
 # E04-T04: Get Subreddit Posts Tool
 
-| Field | Value |
-|-------|-------|
-| **Epic** | [E04 — Phase 1 Read Tools](EPIC.md) |
-| **Status** | Not Started |
-| **Size** | M |
-| **Dependencies** | E02, E03 |
+| Field            | Value                               |
+| ---------------- | ----------------------------------- |
+| **Epic**         | [E04 — Phase 1 Read Tools](EPIC.md) |
+| **Status**       | Done                         |
+| **Size**         | M                                   |
+| **Dependencies** | E02, E03                            |
 
 ## Description
+
 List posts from a subreddit feed. Params: `subreddit`, `sort` (hot/new/top/rising/controversial), `time` (for top/controversial), `limit`, `after`. Uses `GET /r/{sub}/{sort}`.
 
 ## Acceptance Criteria
+
 1. All 5 sort modes work
 2. Time filter applies to top/controversial only
 3. Returns normalized post list with pagination cursor
 4. Post type detected (text/link/image/video/gallery/poll)
 
 ## Definition of Ready
+
 - [ ] E02 (Core Infrastructure) is Done — HTTP client, rate limiter, error parser, types (including post type detection from E02-T04) available
 - [ ] E03 (Authentication System) is Done — auth manager and auth guard available for tier checking
 - [ ] Research read: FINAL-CONSOLIDATED-RESEARCH.md section 2.3 (Thing Types) — Listings wrap arrays with pagination cursors (`before`/`after`), hard limit ~1000 items
@@ -27,6 +30,7 @@ List posts from a subreddit feed. Params: `subreddit`, `sort` (hot/new/top/risin
 - [ ] Understand time filter only applies to `top` and `controversial` sorts; `rising` has no time filter
 
 ## Definition of Done
+
 - [ ] Tool registered with `McpServer.tool()` as `get_subreddit_posts`
 - [ ] All 5 sort modes work: hot, new, top, rising, controversial
 - [ ] Time filter (hour/day/week/month/year/all) applies only to top and controversial sorts
@@ -42,9 +46,11 @@ List posts from a subreddit feed. Params: `subreddit`, `sort` (hot/new/top/risin
 - [ ] Public API exported from `src/tools/read/index.ts` barrel file
 
 ## Out of Scope
+
 Frontpage (r/all, r/popular) -- can be added if needed.
 
 ## Implementation Notes
+
 - `rising` has no time filter
 - Default limit is 25, max 100
 - Time filter values: hour, day, week, month, year, all
@@ -52,6 +58,7 @@ Frontpage (r/all, r/popular) -- can be added if needed.
 - Post type detection uses helpers from E02-T04
 
 ## Files to Create/Modify
+
 - `src/tools/read/get-subreddit-posts.ts` — subreddit posts listing tool
 - `src/tools/read/index.ts` — export tool
 - `src/__tests__/tools/read/get-subreddit-posts.test.ts` — tests for all sort modes

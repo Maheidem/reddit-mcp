@@ -22,6 +22,7 @@ specs/
 ```
 
 Each epic folder contains:
+
 - `EPIC.md` -- goal, context, research references, task index table with status
 - `EXX-TYY-task-name.md` -- self-contained task ticket with metadata, ACs, DoR, DoD
 
@@ -48,18 +49,22 @@ The DoR checklist in each task file must be **task-specific**, not boilerplate. 
 **Minimum 4 checklist items.** Three items or fewer signals the DoR was copied from a template without tailoring.
 
 **Dependency specificity.** Each dependency must be listed by task ID and title:
+
 - GOOD: `Dependency: E01-T02 (Create Source Directory Structure) is Done -- src/index.ts and directory structure must exist`
 - BAD: `Dependencies completed`
 
 **Research specificity.** Each research reference must cite a specific section number and topic:
+
 - GOOD: `Research: Read research/09-typescript-mcp-sdk-deep-dive.md section 2 -- Server Construction Patterns (McpServer vs low-level Server, key method reference)`
 - BAD: `Research sections read: 09-typescript-mcp-sdk-deep-dive.md`
 
 **Understanding items.** The DoR must include items that show the implementer has internalized task-specific concepts:
+
 - GOOD: `Understand: In stdio mode, NEVER use console.log() -- stdout is reserved for MCP protocol messages`
 - BAD: (no understanding items at all)
 
 **AC review item.** State the count and scope of ACs:
+
 - GOOD: `ACs reviewed: 3 acceptance criteria covering lint pass, format command, and specific lint rules`
 - BAD: `Acceptance criteria reviewed and clear`
 
@@ -86,22 +91,24 @@ The DoD checklist in each task file must be **task-specific**, not boilerplate. 
 **Minimum 6 checklist items.** Five items or fewer signals the DoD was copied from a template without tailoring.
 
 **AC restatement.** Each acceptance criterion must be restated as a verifiable checklist item:
+
 - GOOD: `AC1: npm run build (tsc) succeeds without errors`
 - BAD: `All acceptance criteria met`
 
 **Type-appropriate gates.** Different task types require different DoD gates:
 
-| Task Type | Required DoD Gates | NOT Required |
-|-----------|-------------------|--------------|
-| Config/scaffolding | Config files created, commands work, no lint warnings | Barrel exports, TSDoc |
-| Source code (tool, module, class) | Barrel export, TSDoc on public API, tests written | -- |
-| Test infrastructure | Test runner works, sample test passes | Barrel exports |
-| Tool implementation | Zod schema defined, tool registered, barrel export, TSDoc | -- |
-| Integration/packaging | End-to-end verification, all components wired | TSDoc on internals |
+| Task Type                         | Required DoD Gates                                        | NOT Required          |
+| --------------------------------- | --------------------------------------------------------- | --------------------- |
+| Config/scaffolding                | Config files created, commands work, no lint warnings     | Barrel exports, TSDoc |
+| Source code (tool, module, class) | Barrel export, TSDoc on public API, tests written         | --                    |
+| Test infrastructure               | Test runner works, sample test passes                     | Barrel exports        |
+| Tool implementation               | Zod schema defined, tool registered, barrel export, TSDoc | --                    |
+| Integration/packaging             | End-to-end verification, all components wired             | TSDoc on internals    |
 
 **Build gate.** Every DoD must include `tsc --noEmit` or equivalent build verification.
 
 **Specificity.** DoD items must reference concrete artifacts:
+
 - GOOD: `src/server.ts creates McpServer instance with reddit_ping tool registration`
 - BAD: `Server code is correct`
 
@@ -109,10 +116,10 @@ The DoD checklist in each task file must be **task-specific**, not boilerplate. 
 
 ## Estimation Guide
 
-| Size | Meaning | Effort | Examples |
-|------|---------|--------|----------|
-| **S** | Well-understood, 1 file, clear pattern | 1-2 hours | Barrel exports, config loading, single simple tool |
-| **M** | Some design decisions, 2-4 files, tests needed | 2-6 hours | HTTP client, rate limiter, most tools |
+| Size  | Meaning                                                     | Effort     | Examples                                             |
+| ----- | ----------------------------------------------------------- | ---------- | ---------------------------------------------------- |
+| **S** | Well-understood, 1 file, clear pattern                      | 1-2 hours  | Barrel exports, config loading, single simple tool   |
+| **M** | Some design decisions, 2-4 files, tests needed              | 2-6 hours  | HTTP client, rate limiter, most tools                |
 | **L** | Complex logic, multiple integration points, extensive tests | 6-12 hours | Comment tree parsing, integration test suite, README |
 
 ---
@@ -124,31 +131,35 @@ Each `EPIC.md` follows this structure:
 ```markdown
 # EXX: Epic Title
 
-| Field | Value |
-|-------|-------|
-| **Status** | Not Started |
-| **Dependencies** | EXX (Name) |
-| **Tasks** | N |
-| **Estimated Effort** | N-N hours |
+| Field                | Value       |
+| -------------------- | ----------- |
+| **Status**           | Not Started |
+| **Dependencies**     | EXX (Name)  |
+| **Tasks**            | N           |
+| **Estimated Effort** | N-N hours   |
 
 ## Goal
+
 One sentence describing the epic's outcome.
 
 ## Context
+
 Background on what this epic implements and why.
 
 ## Research References
+
 - FINAL-CONSOLIDATED-RESEARCH.md sections: X, Y, Z
 - research/XX-specific-doc.md
 
 ## Task Index
 
-| ID | Title | Size | Status | Dependencies |
-|----|-------|:----:|--------|-------------|
-| [T01](EXX-T01-task-name.md) | Task Title | S | Not Started | None |
-| [T02](EXX-T02-task-name.md) | Task Title | M | Not Started | T01 |
+| ID                          | Title      | Size | Status      | Dependencies |
+| --------------------------- | ---------- | :--: | ----------- | ------------ |
+| [T01](EXX-T01-task-name.md) | Task Title |  S   | Not Started | None         |
+| [T02](EXX-T02-task-name.md) | Task Title |  M   | Not Started | T01          |
 
 ## Success Criteria
+
 - Concrete outcome 1
 - Concrete outcome 2
 ```
@@ -162,22 +173,25 @@ Each `EXX-TYY-task-name.md` is a self-contained task ticket:
 ```markdown
 # EXX-TYY: Task Title
 
-| Field | Value |
-|-------|-------|
-| **Epic** | [EXX -- Epic Title](EPIC.md) |
-| **Status** | Not Started |
-| **Size** | S/M/L |
-| **Dependencies** | EXX-TYY, EXX-TYY |
+| Field            | Value                        |
+| ---------------- | ---------------------------- |
+| **Epic**         | [EXX -- Epic Title](EPIC.md) |
+| **Status**       | Not Started                  |
+| **Size**         | S/M/L                        |
+| **Dependencies** | EXX-TYY, EXX-TYY             |
 
 ## Description
+
 What to build and why, in 2-3 sentences.
 
 ## Acceptance Criteria
+
 1. Testable criterion with concrete expected outcome
 2. Testable criterion with concrete expected outcome
 3. Testable criterion with concrete expected outcome
 
 ## Definition of Ready
+
 - [ ] Dependency: EXX-TYY (Task Title) is Done -- [why this dependency matters]
 - [ ] Research: Read FINAL-CONSOLIDATED-RESEARCH.md section N -- [Topic Name] ([what to look for])
 - [ ] Research: Read research/NN-doc-name.md section N -- [Topic Name] ([what to look for])
@@ -186,6 +200,7 @@ What to build and why, in 2-3 sentences.
 - [ ] ACs reviewed: N acceptance criteria covering [brief scope summary]
 
 ## Definition of Done
+
 - [ ] AC1: [Restate AC1 as verifiable checklist item]
 - [ ] AC2: [Restate AC2 as verifiable checklist item]
 - [ ] AC3: [Restate AC3 as verifiable checklist item]
@@ -195,13 +210,16 @@ What to build and why, in 2-3 sentences.
 - [ ] [Additional concrete verification item]
 
 ## Out of Scope
+
 What this task explicitly does NOT do.
 
 ## Implementation Notes
+
 - Hints, gotchas, patterns to follow
 - Links to relevant code or research
 
 ## Files to Create/Modify
+
 - `path/to/file.ts` -- what this file does
 - `path/to/other.ts` -- what this file does
 ```
@@ -214,6 +232,7 @@ What this task explicitly does NOT do.
 
 ```markdown
 ## Definition of Ready
+
 - [ ] No dependencies (this is the first task)
 - [ ] Research: Read FINAL-CONSOLIDATED-RESEARCH.md section 6 -- Technology Stack Decision (TypeScript + Direct HTTP, key dependencies table)
 - [ ] Research: Read research/09-typescript-mcp-sdk-deep-dive.md section 9 -- Production Deployment (package.json configuration, file structure)
@@ -222,6 +241,7 @@ What this task explicitly does NOT do.
 - [ ] ACs reviewed: 3 acceptance criteria covering tsc build, tsconfig settings, package.json configuration
 
 ## Definition of Done
+
 - [ ] AC1: `npm run build` (tsc) succeeds without errors
 - [ ] AC2: `tsconfig.json` has "module": "NodeNext", "target": "ES2022", "strict": true
 - [ ] AC3: `package.json` has "type": "module" and "bin" entry pointing to dist/index.js
@@ -238,6 +258,7 @@ Note: No barrel export or TSDoc required -- this is a config task.
 
 ```markdown
 ## Definition of Ready
+
 - [ ] Dependency: E01-T03 (Wire STDIO Transport) is Done -- HTTP client needs working server shell
 - [ ] Research: Read FINAL-CONSOLIDATED-RESEARCH.md section 2 -- Reddit API Conventions (raw_json=1, api_type=json, User-Agent format)
 - [ ] Research: Read research/07-api-edge-cases-and-gotchas.md section 3 -- HTTP Edge Cases (retry logic, timeout values)
@@ -246,6 +267,7 @@ Note: No barrel export or TSDoc required -- this is a config task.
 - [ ] ACs reviewed: 4 acceptance criteria covering GET/POST conventions, User-Agent, error handling
 
 ## Definition of Done
+
 - [ ] AC1: GET requests automatically append raw_json=1 query parameter
 - [ ] AC2: POST requests automatically include api_type=json in body
 - [ ] AC3: User-Agent header follows Reddit format specification
@@ -261,15 +283,17 @@ Note: No barrel export or TSDoc required -- this is a config task.
 
 ```markdown
 ## Definition of Ready
+
 - [ ] Dependency: E02-T04 (Reddit Thing Types) is Done -- tool needs Post type definitions
 - [ ] Dependency: E03-T06 (Auth Guard) is Done -- tool needs auth tier checking
 - [ ] Research: Read FINAL-CONSOLIDATED-RESEARCH.md section 3.1 -- Listing Endpoints (pagination, after/before params)
 - [ ] Research: Read research/01-reddit-official-api.md section on GET /r/{subreddit}/hot
 - [ ] Understand: Reddit listings return max 100 items per request, default 25
-- [ ] Understand: Tool naming convention is {action}_{resource} (e.g., get_subreddit_posts)
+- [ ] Understand: Tool naming convention is {action}\_{resource} (e.g., get_subreddit_posts)
 - [ ] ACs reviewed: 5 acceptance criteria covering Zod schema, pagination, sorting, auth tier, error handling
 
 ## Definition of Done
+
 - [ ] AC1: Zod schema validates subreddit name, sort order, limit, and after parameters
 - [ ] AC2: Supports hot/new/top/rising sort with time filter for top
 - [ ] AC3: Returns normalized Post[] with consistent field names
@@ -288,28 +312,34 @@ Note: No barrel export or TSDoc required -- this is a config task.
 ## Conventions
 
 ### Task IDs
+
 - Format: `EXX-TYY` (e.g., `E02-T03`)
 - Sequential within each epic
 - Referenced in dependency fields
 
 ### Status Flow
+
 ```
 Not Started --> In Progress --> Done
 ```
 
 ### Status Tracking
+
 Status is tracked in TWO places (must always be in sync):
+
 1. The task file's metadata table (`| **Status** | ... |`)
 2. The EPIC.md's task index table (`| T01 | ... | Status | ... |`)
 
 When an epic's status changes, also update `specs/README.md`.
 
 ### File Naming
+
 - Epic folders: `EXX-kebab-case-name/`
 - Epic files: `EPIC.md` (inside the epic folder)
 - Task files: `EXX-TYY-kebab-case-name.md` (inside the epic folder)
 
 ### Research References
+
 - Always cite specific sections of FINAL-CONSOLIDATED-RESEARCH.md by number and topic
 - Link to individual research docs when a task needs deep detail
 - Include what to look for in the cited section, not just the section number

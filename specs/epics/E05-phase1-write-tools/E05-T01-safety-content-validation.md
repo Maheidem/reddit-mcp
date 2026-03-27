@@ -1,16 +1,18 @@
 # E05-T01: Safety Layer -- Content Validation
 
-| Field | Value |
-|-------|-------|
-| **Epic** | [E05 -- Phase 1 Write Tools](EPIC.md) |
-| **Status** | Not Started |
-| **Size** | M |
-| **Dependencies** | E02 |
+| Field            | Value                                 |
+| ---------------- | ------------------------------------- |
+| **Epic**         | [E05 -- Phase 1 Write Tools](EPIC.md) |
+| **Status**       | Done                                  |
+| **Size**         | M                                     |
+| **Dependencies** | E02                                   |
 
 ## Description
+
 Build `src/utils/safety.ts`: validate content lengths (title<=300, body<=40K, comment<=10K, message<=10K). Count Unicode characters not bytes. Validate title non-empty. Check for Snudown-incompatible markdown.
 
 ## Acceptance Criteria
+
 1. Rejects title > 300 chars with specific error
 2. Rejects body > 40,000 chars with specific error
 3. Counts Unicode chars correctly (emoji = 1 char, not 2+ bytes)
@@ -18,6 +20,7 @@ Build `src/utils/safety.ts`: validate content lengths (title<=300, body<=40K, co
 5. Unit tests cover boundary cases (exactly at limit, 1 over)
 
 ## Definition of Ready
+
 - [ ] E02 (Core Infrastructure) is Done -- HTTP client and error types available
 - [ ] Research read: FINAL-CONSOLIDATED-RESEARCH.md section 8.3 (Content Length Limits -- title 300, body 40K/80K premium, comment 10K, message 10K, flair 64)
 - [ ] Research read: research/08-reddit-content-formatting.md section 4 (Complete Character Limit Reference, API validation behavior, content rendering limits)
@@ -27,6 +30,7 @@ Build `src/utils/safety.ts`: validate content lengths (title<=300, body<=40K, co
 - [ ] Acceptance criteria reviewed and clear
 
 ## Definition of Done
+
 - [ ] `validateTitle()` rejects titles > 300 chars and empty titles with specific error messages
 - [ ] `validateBody()` rejects bodies > 40,000 chars (standard) with specific error; supports optional premium flag for 80K limit
 - [ ] `validateComment()` rejects comments > 10,000 chars with specific error
@@ -39,12 +43,15 @@ Build `src/utils/safety.ts`: validate content lengths (title<=300, body<=40K, co
 - [ ] Public API exported from `src/utils/safety.ts` barrel
 
 ## Out of Scope
+
 Markdown rendering or preview.
 
 ## Implementation Notes
+
 - Premium users get 80K body limit, but validate at 40K (standard) by default
 - Use `[...str].length` or `Array.from(str).length` for proper Unicode char counting (not `str.length` which counts UTF-16 code units)
 - Provide distinct error messages per field so callers know exactly which limit was exceeded
 
 ## Files to Create/Modify
+
 - `src/utils/safety.ts` -- content validation functions

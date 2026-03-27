@@ -1,16 +1,18 @@
 # E05-T03: `create_post` Tool
 
-| Field | Value |
-|-------|-------|
-| **Epic** | [E05 -- Phase 1 Write Tools](EPIC.md) |
-| **Status** | Not Started |
-| **Size** | L |
-| **Dependencies** | E05-T01, E05-T02, E03 |
+| Field            | Value                                 |
+| ---------------- | ------------------------------------- |
+| **Epic**         | [E05 -- Phase 1 Write Tools](EPIC.md) |
+| **Status**       | Done                                  |
+| **Size**         | L                                     |
+| **Dependencies** | E05-T01, E05-T02, E03                 |
 
 ## Description
+
 Submit text or link post. Params: `subreddit`, `title`, `text` (self), `url` (link), `flair_id` (optional), `nsfw` (optional), `spoiler` (optional). Uses `POST /api/submit`.
 
 ## Acceptance Criteria
+
 1. Text post created with content validation applied
 2. Link post created with URL
 3. Bot footer appended to text posts
@@ -19,6 +21,7 @@ Submit text or link post. Params: `subreddit`, `title`, `text` (self), `url` (li
 6. Handles Reddit errors (rate limit, subreddit restrictions, banned)
 
 ## Definition of Ready
+
 - [ ] E05-T01 (Safety Layer -- Content Validation) is Done -- content validation functions available
 - [ ] E05-T02 (Safety Layer -- Bot Disclosure) is Done -- bot footer and duplicate detection available
 - [ ] E03 (Authentication System) is Done -- Tier 3 (user OAuth) auth guard and token management available
@@ -30,6 +33,7 @@ Submit text or link post. Params: `subreddit`, `title`, `text` (self), `url` (li
 - [ ] Acceptance criteria reviewed and clear
 
 ## Definition of Done
+
 - [ ] Text post created with `kind=self` and body content; link post created with `kind=link` and URL
 - [ ] Safety layer enforced before API call: title validated (<=300, non-empty), body validated (<=40K)
 - [ ] Bot disclosure footer appended to text post body (NOT to link posts which have no body)
@@ -42,13 +46,16 @@ Submit text or link post. Params: `subreddit`, `title`, `text` (self), `url` (li
 - [ ] Public API exported from barrel file
 
 ## Out of Scope
+
 Image/video/gallery/poll posts (Phase 2).
 
 ## Implementation Notes
+
 - `kind` param: `self` for text, `link` for URL
 - Response is in wrapped JSON format: `{"json": {"data": {...}}}`
 - Bot footer should NOT be appended to link posts (no body text)
 - Flair requires the subreddit to have flairs enabled
 
 ## Files to Create/Modify
+
 - `src/tools/write/create-post.ts` -- tool implementation

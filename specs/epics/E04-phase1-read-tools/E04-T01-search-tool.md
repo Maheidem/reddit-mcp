@@ -1,16 +1,18 @@
 # E04-T01: Search Tool
 
-| Field | Value |
-|-------|-------|
-| **Epic** | [E04 — Phase 1 Read Tools](EPIC.md) |
-| **Status** | Not Started |
-| **Size** | M |
-| **Dependencies** | E02, E03 |
+| Field            | Value                               |
+| ---------------- | ----------------------------------- |
+| **Epic**         | [E04 — Phase 1 Read Tools](EPIC.md) |
+| **Status**       | Done                         |
+| **Size**         | M                                   |
+| **Dependencies** | E02, E03                            |
 
 ## Description
+
 Search posts across Reddit or within a subreddit. Params: `q`, `subreddit` (optional), `sort` (relevance/hot/top/new), `time` (hour/day/week/month/year/all), `limit`, `after`. Uses `GET /search` or `GET /r/{sub}/search`.
 
 ## Acceptance Criteria
+
 1. Returns posts matching query with title, score, author, url, subreddit
 2. Subreddit-scoped search works
 3. Sort and time filters apply correctly
@@ -18,6 +20,7 @@ Search posts across Reddit or within a subreddit. Params: `q`, `subreddit` (opti
 5. Zod schema validates all params with descriptions
 
 ## Definition of Ready
+
 - [ ] E02 (Core Infrastructure) is Done — HTTP client, rate limiter, error parser, types available
 - [ ] E03 (Authentication System) is Done — auth manager and auth guard available for tier checking
 - [ ] Research read: FINAL-CONSOLIDATED-RESEARCH.md section 2.2 (Endpoint Catalog) — Search category: 4 endpoints
@@ -29,6 +32,7 @@ Search posts across Reddit or within a subreddit. Params: `q`, `subreddit` (opti
 - [ ] Understand Listing response format: pagination via `before`/`after` cursors, max 100 per request, default 25
 
 ## Definition of Done
+
 - [ ] Tool registered with `McpServer.tool()` as `search`
 - [ ] Returns posts matching query with title, score, author, url, subreddit fields
 - [ ] Subreddit-scoped search works with `restrict_sr=true` when subreddit param provided
@@ -43,9 +47,11 @@ Search posts across Reddit or within a subreddit. Params: `q`, `subreddit` (opti
 - [ ] Public API exported from `src/tools/read/index.ts` barrel file
 
 ## Out of Scope
+
 Comment search (Reddit doesn't support it via API).
 
 ## Implementation Notes
+
 - `restrict_sr=true` needed for subreddit-scoped search
 - Default sort is `relevance`, default time is `all`
 - Max limit is 100, default is 25
@@ -53,6 +59,7 @@ Comment search (Reddit doesn't support it via API).
 - Zod parameter descriptions are what the LLM sees to understand what each param does
 
 ## Files to Create/Modify
+
 - `src/tools/read/search.ts` — search tool implementation
 - `src/tools/read/index.ts` — export search tool
 - `src/__tests__/tools/read/search.test.ts` — tests with mocked Reddit responses

@@ -40,25 +40,25 @@ This document provides a comprehensive survey of Reddit API libraries and SDK wr
 
 ## 1. Library Comparison Matrix
 
-| Library | Language | Latest Version | Last Active | Stars | OAuth2 | Streaming | Rate Limiting | Async | API Coverage | Maintained? |
-|---------|----------|---------------|-------------|-------|--------|-----------|---------------|-------|-------------|-------------|
-| **PRAW** | Python | v7.8.1 (Oct 2024) | Active | 4,100 | Yes | Yes | Auto | No (sync) | ~95% | **Yes** |
-| **AsyncPRAW** | Python | v7.8.1 (Dec 2024) | Active | 144 | Yes | Yes | Auto | **Yes** | ~95% | **Yes** |
-| **RedditWarp** | Python | Latest on PyPI | Jun 2024 | 55 | Yes | Yes | Auto | **Yes** | Comprehensive | Partial |
-| **PMAW** | Python | v3.0.0 | Maintained | 78 commits | N/A (Pushshift) | No | Auto (60 RPM) | No | Pushshift only | **Dead (Pushshift shut down)** |
-| **snoowrap** | JavaScript | v1.23.0 (May 2021) | **Archived Mar 2024** | 1,000+ | Yes | WebSocket | Auto | Yes (Promises) | ~90% | **No** |
-| **raw.js** | JavaScript | v0.6.0 (9 yrs ago) | **Dead** | Minimal | Yes | No | Unknown | No | Beta/partial | **No** |
-| **TRAW** | TypeScript | WIP (Mar 2023) | Stalled | 4 | Yes | Unknown | Unknown | Unknown | Partial | **No** |
-| **Snoostorm** | TypeScript | Unreleased | Early 2023 | 93 | Via snoowrap | **Yes (events)** | Via snoowrap | Yes | Streaming only | **No** |
-| **JRAW** | Kotlin/Java | v1.1.0 (May 2018) | Inactive | 360 | Yes | No | Unknown | No | ~49% | **No** |
-| **jReddit** | Java | Legacy | Inactive | — | No (cookies) | No | No | No | Limited | **No** |
-| **go-reddit** | Go | v2.0.0 (Feb 2021) | Moderate | 332 | Yes | No | No built-in | No | Moderate | **Partial** |
-| **graw** | Go | Legacy | Inactive | — | Yes | Yes | Unknown | No | Limited | **No** |
-| **roux** | Rust | On crates.io | Maintained | 112 | Yes | Via roux-stream | Unknown | **Yes** | Common endpoints | **Partial** |
-| **Reddit.NET** | C# | Dec 2022 | Inactive | 506 | Yes | Events | Auto (60/min) | Yes | 171/204 endpoints | **No** |
-| **RedditSharp** | C# | Legacy | **Unmaintained** | — | Yes | No | Yes | No | Partial | **No** |
-| **Redd** | Ruby | v0.7.5 (Feb 2015) | Inactive (2019) | 191 | Yes | Yes | Auto | No | Most endpoints | **No** |
-| **reddift** | Swift | Legacy | Unknown | — | Yes | No | Unknown | No | Limited | **No** |
+| Library         | Language    | Latest Version     | Last Active           | Stars      | OAuth2          | Streaming        | Rate Limiting | Async          | API Coverage      | Maintained?                    |
+| --------------- | ----------- | ------------------ | --------------------- | ---------- | --------------- | ---------------- | ------------- | -------------- | ----------------- | ------------------------------ |
+| **PRAW**        | Python      | v7.8.1 (Oct 2024)  | Active                | 4,100      | Yes             | Yes              | Auto          | No (sync)      | ~95%              | **Yes**                        |
+| **AsyncPRAW**   | Python      | v7.8.1 (Dec 2024)  | Active                | 144        | Yes             | Yes              | Auto          | **Yes**        | ~95%              | **Yes**                        |
+| **RedditWarp**  | Python      | Latest on PyPI     | Jun 2024              | 55         | Yes             | Yes              | Auto          | **Yes**        | Comprehensive     | Partial                        |
+| **PMAW**        | Python      | v3.0.0             | Maintained            | 78 commits | N/A (Pushshift) | No               | Auto (60 RPM) | No             | Pushshift only    | **Dead (Pushshift shut down)** |
+| **snoowrap**    | JavaScript  | v1.23.0 (May 2021) | **Archived Mar 2024** | 1,000+     | Yes             | WebSocket        | Auto          | Yes (Promises) | ~90%              | **No**                         |
+| **raw.js**      | JavaScript  | v0.6.0 (9 yrs ago) | **Dead**              | Minimal    | Yes             | No               | Unknown       | No             | Beta/partial      | **No**                         |
+| **TRAW**        | TypeScript  | WIP (Mar 2023)     | Stalled               | 4          | Yes             | Unknown          | Unknown       | Unknown        | Partial           | **No**                         |
+| **Snoostorm**   | TypeScript  | Unreleased         | Early 2023            | 93         | Via snoowrap    | **Yes (events)** | Via snoowrap  | Yes            | Streaming only    | **No**                         |
+| **JRAW**        | Kotlin/Java | v1.1.0 (May 2018)  | Inactive              | 360        | Yes             | No               | Unknown       | No             | ~49%              | **No**                         |
+| **jReddit**     | Java        | Legacy             | Inactive              | —          | No (cookies)    | No               | No            | No             | Limited           | **No**                         |
+| **go-reddit**   | Go          | v2.0.0 (Feb 2021)  | Moderate              | 332        | Yes             | No               | No built-in   | No             | Moderate          | **Partial**                    |
+| **graw**        | Go          | Legacy             | Inactive              | —          | Yes             | Yes              | Unknown       | No             | Limited           | **No**                         |
+| **roux**        | Rust        | On crates.io       | Maintained            | 112        | Yes             | Via roux-stream  | Unknown       | **Yes**        | Common endpoints  | **Partial**                    |
+| **Reddit.NET**  | C#          | Dec 2022           | Inactive              | 506        | Yes             | Events           | Auto (60/min) | Yes            | 171/204 endpoints | **No**                         |
+| **RedditSharp** | C#          | Legacy             | **Unmaintained**      | —          | Yes             | No               | Yes           | No             | Partial           | **No**                         |
+| **Redd**        | Ruby        | v0.7.5 (Feb 2015)  | Inactive (2019)       | 191        | Yes             | Yes              | Auto          | No             | Most endpoints    | **No**                         |
+| **reddift**     | Swift       | Legacy             | Unknown               | —          | Yes             | No               | Unknown       | No             | Limited           | **No**                         |
 
 **Key takeaway:** Only **PRAW** and **AsyncPRAW** are actively and reliably maintained with comprehensive API coverage. Everything else is either archived, stalled, or in maintenance-only mode.
 
@@ -70,22 +70,22 @@ Real-world adoption as measured by package registry downloads (as of March 2026)
 
 ### Python (PyPI)
 
-| Package | Daily | Weekly | Monthly | Trend |
-|---------|-------|--------|---------|-------|
-| **PRAW** | ~64,000 | ~353,000 | **~1,187,000** | Steady growth, Python 3.11/3.12 dominant |
-| **AsyncPRAW** | ~3,600 | ~24,800 | **~115,500** | Growing, ~10% of PRAW volume |
-| **RedditWarp** | — | — | Minimal | Niche adoption |
-| **PMAW** | — | — | Declining | Pushshift shutdown impact |
+| Package        | Daily   | Weekly   | Monthly        | Trend                                    |
+| -------------- | ------- | -------- | -------------- | ---------------------------------------- |
+| **PRAW**       | ~64,000 | ~353,000 | **~1,187,000** | Steady growth, Python 3.11/3.12 dominant |
+| **AsyncPRAW**  | ~3,600  | ~24,800  | **~115,500**   | Growing, ~10% of PRAW volume             |
+| **RedditWarp** | —       | —        | Minimal        | Niche adoption                           |
+| **PMAW**       | —       | —        | Declining      | Pushshift shutdown impact                |
 
 **Sources:** [pypistats.org/packages/praw](https://pypistats.org/packages/praw), [pypistats.org/packages/asyncpraw](https://pypistats.org/packages/asyncpraw)
 
 ### JavaScript/TypeScript (npm)
 
-| Package | Weekly | Monthly | Trend |
-|---------|--------|---------|-------|
-| **snoowrap** | ~15,800 | **~72,000** | Down 10% weekly despite being archived |
-| **raw.js** | Negligible | Negligible | Dead |
-| **Snoostorm** | — | Minimal | Niche |
+| Package       | Weekly     | Monthly     | Trend                                  |
+| ------------- | ---------- | ----------- | -------------------------------------- |
+| **snoowrap**  | ~15,800    | **~72,000** | Down 10% weekly despite being archived |
+| **raw.js**    | Negligible | Negligible  | Dead                                   |
+| **Snoostorm** | —          | Minimal     | Niche                                  |
 
 **Source:** [npmcharts.com/compare/snoowrap](https://npmcharts.com/compare/snoowrap)
 
@@ -110,6 +110,7 @@ PRAW dominates with **1.2M monthly downloads** — more than 16x the combined JS
 - **Python:** 3.9+
 
 #### Key Features
+
 - **Automatic rate limiting** — no manual `sleep()` calls needed; internally follows all Reddit API rules
 - **Full OAuth2** — supports script, web, and installed app types
 - **Streaming** — `subreddit.stream.comments()` and `subreddit.stream.submissions()` for real-time monitoring
@@ -124,6 +125,7 @@ PRAW dominates with **1.2M monthly downloads** — more than 16x the combined JS
 - **`praw.ini` support** — credential management across environments
 
 #### Auth Handling
+
 ```python
 import praw
 reddit = praw.Reddit(
@@ -134,17 +136,21 @@ reddit = praw.Reddit(
     password="my_password"
 )
 ```
+
 Also supports `praw.ini` files and environment variables for credential management.
 
 #### Error Handling
+
 See [Section 12: Error Handling Patterns](#12-error-handling-patterns-by-library) for detailed breakdown.
 
 #### Limitations
+
 - **Synchronous only** — blocks during API calls
 - Not ideal for async frameworks (Discord bots, web servers)
 - For async environments, use AsyncPRAW instead
 
 #### MCP Suitability: **HIGH**
+
 PRAW's comprehensive API coverage and automatic rate limiting make it excellent for an MCP server backend. However, its synchronous nature means it may not handle concurrent MCP tool calls efficiently.
 
 ---
@@ -163,6 +169,7 @@ PRAW's comprehensive API coverage and automatic rate limiting make it excellent 
 - **Dependencies:** aiohttp, aiofiles, aiosqlite, asyncprawcore
 
 #### Key Differences from PRAW
+
 - Full `async`/`await` support throughout
 - Non-blocking API interactions enable concurrent operations
 - Async streaming via `async for` loops
@@ -170,6 +177,7 @@ PRAW's comprehensive API coverage and automatic rate limiting make it excellent 
 - Uses `aiohttp` instead of `requests` for HTTP
 
 #### Streaming Example
+
 ```python
 import asyncpraw
 
@@ -181,9 +189,11 @@ async def stream_comments():
 ```
 
 #### Error Handling
+
 Same exception hierarchy as PRAW — `PRAWException`, `RedditAPIException`, `ClientException`, plus `asyncprawcore` exceptions. See [Section 12](#12-error-handling-patterns-by-library).
 
 #### MCP Suitability: **HIGHEST**
+
 AsyncPRAW is the top Python choice for MCP servers. Async support means the MCP server can handle multiple tool calls concurrently without blocking. The MCP Python SDK (FastMCP) is also async-native, making them a natural fit.
 
 ---
@@ -200,6 +210,7 @@ AsyncPRAW is the top Python choice for MCP servers. Async support means the MCP 
 - **Last significant activity:** June 2024
 
 #### Key Features
+
 - **Full type annotations** — "modern type-complete codebase" with static typing
 - Both sync and async I/O models
 - Automatic rate limit handling
@@ -209,6 +220,7 @@ AsyncPRAW is the top Python choice for MCP servers. Async support means the MCP 
 - Client-based architecture: `client.p.subreddit.fetch_by_name()`
 
 #### MCP Suitability: **MODERATE**
+
 Strong type safety is appealing for MCP tool definitions, but the smaller community (~55 stars) and less battle-tested status make it riskier than PRAW/AsyncPRAW.
 
 ---
@@ -227,6 +239,7 @@ Strong type safety is appealing for MCP tool definitions, but the smaller commun
 - **Node.js:** 4+ (Proxy support in Node 6+)
 
 #### Key Features
+
 - Non-blocking async calls returning Bluebird Promises
 - Independent snoowrap objects for multi-account operations
 - Automatic OAuth token refresh
@@ -237,15 +250,19 @@ Strong type safety is appealing for MCP tool definitions, but the smaller commun
 - Default retry on 502/503/504/522 (up to 3 attempts for GET/DELETE/PUT)
 
 #### Why It's Archived
+
 The original maintainer (`not-an-aardvark`) archived the repository in March 2024. No new maintenance, bug fixes, or feature additions should be expected.
 
 #### TypeScript Support
+
 Minimal — only 1.1% of the codebase is TypeScript. Community-maintained type definitions exist on DefinitelyTyped (`@types/snoowrap`).
 
 #### Error Handling
+
 See [Section 12](#12-error-handling-patterns-by-library) for detailed patterns.
 
 #### Active Forks
+
 - [please-wait/snoowrap](https://github.com/please-wait/snoowrap) — Node.js-focused fork
 - [alex-kelso/snoowrap](https://github.com/alex-kelso/snoowrap) — community fork
 - [AleDema/snoowrap](https://github.com/AleDema/snoowrap) — community fork
@@ -253,6 +270,7 @@ See [Section 12](#12-error-handling-patterns-by-library) for detailed patterns.
 None of the forks have gained significant traction (all < 50 stars).
 
 #### MCP Suitability: **LOW (archived)**
+
 Despite being feature-rich, the archived status is a dealbreaker for a new MCP server project. Security vulnerabilities will never be patched.
 
 ---
@@ -268,11 +286,13 @@ Despite being feature-rich, the archived status is a dealbreaker for a new MCP s
 - **License:** MIT
 
 #### Features
+
 - OAuth2 support (web app, installed app, script types)
 - Unauthenticated request support
 - Listed as "stable" on Reddit API wrappers wiki
 
 #### MCP Suitability: **NONE**
+
 Dead project. Last update nearly a decade ago. Only 3 dependents on npm.
 
 ---
@@ -288,15 +308,18 @@ Dead project. Last update nearly a decade ago. Only 3 dependents on npm.
 - **Language:** 100% TypeScript
 
 #### Key Differences from snoowrap
+
 - Full TypeScript implementation
 - Addresses snoowrap's security concerns from outdated dependencies
 - Uses Axios instead of `request` (deprecated npm package)
 - Modernized function signatures
 
 #### Status
+
 Incomplete roadmap: still reimplementing snoowrap features, establishing tests, adding mod notes. Only mod notes feature marked complete. Development stalled since March 2023.
 
 #### MCP Suitability: **VERY LOW**
+
 Too immature (4 stars, stalled development) for production use.
 
 ---
@@ -312,12 +335,14 @@ Too immature (4 stars, stalled development) for production use.
 - **Language:** 100% TypeScript
 
 #### Key Features
+
 - Event-based streaming for comments, submissions, inbox, modmail
 - Built on top of snoowrap (dependency)
 - Extensible polling architecture — can extend `Poll` class for custom objects
 - TypeScript types preinstalled
 
 #### MCP Suitability: **LOW**
+
 Depends on the archived snoowrap. Useful concept for streaming but not viable as a standalone solution.
 
 ---
@@ -325,6 +350,7 @@ Depends on the archived snoowrap. Useful concept for streaming but not viable as
 ### 4.5 Other JS/TS Libraries (npm)
 
 From the [npm Reddit API category](https://socket.dev/npm/category/apis/social-api/reddit-api):
+
 - **reddit-client-api** ([github.com/jamiegood/reddit-client-api](https://github.com/jamiegood/reddit-client-api)) — Node.js/TypeScript client, minimal adoption
 - **npm-reddit-ts** ([github.com/aelysiaa/npm-reddit-ts](https://github.com/aelysiaa/npm-reddit-ts)) — TypeScript Reddit API, minimal adoption
 - **TypeScript-Reddit-API** ([github.com/pwdonald/TypeScript-Reddit-API](https://github.com/pwdonald/TypeScript-Reddit-API)) — Legacy TS module
@@ -344,6 +370,7 @@ Since snoowrap is archived and alternatives are immature, building an MCP server
 - Only wrap the specific endpoints the MCP tools expose (not the entire Reddit API)
 
 **Why this works for MCP:**
+
 1. MCP tools are individually defined — you only need to wrap specific endpoints
 2. The TypeScript MCP SDK is the most mature and widely used
 3. Reddit's REST API is well-documented and returns JSON
@@ -364,6 +391,7 @@ Since snoowrap is archived and alternatives are immature, building an MCP server
 - **License:** MIT
 
 #### Features
+
 - OAuth2 authentication via `OAuthHelper.automatic()`
 - Full multireddit and captcha support
 - Mini HTTP framework wrapping OkHttp
@@ -373,6 +401,7 @@ Since snoowrap is archived and alternatives are immature, building an MCP server
 - RedditClient as the primary internet-accessing class
 
 #### MCP Suitability: **VERY LOW**
+
 Last release was 2018. No active maintenance. Java/Kotlin MCP SDK support is limited compared to TypeScript/Python.
 
 ### 5.2 jReddit
@@ -395,6 +424,7 @@ Last release was 2018. No active maintenance. Java/Kotlin MCP SDK support is lim
 - **Design:** Inspired by Google's GitHub API client and DigitalOcean's API client
 
 #### Features
+
 - OAuth2 authentication (client credentials + password grant)
 - Read-only mode via `NewReadonlyClient()` for unauthenticated access
 - Context-based API calls (`context.Context`) for timeout/cancellation
@@ -402,15 +432,18 @@ Last release was 2018. No active maintenance. Java/Kotlin MCP SDK support is lim
 - Environment variable credential loading
 
 #### API Coverage
+
 - Comments, Posts, Subreddits, Users, Flairs, Collections
 - **No built-in streaming** (must poll manually)
 - **No built-in rate limiting** (must implement manually)
 
 #### Active Forks
+
 - [kmulvey/reddit](https://github.com/kmulvey/reddit) — actively maintained fork
 - [loganintech/go-reddit/v2](https://pkg.go.dev/github.com/loganintech/go-reddit/v2) — published Jul 2024
 
 #### MCP Suitability: **MODERATE**
+
 Go is fast and concurrent (goroutines are natural for MCP), but the library needs manual rate limiting and has no streaming. The Go MCP SDK exists but is less mature than TypeScript/Python.
 
 ### 6.2 graw
@@ -432,18 +465,22 @@ Go is fast and concurrent (goroutines are natural for MCP), but the library need
 - **License:** MIT
 
 #### Features
+
 - Synchronous and asynchronous (tokio-based) operation modes
 - `blocking` cargo feature for sync mode
 - OAuth2 authentication for write operations (text/link post submission)
 - Read-only subreddit and user access without auth
 
 #### Companion: roux-stream
+
 - [github.com/torfsen/roux-stream](https://github.com/torfsen/roux-stream) — streaming API for subreddit posts and comments
 
 #### Status
+
 "Not in active development but is still being maintained" — covers most common endpoints. Accepts bug reports and PRs.
 
 #### MCP Suitability: **LOW**
+
 Rust MCP SDK support is nascent. The library covers only common endpoints, and Rust's compile times slow development iteration.
 
 ---
@@ -459,6 +496,7 @@ Rust MCP SDK support is nascent. The library covers only common endpoints, and R
 - **Target:** .NET Standard (cross-platform)
 
 #### Features
+
 - **171 of 204 API endpoints** covered (84%)
 - 392 passing integration tests
 - Event-based monitoring with automatic scaling (monitoring delay adjusts per concurrent threads)
@@ -469,6 +507,7 @@ Rust MCP SDK support is nascent. The library covers only common endpoints, and R
 - **AuthTokenRetrieverLib** for programmatic token retrieval
 
 #### MCP Suitability: **LOW-MODERATE**
+
 Best API coverage of any non-Python library (84%), but inactive since 2022. C# MCP SDK support exists but is community-driven, not official.
 
 ### 8.2 RedditSharp
@@ -491,6 +530,7 @@ Best API coverage of any non-Python library (84%), but inactive since 2022. C# M
 - **Stars:** 191 | **Forks:** 76
 
 #### Features
+
 - "Batteries-included" — supports most Reddit API endpoints
 - Live threads and beta mod-mail
 - Streaming for new posts and comments
@@ -501,6 +541,7 @@ Best API coverage of any non-Python library (84%), but inactive since 2022. C# M
 - OAuth2 (allows 2x request rate vs. cookie auth: 1 req/sec)
 
 #### MCP Suitability: **VERY LOW**
+
 Last release was 2015, last commit 2019. Ruby MCP SDK support is minimal.
 
 ---
@@ -508,28 +549,35 @@ Last release was 2015, last commit 2019. Ruby MCP SDK support is minimal.
 ## 10. Other Languages
 
 ### 10.1 Dart
+
 - **Library:** `reddit` | **Maintainer:** /u/sroose | **License:** MIT | **Status:** Stable (per wiki)
 - No significant community or recent activity found.
 
 ### 10.2 Swift
+
 - **Library:** `reddift` | **License:** MIT | **Status:** Stable (per wiki)
 - iOS/macOS focused, not relevant for server-side MCP.
 
 ### 10.3 Perl
+
 - **Reddit::Client** — GPL/Artistic license, stable per wiki
 - **Mojo::Snoo** — BSD 2-Clause, unstable
 
 ### 10.4 PHP
+
 - **Phapper for reddit** — Maintainer: /u/rotorcowboy, MIT license, stable per wiki
 - **PHP Reddit API Wrapper** — Maintainer: /u/jcleblanc, MIT license, unstable
 
 ### 10.5 Common Lisp
+
 - **cl-reddit** — BSD-2-Clause, non-OAuth (legacy/cookie-based)
 
 ### 10.6 PowerShell
+
 - **PoSh Reddit** — WTFPL license, non-OAuth (legacy)
 
 ### 10.7 Objective-C
+
 - **RedditKit** — Maintainer: /u/samsymons, MIT license (non-OAuth, legacy)
 
 **MCP Suitability for all above:** None practical — no MCP SDK support and minimal community.
@@ -547,6 +595,7 @@ Last release was 2015, last commit 2019. Ruby MCP SDK support is minimal.
 - **Python:** 3.5+
 
 #### Features (when Pushshift was active)
+
 - **Multithreading** — default 10 workers, recommended 10-20 threads
 - **Rate limiting** — rate-averaging (default 60 RPM) or exponential backoff (full, equal, decorrelated jitter)
 - **Caching** — `mem_safe=True` caches every ~20 batches to reduce RAM
@@ -554,6 +603,7 @@ Last release was 2015, last commit 2019. Ruby MCP SDK support is minimal.
 - **PRAW enrichment** — pass a PRAW instance to enrich Pushshift results with live Reddit metadata
 
 #### Current Status: **EFFECTIVELY DEAD**
+
 Pushshift public API is shut down. PMAW cannot function without it.
 
 ### 11.2 PSAW (Python Pushshift.io API Wrapper)
@@ -574,6 +624,7 @@ Pushshift public API is shut down. PMAW cannot function without it.
 - **Status:** Functional code but useless without Pushshift API
 
 ### 11.4 Pushshift Successor: Arctic Shift
+
 - Academic project hosting Reddit data dumps via Academic Torrents
 - Publishes monthly archives of Reddit data (posts, comments, metadata)
 - For bulk historical analysis only, not real-time API access
@@ -587,6 +638,7 @@ Pushshift public API is shut down. PMAW cannot function without it.
 ### 12.1 PRAW / AsyncPRAW Error Handling
 
 **Exception Hierarchy:**
+
 ```
 PRAWException (base)
 ├── RedditAPIException  — server-side errors from Reddit's API
@@ -600,6 +652,7 @@ PRAWException (base)
 ```
 
 **Important:** PRAW does NOT wrap all `prawcore` exceptions. HTTP-level errors (403 Forbidden, 503 Service Unavailable) may require catching `prawcore` exceptions directly:
+
 ```python
 import prawcore
 
@@ -619,18 +672,21 @@ except prawcore.exceptions.ServerError:
 ### 12.2 snoowrap Error Handling
 
 **Rate Limit Handling:**
+
 ```javascript
 const r = new snoowrap({...});
 r.config({ continueAfterRatelimitError: true }); // Queue requests during rate limit
 ```
 
 **HTTP Error Catching:**
+
 ```javascript
-r.getSubmission('abc123').fetch()
-  .catch({statusCode: 429}, () => {
+r.getSubmission("abc123")
+  .fetch()
+  .catch({ statusCode: 429 }, () => {
     // Handle rate limit specifically
   })
-  .catch(err => {
+  .catch((err) => {
     // General error handler
   });
 ```
@@ -638,12 +694,14 @@ r.getSubmission('abc123').fetch()
 **Automatic Retries:** Retries GET, DELETE, PUT up to 3 times on status codes 502, 503, 504, 522.
 
 **Known Issues:**
+
 - Unhandled Promise rejections from implicit lazy-loading calls ([issue #153](https://github.com/not-an-aardvark/snoowrap/issues/153))
 - `continueAfterRatelimitError: true` may still throw if Promises aren't properly chained ([issue #105](https://github.com/not-an-aardvark/snoowrap/issues/105))
 
 ### 12.3 go-reddit Error Handling
 
 Uses Go's idiomatic `error` return pattern with `context.Context` for cancellation:
+
 ```go
 client, err := reddit.NewClient(credentials)
 if err != nil {
@@ -668,6 +726,7 @@ if err != nil {
 ### 12.5 roux (Rust) Error Handling
 
 Uses Rust's `Result<T, RouxError>` pattern:
+
 ```rust
 match subreddit.hot(25, None).await {
     Ok(submissions) => { /* process */ },
@@ -677,14 +736,14 @@ match subreddit.hot(25, None).await {
 
 ### 12.6 Error Handling Comparison
 
-| Library | Rate Limit Recovery | HTTP Retry | Error Types | Granularity |
-|---------|-------------------|------------|-------------|-------------|
-| **PRAW** | Auto (transparent) | Via prawcore | Typed hierarchy | High — per-error-type |
-| **AsyncPRAW** | Auto (transparent) | Via asyncprawcore | Typed hierarchy | High — per-error-type |
-| **snoowrap** | Configurable (queue/reject) | Auto 3x on 5xx | Promise rejection | Medium |
-| **go-reddit** | None (manual) | None (manual) | Go error interface | Low |
-| **Reddit.NET** | Auto < 60s | Auto < 60s | .NET exceptions | Medium |
-| **roux** | Unknown | Unknown | Rust Result type | Medium |
+| Library        | Rate Limit Recovery         | HTTP Retry        | Error Types        | Granularity           |
+| -------------- | --------------------------- | ----------------- | ------------------ | --------------------- |
+| **PRAW**       | Auto (transparent)          | Via prawcore      | Typed hierarchy    | High — per-error-type |
+| **AsyncPRAW**  | Auto (transparent)          | Via asyncprawcore | Typed hierarchy    | High — per-error-type |
+| **snoowrap**   | Configurable (queue/reject) | Auto 3x on 5xx    | Promise rejection  | Medium                |
+| **go-reddit**  | None (manual)               | None (manual)     | Go error interface | Low                   |
+| **Reddit.NET** | Auto < 60s                  | Auto < 60s        | .NET exceptions    | Medium                |
+| **roux**       | Unknown                     | Unknown           | Rust Result type   | Medium                |
 
 ---
 
@@ -701,6 +760,7 @@ Devvit is Reddit's **official open-source developer platform** for building cust
 - **Build system:** Turborepo monorepo
 
 ### Key Components
+
 - UI toolkit (Blocks and Web modes — React/Vue/Angular for Web)
 - Redis data storage
 - Scheduler, realtime support
@@ -709,6 +769,7 @@ Devvit is Reddit's **official open-source developer platform** for building cust
 - Helper library: `@devvit/web` (single dependency for media, realtime, Reddit API client, Redis, scheduler, settings)
 
 ### Developer Funds Program (2026)
+
 - Runs April 1, 2025 to June 30, 2026
 - Payments for qualifying Devvit apps meeting Daily Qualified Engager / Qualified Installs thresholds
 - Up to 3 apps per developer
@@ -716,7 +777,9 @@ Devvit is Reddit's **official open-source developer platform** for building cust
 **Source:** [Reddit Developer Funds 2026 Terms](https://support.reddithelp.com/hc/en-us/articles/27958169342996-Reddit-Developer-Funds-2026-Terms)
 
 ### Devvit MCP Server
+
 Reddit has published an **official MCP server for Devvit app development**:
+
 - **Repository:** [github.com/reddit/devvit-mcp](https://github.com/reddit/devvit-mcp)
 - **npm:** `@devvit/mcp`
 - **Config:** `{"mcpServers": {"devvit-mcp": {"command": "npx", "args": ["-y", "@devvit/mcp"]}}}`
@@ -731,6 +794,7 @@ Reddit has published an **official MCP server for Devvit app development**:
 ### The 2023 API Pricing Changes
 
 On April 18, 2023, Reddit announced paid API access, effective June 19, 2023. This caused massive disruption:
+
 - Third-party apps like Apollo, Reddit is Fun, and Sync shut down
 - Estimated $20M/year cost for apps like Apollo
 - 8,000+ subreddits went dark in protest
@@ -741,15 +805,16 @@ On April 18, 2023, Reddit announced paid API access, effective June 19, 2023. Th
 
 ### Current Pricing Tiers (2024-2026)
 
-| Tier | Rate Limit | Cost | Requirements |
-|------|-----------|------|-------------|
-| **Free (OAuth)** | 100 QPM per OAuth client ID | Free | Non-commercial use, personal projects, academic research |
-| **Free (Unauthenticated)** | 10 QPM (mostly rejected) | Free | Very limited, not viable |
-| **Paid (Commercial)** | Negotiated | $0.24 per 1K API calls | Prior approval from Reddit required |
+| Tier                       | Rate Limit                  | Cost                   | Requirements                                             |
+| -------------------------- | --------------------------- | ---------------------- | -------------------------------------------------------- |
+| **Free (OAuth)**           | 100 QPM per OAuth client ID | Free                   | Non-commercial use, personal projects, academic research |
+| **Free (Unauthenticated)** | 10 QPM (mostly rejected)    | Free                   | Very limited, not viable                                 |
+| **Paid (Commercial)**      | Negotiated                  | $0.24 per 1K API calls | Prior approval from Reddit required                      |
 
 **Sources:** [Reddit Data API Wiki](https://support.reddithelp.com/hc/en-us/articles/16160319875092-Reddit-Data-API-Wiki), [Reddit API Limits — Data365](https://data365.co/blog/reddit-api-limits)
 
 ### Key Changes (Late 2024 - 2025)
+
 - **Self-service access removed** — must submit a request and wait for Reddit approval
 - Free usage quotas significantly reduced
 - Stricter limitations on API call frequency
@@ -759,6 +824,7 @@ On April 18, 2023, Reddit announced paid API access, effective June 19, 2023. Th
 **Source:** [Reddit's 2025 API Crackdown](https://replydaddy.com/blog/reddit-api-pre-approval-2025-personal-projects-crackdown)
 
 ### Impact on Libraries
+
 - **PRAW and AsyncPRAW** — continue to work fully with updated API; handle rate limits automatically
 - **snoowrap** — still works technically but archived; no patches for API changes
 - **Pushshift libraries (PMAW, PSAW)** — broken, Pushshift API shut down
@@ -771,21 +837,22 @@ On April 18, 2023, Reddit announced paid API access, effective June 19, 2023. Th
 
 ### Decision Matrix
 
-| Factor | TypeScript | Python | Go |
-|--------|-----------|--------|-----|
-| **MCP SDK Maturity** | **Best** (official SDK, most examples, most MCP servers) | Strong (FastMCP, official SDK) | Emerging |
-| **Reddit Library Quality** | Poor (snoowrap archived, no viable alternative) | **Excellent** (PRAW/AsyncPRAW, 1.2M monthly downloads) | Moderate (go-reddit, no rate limiting) |
-| **Async Support** | Native (Promises, async/await) | AsyncPRAW + asyncio | Native (goroutines) |
-| **Type Safety** | **Excellent** (native TS types) | Good (type hints, mypy) | **Excellent** (static types) |
-| **Community Examples** | Most MCP servers are TypeScript | Many MCP servers exist | Few MCP server examples |
-| **Development Speed** | Fast | Fast | Moderate |
-| **Direct API Viability** | **Excellent** (fetch/axios + TS interfaces) | Good (httpx/aiohttp) | Good (net/http) |
-| **Error Handling for MCP** | Try/catch with typed errors | Exception hierarchy (PRAWException) | Idiomatic error returns |
-| **Download Stats Confidence** | snoowrap: 72K/mo (declining, archived) | PRAW: 1.2M/mo (growing) | go-reddit: N/A |
+| Factor                        | TypeScript                                               | Python                                                 | Go                                     |
+| ----------------------------- | -------------------------------------------------------- | ------------------------------------------------------ | -------------------------------------- |
+| **MCP SDK Maturity**          | **Best** (official SDK, most examples, most MCP servers) | Strong (FastMCP, official SDK)                         | Emerging                               |
+| **Reddit Library Quality**    | Poor (snoowrap archived, no viable alternative)          | **Excellent** (PRAW/AsyncPRAW, 1.2M monthly downloads) | Moderate (go-reddit, no rate limiting) |
+| **Async Support**             | Native (Promises, async/await)                           | AsyncPRAW + asyncio                                    | Native (goroutines)                    |
+| **Type Safety**               | **Excellent** (native TS types)                          | Good (type hints, mypy)                                | **Excellent** (static types)           |
+| **Community Examples**        | Most MCP servers are TypeScript                          | Many MCP servers exist                                 | Few MCP server examples                |
+| **Development Speed**         | Fast                                                     | Fast                                                   | Moderate                               |
+| **Direct API Viability**      | **Excellent** (fetch/axios + TS interfaces)              | Good (httpx/aiohttp)                                   | Good (net/http)                        |
+| **Error Handling for MCP**    | Try/catch with typed errors                              | Exception hierarchy (PRAWException)                    | Idiomatic error returns                |
+| **Download Stats Confidence** | snoowrap: 72K/mo (declining, archived)                   | PRAW: 1.2M/mo (growing)                                | go-reddit: N/A                         |
 
 ### Recommendation: Two Viable Paths
 
 #### Path A: TypeScript with Direct HTTP (Recommended)
+
 - Use the official MCP TypeScript SDK (`@modelcontextprotocol/sdk`)
 - Call Reddit's REST API directly with `fetch`
 - Build type-safe Reddit API interfaces for each MCP tool
@@ -795,12 +862,14 @@ On April 18, 2023, Reddit announced paid API access, effective June 19, 2023. Th
 - **Risk:** Low — Reddit's REST API is stable, well-documented JSON
 
 #### Path B: Python with AsyncPRAW
+
 - Use the MCP Python SDK (FastMCP)
 - Wrap AsyncPRAW for Reddit API access
 - **Pros:** Most mature Reddit library (1.2M downloads/mo), comprehensive API coverage (~95%), streaming built-in, automatic rate limiting, battle-tested error handling
 - **Cons:** Slightly less mature MCP SDK than TypeScript, Python typing less strict, dependency on asyncprawcore for some error types
 
 #### Not Recommended
+
 - **Go:** go-reddit lacks streaming, rate limiting, and error granularity; MCP SDK is early-stage
 - **Java/Kotlin:** JRAW is dead (last release 2018); no practical MCP SDK
 - **Rust:** roux is maintenance-only; MCP SDK is nascent; slow dev iteration
@@ -812,6 +881,7 @@ On April 18, 2023, Reddit announced paid API access, effective June 19, 2023. Th
 ## 16. Sources
 
 ### Primary Sources (Official Documentation)
+
 1. **[PRAW Documentation](https://praw.readthedocs.io/)** — Accessed: 2026-03-27 — Type: Official Docs — Reliability: 5/5
 2. **[AsyncPRAW Documentation](https://asyncpraw.readthedocs.io/)** — Accessed: 2026-03-27 — Type: Official Docs — Reliability: 5/5
 3. **[PRAW Exceptions Documentation](https://praw.readthedocs.io/en/stable/code_overview/exceptions.html)** — Accessed: 2026-03-27 — Type: Official Docs — Reliability: 5/5
@@ -820,6 +890,7 @@ On April 18, 2023, Reddit announced paid API access, effective June 19, 2023. Th
 6. **[Reddit API Wrappers Wiki](https://github.com/reddit-archive/reddit/wiki/api-wrappers)** — Accessed: 2026-03-27 — Type: Archived Wiki — Reliability: 4/5
 
 ### GitHub Repositories
+
 7. **[PRAW GitHub](https://github.com/praw-dev/praw)** — v7.8.1, 4.1k stars, active — Reliability: 5/5
 8. **[AsyncPRAW GitHub](https://github.com/praw-dev/asyncpraw)** — v7.8.1, 144 stars, active — Reliability: 5/5
 9. **[snoowrap GitHub](https://github.com/not-an-aardvark/snoowrap)** — Archived Mar 2024, 1k+ stars — Reliability: 4/5
@@ -840,11 +911,13 @@ On April 18, 2023, Reddit announced paid API access, effective June 19, 2023. Th
 24. **[roux-stream GitHub](https://github.com/torfsen/roux-stream)** — Streaming for roux — Reliability: 3/5
 
 ### Download Statistics
+
 25. **[PyPI Stats: PRAW](https://pypistats.org/packages/praw)** — Accessed: 2026-03-27 — ~1.2M monthly — Reliability: 5/5
 26. **[PyPI Stats: AsyncPRAW](https://pypistats.org/packages/asyncpraw)** — Accessed: 2026-03-27 — ~115K monthly — Reliability: 5/5
 27. **[npm Charts: snoowrap](https://npmcharts.com/compare/snoowrap)** — Accessed: 2026-03-27 — ~72K monthly — Reliability: 5/5
 
 ### Secondary Sources (Articles & Analysis)
+
 28. **[MCP SDK Comparison: Python vs TypeScript vs Go](https://www.stainless.com/mcp/mcp-sdk-comparison-python-vs-typescript-vs-go-implementations)** — Accessed: 2026-03-27 — Reliability: 4/5
 29. **[Building MCP Servers: TypeScript or Python?](https://medium.com/@balazskocsis/building-model-context-protocol-servers-typescript-or-python-a1a235f789d7)** — Accessed: 2026-03-27 — Reliability: 3/5
 30. **[Reddit API Pricing Guide](https://data365.co/blog/reddit-api-pricing)** — Accessed: 2026-03-27 — Reliability: 3/5
@@ -854,6 +927,7 @@ On April 18, 2023, Reddit announced paid API access, effective June 19, 2023. Th
 34. **[Pushshift Reddit Dataset Overview](https://www.emergentmind.com/topics/pushshift-reddit-dataset)** — Accessed: 2026-03-27 — Reliability: 3/5
 
 ### Community Sources
+
 35. **[Reddit Developer Funds 2026 Terms](https://support.reddithelp.com/hc/en-us/articles/27958169342996-Reddit-Developer-Funds-2026-Terms)** — Accessed: 2026-03-27 — Reliability: 5/5
 36. **[Reddit API Controversy — Wikipedia](https://en.wikipedia.org/wiki/Reddit_API_controversy)** — Accessed: 2026-03-27 — Reliability: 4/5
 37. **[How to Get Reddit API Credentials in 2025](https://www.wappkit.com/blog/reddit-api-credentials-guide-2025)** — Accessed: 2026-03-27 — Reliability: 3/5

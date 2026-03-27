@@ -1,16 +1,18 @@
 # E07-T05: Prompts -- moderate, content_plan, user_analysis
 
-| Field | Value |
-|-------|-------|
-| **Epic** | [E07 -- MCP Resources and Prompts](EPIC.md) |
-| **Status** | Not Started |
-| **Size** | M |
-| **Dependencies** | E04, E05, E06 |
+| Field            | Value                                       |
+| ---------------- | ------------------------------------------- |
+| **Epic**         | [E07 -- MCP Resources and Prompts](EPIC.md) |
+| **Status**       | Done                                        |
+| **Size**         | M                                           |
+| **Dependencies** | E04, E05, E06                               |
 
 ## Description
+
 Three workflow prompts: `reddit_moderate` (review modqueue), `reddit_content_plan` (content strategy), `reddit_user_analysis` (user history analysis).
 
 ## Acceptance Criteria
+
 1. All 3 prompts registered and visible in MCP Inspector
 2. Each has relevant parameters with Zod validation
 3. Prompt text is actionable and references correct tools
@@ -18,6 +20,7 @@ Three workflow prompts: `reddit_moderate` (review modqueue), `reddit_content_pla
 5. `reddit_user_analysis` references get_user, get_user_posts, get_user_comments
 
 ## Definition of Ready
+
 - [ ] E04 (Phase 1 Read Tools) is Done -- prompts reference read tools by name
 - [ ] E05 (Phase 1 Write Tools) is Done -- `reddit_content_plan` references write tools
 - [ ] E06 (Phase 1 Mod Tools) is Done -- `reddit_moderate` references `approve`, `remove`, `ban_user`, `get_modqueue`
@@ -26,6 +29,7 @@ Three workflow prompts: `reddit_moderate` (review modqueue), `reddit_content_pla
 - [ ] MCP SDK prompt registration pattern and Zod parameter validation understood
 
 ## Definition of Done
+
 - [ ] `reddit_moderate` prompt registered: params `subreddit`, references mod tools (`get_modqueue`, `approve`, `remove`, `ban_user`)
 - [ ] `reddit_content_plan` prompt registered: params `subreddit`, `goal`, guides research -> analysis -> content creation workflow
 - [ ] `reddit_user_analysis` prompt registered: params `username`, references `get_user`, `get_user_posts`, `get_user_comments`
@@ -38,9 +42,11 @@ Three workflow prompts: `reddit_moderate` (review modqueue), `reddit_content_pla
 - [ ] No new lint warnings introduced
 
 ## Out of Scope
+
 Complex multi-step workflows.
 
 ## Implementation Notes
+
 - Prompts are our differentiator -- only 1 of 39 competitors uses prompts at all
 - `reddit_moderate`: params `subreddit`, guides through modqueue review workflow using get_modqueue -> approve/remove/ban_user
 - `reddit_content_plan`: params `subreddit`, `goal`, guides research -> analysis -> content creation
@@ -48,6 +54,7 @@ Complex multi-step workflows.
 - Each prompt should be genuinely useful, not just a wrapper around a single tool call
 
 ## Files to Create/Modify
+
 - `src/prompts/moderate.ts` -- moderation prompt implementation
 - `src/prompts/content-plan.ts` -- content planning prompt implementation
 - `src/prompts/user-analysis.ts` -- user analysis prompt implementation

@@ -1,16 +1,18 @@
 # E06-T03: `ban_user` Tool
 
-| Field | Value |
-|-------|-------|
-| **Epic** | [E06 -- Phase 1 Moderation Tools](EPIC.md) |
-| **Status** | Not Started |
-| **Size** | M |
-| **Dependencies** | E02, E03 |
+| Field            | Value                                      |
+| ---------------- | ------------------------------------------ |
+| **Epic**         | [E06 -- Phase 1 Moderation Tools](EPIC.md) |
+| **Status**       | Done                                       |
+| **Size**         | M                                          |
+| **Dependencies** | E02, E03                                   |
 
 ## Description
+
 Ban user from subreddit. Params: `subreddit`, `username`, `duration` (days, 0=permanent), `reason` (mod note), `message` (sent to user). Uses `POST /r/{sub}/api/friend` with `type=banned`.
 
 ## Acceptance Criteria
+
 1. Temporary ban with duration (1-999 days)
 2. Permanent ban (duration=0 or omitted)
 3. Ban message sent to user
@@ -19,6 +21,7 @@ Ban user from subreddit. Params: `subreddit`, `username`, `duration` (days, 0=pe
 6. Error on invalid duration or already-banned user
 
 ## Definition of Ready
+
 - [ ] E02 (Core Infrastructure) is Done -- HTTP client and error parser available
 - [ ] E03 (Authentication System) is Done -- Tier 3 auth guard with scope checking available
 - [ ] Research read: FINAL-CONSOLIDATED-RESEARCH.md section 9.4 (Ban/Mute System -- relationship-based `/api/friend`, temp 1-999 days, permanent)
@@ -29,6 +32,7 @@ Ban user from subreddit. Params: `subreddit`, `username`, `duration` (days, 0=pe
 - [ ] Understand field visibility: `ban_reason`/`note` is mod-only, `ban_message` is sent to user via PM
 
 ## Definition of Done
+
 - [ ] Temporary ban works with duration 1-999 days
 - [ ] Permanent ban works with duration=0 or omitted
 - [ ] Ban message sent to user (via `ban_message` parameter)
@@ -42,9 +46,11 @@ Ban user from subreddit. Params: `subreddit`, `username`, `duration` (days, 0=pe
 - [ ] Public API exported from barrel file
 
 ## Out of Scope
+
 Unban (Phase 3), mute (Phase 3).
 
 ## Implementation Notes
+
 - Reddit's relationship API (`/api/friend`) is used for bans, mutes, contributors -- `type` parameter distinguishes them
 - Duration of 0 or omitted means permanent ban
 - Duration must be 1-999 for temporary bans
@@ -52,4 +58,5 @@ Unban (Phase 3), mute (Phase 3).
 - The `ban_message` field is sent to the banned user via PM
 
 ## Files to Create/Modify
+
 - `src/tools/mod/ban-user.ts` -- tool implementation

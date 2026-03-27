@@ -22,6 +22,7 @@ This creates a massive opportunity: a truly comprehensive Reddit MCP server woul
 ## Tier 1: Major Implementations (High Stars, Active Development)
 
 ### 1. karanb192/reddit-mcp-buddy
+
 - **URL**: [github.com/karanb192/reddit-mcp-buddy](https://github.com/karanb192/reddit-mcp-buddy)
 - **Stars**: 570+ | **Forks**: 69 | **License**: MIT
 - **Language**: TypeScript/Node.js
@@ -40,6 +41,7 @@ This creates a massive opportunity: a truly comprehensive Reddit MCP server woul
 - **Notable**: Most popular by stars; focused on LLM-optimized data delivery. Published as npm package `reddit-mcp-buddy`.
 
 ### 2. adhikasp/mcp-reddit
+
 - **URL**: [github.com/adhikasp/mcp-reddit](https://github.com/adhikasp/mcp-reddit)
 - **Stars**: 377 | **Forks**: 51 | **License**: MIT
 - **Language**: Python (76.5%), Dockerfile (23.5%)
@@ -53,6 +55,7 @@ This creates a massive opportunity: a truly comprehensive Reddit MCP server woul
 - **Notable**: High stars for minimal functionality; benefited from early mover advantage. 4 contributors.
 
 ### 3. Arindam200/reddit-mcp
+
 - **URL**: [github.com/Arindam200/reddit-mcp](https://github.com/Arindam200/reddit-mcp)
 - **Stars**: 272 | **Forks**: 38 | **License**: MIT
 - **Language**: Python (100%)
@@ -68,6 +71,7 @@ This creates a massive opportunity: a truly comprehensive Reddit MCP server woul
 - **Code Quality**: Reasonable structure, PRAW-based, clear tool definitions
 
 ### 4. Hawstein/mcp-server-reddit
+
 - **URL**: [github.com/Hawstein/mcp-server-reddit](https://github.com/Hawstein/mcp-server-reddit)
 - **Stars**: 152 | **Forks**: 29 | **License**: MIT
 - **Language**: Python (96.7%)
@@ -81,6 +85,7 @@ This creates a massive opportunity: a truly comprehensive Reddit MCP server woul
 - **Code Quality**: Well-structured, uses redditwarp instead of PRAW (lighter weight)
 
 ### 5. eliasbiondo/reddit-mcp-server
+
 - **URL**: [github.com/eliasbiondo/reddit-mcp-server](https://github.com/eliasbiondo/reddit-mcp-server)
 - **Stars**: 123 | **Forks**: 11 | **License**: MIT
 - **Language**: Python (100%)
@@ -99,6 +104,7 @@ This creates a massive opportunity: a truly comprehensive Reddit MCP server woul
 ## Tier 2: Solid Feature-Rich Implementations
 
 ### 6. jordanburke/reddit-mcp-server
+
 - **URL**: [github.com/jordanburke/reddit-mcp-server](https://github.com/jordanburke/reddit-mcp-server)
 - **Stars**: 28 | **Forks**: 9 | **License**: MIT
 - **Language**: TypeScript/Node.js
@@ -118,6 +124,7 @@ This creates a massive opportunity: a truly comprehensive Reddit MCP server woul
 - **Notable**: **Best overall feature completeness** despite lower stars. Published on npm as `reddit-mcp-server` v1.2.1. Available as Claude Desktop Extension (.mcpb).
 
 ### 7. king-of-the-grackles/reddit-research-mcp (Dialog)
+
 - **URL**: [github.com/king-of-the-grackles/reddit-research-mcp](https://github.com/king-of-the-grackles/reddit-research-mcp)
 - **Stars**: 94 | **Forks**: 17 | **License**: MIT
 - **Language**: Python
@@ -147,6 +154,7 @@ This creates a massive opportunity: a truly comprehensive Reddit MCP server woul
 ## Tier 3: Specialized / Niche Implementations
 
 ### 8. reddit-mcp-server (PyPI — andrewlwn77)
+
 - **URL**: [pypi.org/project/reddit-mcp-server/](https://pypi.org/project/reddit-mcp-server/) | [github.com/reddit-mcp/reddit-mcp-server](https://github.com/reddit-mcp/reddit-mcp-server)
 - **Stars**: 3 | **Version**: 1.2.0 (August 2025)
 - **Language**: Python (99.1%)
@@ -164,6 +172,7 @@ This creates a massive opportunity: a truly comprehensive Reddit MCP server woul
 - **Notable**: Market research oriented — brand monitoring, competitor tracking, influencer analysis
 
 ### 9. jacklenzotti/pullpush-mcp
+
 - **URL**: [github.com/jacklenzotti/pullpush-mcp](https://github.com/jacklenzotti/pullpush-mcp)
 - **Stars**: 2 | **License**: MIT
 - **Language**: TypeScript
@@ -176,6 +185,7 @@ This creates a massive opportunity: a truly comprehensive Reddit MCP server woul
 - **Notable**: **Only implementation offering access to deleted/archived Reddit content** via PullPush.io (successor to PushShift)
 
 ### 10. sbmeaper/reddit-ad-mcp
+
 - **URL**: [github.com/sbmeaper/reddit-ad-mcp](https://github.com/sbmeaper/reddit-ad-mcp)
 - **Stars**: 0
 - **Language**: Python
@@ -193,6 +203,7 @@ This creates a massive opportunity: a truly comprehensive Reddit MCP server woul
 - **Notable**: **Only Python implementation covering Reddit Ads API**
 
 ### 11. mkerchenski/RedditAdsMcp
+
 - **URL**: [github.com/mkerchenski/RedditAdsMcp](https://github.com/mkerchenski/RedditAdsMcp)
 - **Stars**: 1 | **License**: MIT
 - **Language**: C# (.NET 10) — **only C#/.NET Reddit MCP implementation**
@@ -202,6 +213,7 @@ This creates a massive opportunity: a truly comprehensive Reddit MCP server woul
 - **Notable**: Demonstrates MCP server viability in .NET ecosystem; uses official ModelContextProtocol C# SDK
 
 ### 12. GeLi2001/reddit-mcp
+
 - **URL**: [github.com/GeLi2001/reddit-mcp](https://github.com/GeLi2001/reddit-mcp)
 - **Stars**: 3 | **Forks**: 4 | **License**: MIT
 - **Language**: Python 3.10+ (FastMCP framework)
@@ -210,6 +222,7 @@ This creates a massive opportunity: a truly comprehensive Reddit MCP server woul
 - **Limitations**: Read-only, basic tool set, ~60 req/min rate limit
 
 ### 13. netixc/reddit-mcp-server
+
 - **URL**: [github.com/netixc/reddit-mcp-server](https://github.com/netixc/reddit-mcp-server)
 - **Stars**: 2
 - **Language**: Python 3.12+
@@ -222,6 +235,7 @@ This creates a massive opportunity: a truly comprehensive Reddit MCP server woul
 ## Tier 4: Hosted / Platform Services
 
 ### 14. Apify Reddit MCP Server
+
 - **URL**: [apify.com/mcp/reddit-mcp-server](https://apify.com/mcp/reddit-mcp-server)
 - **Platform**: Apify Cloud (hosted at mcp.apify.com)
 - **Auth**: Apify API token or OAuth2
@@ -235,24 +249,26 @@ This creates a massive opportunity: a truly comprehensive Reddit MCP server woul
 - **Limitation**: Cloud-hosted dependency, Apify pricing applies, not self-hostable
 
 ### 15. axelfooley/ai-reddit-mod
+
 - **URL**: [github.com/AxelFooley](https://github.com/AxelFooley) (ai-reddit-mod repo)
 - **Listed on**: PulseMCP as "Reddit Mod"
 - **Features**: AI-assisted moderation with human-in-the-loop approval
 - **Notable**: **Only implementation specifically targeting moderation** — but appears to be early stage with limited public documentation
 
 ### 16. Additional Notable Entries from PulseMCP Directory (39 total Reddit servers)
-| Name | Author | Notable Feature |
-|------|--------|----------------|
-| Reddit Insights (lignertys) | lignertys | AI-powered semantic search across millions of posts |
-| Reddit Ads (modelslab) | modelslab | Programmatic Reddit Ads API v3 — 98 MCP tools (94 API ops + 4 auth helpers) |
-| Reddit (Strider Labs) | Strider Labs | Browser automation for Reddit interaction |
-| Reddit Extractor (Andi Ellison) | Andi Ellison | API + HTML parsing for metadata extraction |
-| Reddit (Matt Hesketh) | Matt Hesketh | Java-based OAuth integration |
-| PuchAI Reddit & Productivity | datavorous | Multi-subreddit scraping + productivity features |
-| FreshContext | PrinceGabriel-lgtm | Real-time aggregation from GitHub + HN + Reddit + arXiv |
-| Decodo Web Scraper | Decodo | Professional scraping with geo-targeting for Reddit |
-| Anysite | Anysite | Multi-platform API (LinkedIn, Instagram, Twitter, Reddit) |
-| Rolli | rolli | Social media search across X, Reddit, Bluesky |
+
+| Name                            | Author             | Notable Feature                                                             |
+| ------------------------------- | ------------------ | --------------------------------------------------------------------------- |
+| Reddit Insights (lignertys)     | lignertys          | AI-powered semantic search across millions of posts                         |
+| Reddit Ads (modelslab)          | modelslab          | Programmatic Reddit Ads API v3 — 98 MCP tools (94 API ops + 4 auth helpers) |
+| Reddit (Strider Labs)           | Strider Labs       | Browser automation for Reddit interaction                                   |
+| Reddit Extractor (Andi Ellison) | Andi Ellison       | API + HTML parsing for metadata extraction                                  |
+| Reddit (Matt Hesketh)           | Matt Hesketh       | Java-based OAuth integration                                                |
+| PuchAI Reddit & Productivity    | datavorous         | Multi-subreddit scraping + productivity features                            |
+| FreshContext                    | PrinceGabriel-lgtm | Real-time aggregation from GitHub + HN + Reddit + arXiv                     |
+| Decodo Web Scraper              | Decodo             | Professional scraping with geo-targeting for Reddit                         |
+| Anysite                         | Anysite            | Multi-platform API (LinkedIn, Instagram, Twitter, Reddit)                   |
+| Rolli                           | rolli              | Social media search across X, Reddit, Bluesky                               |
 
 ---
 
@@ -261,6 +277,7 @@ This creates a massive opportunity: a truly comprehensive Reddit MCP server woul
 ### Critical Policy Issue Affecting All Implementations
 
 **Reddit API access is no longer self-service.** Two open issues across repos flag this:
+
 - [reddit-mcp-buddy #34](https://github.com/karanb192/reddit-mcp-buddy/issues/34): "NEW REDDIT POLICY: can't use reddit API without approval" (Nov 2025)
 - [reddit-mcp-buddy #39](https://github.com/karanb192/reddit-mcp-buddy/issues/39): "Reddit API credentials no longer self-service - New Responsible Builder Policy" (Feb 2026)
 
@@ -268,23 +285,24 @@ This creates a massive opportunity: a truly comprehensive Reddit MCP server woul
 
 ### Bug Reports Across Repos
 
-| Repo | Issue | Description |
-|------|-------|-------------|
-| Hawstein | [#6](https://github.com/Hawstein/mcp-server-reddit/issues/6) | `get_subreddit_info` crashes with `KeyError: 'active_user_count'` — missing field handling |
-| Hawstein | [#5](https://github.com/Hawstein/mcp-server-reddit/issues/5) | Dockerfile won't build |
-| Hawstein | [#2](https://github.com/Hawstein/mcp-server-reddit/issues/2) | Smithery integration: "Error: No connection configuration found" |
-| adhikasp | [#3](https://github.com/adhikasp/mcp-reddit/issues/3) | Connection instability with Cursor via Smithery |
-| Arindam200 | [#1](https://github.com/Arindam200/reddit-mcp/issues/1) | "User authentication required" — auth not working |
+| Repo       | Issue                                                        | Description                                                                                |
+| ---------- | ------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
+| Hawstein   | [#6](https://github.com/Hawstein/mcp-server-reddit/issues/6) | `get_subreddit_info` crashes with `KeyError: 'active_user_count'` — missing field handling |
+| Hawstein   | [#5](https://github.com/Hawstein/mcp-server-reddit/issues/5) | Dockerfile won't build                                                                     |
+| Hawstein   | [#2](https://github.com/Hawstein/mcp-server-reddit/issues/2) | Smithery integration: "Error: No connection configuration found"                           |
+| adhikasp   | [#3](https://github.com/adhikasp/mcp-reddit/issues/3)        | Connection instability with Cursor via Smithery                                            |
+| Arindam200 | [#1](https://github.com/Arindam200/reddit-mcp/issues/1)      | "User authentication required" — auth not working                                          |
 
 ### Feature Requests
 
-| Repo | Issue | Request |
-|------|-------|---------|
-| Arindam200 | [#3](https://github.com/Arindam200/reddit-mcp/issues/3) | Detailed post content including comments |
-| adhikasp | [#7](https://github.com/adhikasp/mcp-reddit/issues/7) | Personalized daily feed from subscriptions |
-| adhikasp | [#10](https://github.com/adhikasp/mcp-reddit/issues/10) | Security vulnerability scan needed |
+| Repo       | Issue                                                   | Request                                    |
+| ---------- | ------------------------------------------------------- | ------------------------------------------ |
+| Arindam200 | [#3](https://github.com/Arindam200/reddit-mcp/issues/3) | Detailed post content including comments   |
+| adhikasp   | [#7](https://github.com/adhikasp/mcp-reddit/issues/7)   | Personalized daily feed from subscriptions |
+| adhikasp   | [#10](https://github.com/adhikasp/mcp-reddit/issues/10) | Security vulnerability scan needed         |
 
 ### Common Themes in User Feedback
+
 1. **Connection instability** with Smithery integration (multiple repos)
 2. **Missing error handling** for Reddit API response variations (KeyError crashes)
 3. **Auth complexity** — users struggle with Reddit API credential setup
@@ -297,45 +315,48 @@ This creates a massive opportunity: a truly comprehensive Reddit MCP server woul
 ## Architectural Patterns & Tool Naming Conventions
 
 ### Authentication Approaches
-| Approach | Implementations | Pros | Cons |
-|----------|----------------|------|------|
-| No auth (scraping/public API) | eliasbiondo, adhikasp, Hawstein, reddit-mcp-buddy (anon) | Zero friction | Low rate limits (~10 req/min), read-only |
-| App-only OAuth (client credentials) | GeLi2001, PyPI market research | 60 req/min, no user context needed | No write access, still requires Reddit app registration |
-| Full OAuth (user + password) | jordanburke, Arindam200, netixc | Write access, 100 req/min, full API | Requires all credentials, highest setup friction |
-| Server-managed OAuth | Dialog (Descope) | Best UX, no user setup | Hosted dependency, privacy concerns |
-| None (3rd-party API) | PullPush | Access deleted content | Third-party dependency, no official API |
+
+| Approach                            | Implementations                                          | Pros                                | Cons                                                    |
+| ----------------------------------- | -------------------------------------------------------- | ----------------------------------- | ------------------------------------------------------- |
+| No auth (scraping/public API)       | eliasbiondo, adhikasp, Hawstein, reddit-mcp-buddy (anon) | Zero friction                       | Low rate limits (~10 req/min), read-only                |
+| App-only OAuth (client credentials) | GeLi2001, PyPI market research                           | 60 req/min, no user context needed  | No write access, still requires Reddit app registration |
+| Full OAuth (user + password)        | jordanburke, Arindam200, netixc                          | Write access, 100 req/min, full API | Requires all credentials, highest setup friction        |
+| Server-managed OAuth                | Dialog (Descope)                                         | Best UX, no user setup              | Hosted dependency, privacy concerns                     |
+| None (3rd-party API)                | PullPush                                                 | Access deleted content              | Third-party dependency, no official API                 |
 
 ### Technology Choices
-| Stack | Count | Implementations | Notes |
-|-------|-------|-----------------|-------|
-| **Python + PRAW** | 5 | Arindam200, GeLi2001, netixc, PyPI market research, sbmeaper | Dominant pattern |
-| **Python + redditwarp** | 1 | Hawstein | Lighter weight alternative |
-| **Python + redd** | 1 | eliasbiondo | No auth needed |
-| **Python + FastMCP** | 3 | GeLi2001, Dialog, sbmeaper | Growing framework |
-| **TypeScript + custom HTTP** | 2 | jordanburke, reddit-mcp-buddy | Direct API calls |
-| **TypeScript + MCP SDK** | 3 | jordanburke, reddit-mcp-buddy, PullPush | Official TS SDK |
-| **C# + .NET MCP SDK** | 1 | mkerchenski | Niche |
+
+| Stack                        | Count | Implementations                                              | Notes                      |
+| ---------------------------- | ----- | ------------------------------------------------------------ | -------------------------- |
+| **Python + PRAW**            | 5     | Arindam200, GeLi2001, netixc, PyPI market research, sbmeaper | Dominant pattern           |
+| **Python + redditwarp**      | 1     | Hawstein                                                     | Lighter weight alternative |
+| **Python + redd**            | 1     | eliasbiondo                                                  | No auth needed             |
+| **Python + FastMCP**         | 3     | GeLi2001, Dialog, sbmeaper                                   | Growing framework          |
+| **TypeScript + custom HTTP** | 2     | jordanburke, reddit-mcp-buddy                                | Direct API calls           |
+| **TypeScript + MCP SDK**     | 3     | jordanburke, reddit-mcp-buddy, PullPush                      | Official TS SDK            |
+| **C# + .NET MCP SDK**        | 1     | mkerchenski                                                  | Niche                      |
 
 ### Tool Naming Conventions Observed
 
 **Dominant pattern**: `get_` + `resource` (e.g., `get_hot_posts`, `get_user_info`, `get_subreddit_info`)
 
-| Convention | Examples | Used By |
-|-----------|----------|---------|
-| `get_[resource]` | `get_frontpage_posts`, `get_post_comments` | Hawstein, Arindam200, GeLi2001, PyPI |
-| `[action]_reddit` | `search_reddit`, `browse_subreddit` | reddit-mcp-buddy, jordanburke |
-| `[action]_[resource]` | `fetch_hot_threads`, `create_post` | adhikasp, jordanburke |
-| `[resource]_analysis` | `user_analysis` | reddit-mcp-buddy |
-| `[verb]_[object]` | `discover_subreddits`, `execute_operation` | Dialog |
+| Convention            | Examples                                   | Used By                              |
+| --------------------- | ------------------------------------------ | ------------------------------------ |
+| `get_[resource]`      | `get_frontpage_posts`, `get_post_comments` | Hawstein, Arindam200, GeLi2001, PyPI |
+| `[action]_reddit`     | `search_reddit`, `browse_subreddit`        | reddit-mcp-buddy, jordanburke        |
+| `[action]_[resource]` | `fetch_hot_threads`, `create_post`         | adhikasp, jordanburke                |
+| `[resource]_analysis` | `user_analysis`                            | reddit-mcp-buddy                     |
+| `[verb]_[object]`     | `discover_subreddits`, `execute_operation` | Dialog                               |
 
 **Best practice observed**: jordanburke and reddit-mcp-buddy use consistent, LLM-friendly naming with clear action verbs.
 
 ### MCP Primitive Usage
-| Primitive | Implementations Using It |
-|-----------|------------------------|
-| **Tools** | All 15 (100%) |
+
+| Primitive     | Implementations Using It             |
+| ------------- | ------------------------------------ |
+| **Tools**     | All 15 (100%)                        |
 | **Resources** | Dialog only (`reddit://server-info`) |
-| **Prompts** | Dialog only (`reddit_research`) |
+| **Prompts**   | Dialog only (`reddit_research`)      |
 
 **Key insight**: Only Dialog uses MCP resources and prompts. Every other implementation is tools-only. This is a missed opportunity — resources could expose subreddit data, and prompts could guide common workflows.
 
@@ -343,36 +364,36 @@ This creates a massive opportunity: a truly comprehensive Reddit MCP server woul
 
 ## Cross-Implementation Comparison Matrix
 
-| Feature | reddit-mcp-buddy | adhikasp | Arindam200 | Hawstein | eliasbiondo | jordanburke | Dialog | PyPI market | PullPush |
-|---------|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| **Read Posts** | Y | Y | Y | Y | Y | Y | Y | Y | Y |
-| **Read Comments** | Y | Y | - | Y | Y | Y | Y | Y | Y |
-| **Search** | Y | - | Y | - | Y | Y | Y | Y | Y |
-| **User Profiles** | Y | - | Y | - | Y | Y | - | Y | - |
-| **Subreddit Info** | - | - | Y | Y | - | Y | Y | Y | - |
-| **Trending** | - | - | Y | - | - | Y | - | Y | - |
-| **Create Post** | - | - | Y | - | - | Y | - | - | - |
-| **Reply/Comment** | - | - | Y | - | - | Y | - | - | - |
-| **Edit Content** | - | - | - | - | - | Y | - | - | - |
-| **Delete Content** | - | - | - | - | - | Y | - | - | - |
-| **Subreddit Rules** | - | - | - | - | - | - | - | Y | - |
-| **Subreddit Mods** | - | - | - | - | - | - | - | Y | - |
-| **Subreddit Traffic** | - | - | - | - | - | - | - | Y | - |
-| **Subreddit Wiki** | - | - | - | - | - | - | - | Y | - |
-| **Saved Posts** | - | - | - | - | - | - | - | - | - |
-| **Semantic Search** | - | - | - | - | - | - | Y | - | - |
-| **Historical Data** | - | - | - | - | - | - | - | - | Y |
-| **Data Export** | - | - | - | - | - | - | Y | Y | - |
-| **MCP Resources** | - | - | - | - | - | - | Y | - | - |
-| **MCP Prompts** | - | - | - | - | - | - | Y | - | - |
-| **Safety Mode** | - | - | - | - | - | Y | - | - | - |
-| **Bot Disclosure** | - | - | - | - | - | Y | - | - | - |
-| **Zero-Config** | Y | Y | - | Y | Y | Y | Y | - | Y |
-| **Docker** | Y | Y | - | Y | - | Y | - | - | - |
-| **Multiple Transports** | - | - | - | - | Y | Y | Y | - | - |
-| **Language** | TS | Py | Py | Py | Py | TS | Py | Py | TS |
-| **Stars** | 570 | 377 | 272 | 152 | 123 | 28 | 94 | 3 | 2 |
-| **Commits** | recent | 16 | 27 | 15 | 11 | 132 | 94 | ~12 | 4 |
+| Feature                 | reddit-mcp-buddy | adhikasp | Arindam200 | Hawstein | eliasbiondo | jordanburke | Dialog | PyPI market | PullPush |
+| ----------------------- | :--------------: | :------: | :--------: | :------: | :---------: | :---------: | :----: | :---------: | :------: |
+| **Read Posts**          |        Y         |    Y     |     Y      |    Y     |      Y      |      Y      |   Y    |      Y      |    Y     |
+| **Read Comments**       |        Y         |    Y     |     -      |    Y     |      Y      |      Y      |   Y    |      Y      |    Y     |
+| **Search**              |        Y         |    -     |     Y      |    -     |      Y      |      Y      |   Y    |      Y      |    Y     |
+| **User Profiles**       |        Y         |    -     |     Y      |    -     |      Y      |      Y      |   -    |      Y      |    -     |
+| **Subreddit Info**      |        -         |    -     |     Y      |    Y     |      -      |      Y      |   Y    |      Y      |    -     |
+| **Trending**            |        -         |    -     |     Y      |    -     |      -      |      Y      |   -    |      Y      |    -     |
+| **Create Post**         |        -         |    -     |     Y      |    -     |      -      |      Y      |   -    |      -      |    -     |
+| **Reply/Comment**       |        -         |    -     |     Y      |    -     |      -      |      Y      |   -    |      -      |    -     |
+| **Edit Content**        |        -         |    -     |     -      |    -     |      -      |      Y      |   -    |      -      |    -     |
+| **Delete Content**      |        -         |    -     |     -      |    -     |      -      |      Y      |   -    |      -      |    -     |
+| **Subreddit Rules**     |        -         |    -     |     -      |    -     |      -      |      -      |   -    |      Y      |    -     |
+| **Subreddit Mods**      |        -         |    -     |     -      |    -     |      -      |      -      |   -    |      Y      |    -     |
+| **Subreddit Traffic**   |        -         |    -     |     -      |    -     |      -      |      -      |   -    |      Y      |    -     |
+| **Subreddit Wiki**      |        -         |    -     |     -      |    -     |      -      |      -      |   -    |      Y      |    -     |
+| **Saved Posts**         |        -         |    -     |     -      |    -     |      -      |      -      |   -    |      -      |    -     |
+| **Semantic Search**     |        -         |    -     |     -      |    -     |      -      |      -      |   Y    |      -      |    -     |
+| **Historical Data**     |        -         |    -     |     -      |    -     |      -      |      -      |   -    |      -      |    Y     |
+| **Data Export**         |        -         |    -     |     -      |    -     |      -      |      -      |   Y    |      Y      |    -     |
+| **MCP Resources**       |        -         |    -     |     -      |    -     |      -      |      -      |   Y    |      -      |    -     |
+| **MCP Prompts**         |        -         |    -     |     -      |    -     |      -      |      -      |   Y    |      -      |    -     |
+| **Safety Mode**         |        -         |    -     |     -      |    -     |      -      |      Y      |   -    |      -      |    -     |
+| **Bot Disclosure**      |        -         |    -     |     -      |    -     |      -      |      Y      |   -    |      -      |    -     |
+| **Zero-Config**         |        Y         |    Y     |     -      |    Y     |      Y      |      Y      |   Y    |      -      |    Y     |
+| **Docker**              |        Y         |    Y     |     -      |    Y     |      -      |      Y      |   -    |      -      |    -     |
+| **Multiple Transports** |        -         |    -     |     -      |    -     |      Y      |      Y      |   Y    |      -      |    -     |
+| **Language**            |        TS        |    Py    |     Py     |    Py    |     Py      |     TS      |   Py   |     Py      |    TS    |
+| **Stars**               |       570        |   377    |    272     |   152    |     123     |     28      |   94   |      3      |    2     |
+| **Commits**             |      recent      |    16    |     27     |    15    |     11      |     132     |   94   |     ~12     |    4     |
 
 ---
 
@@ -381,6 +402,7 @@ This creates a massive opportunity: a truly comprehensive Reddit MCP server woul
 ### Completely Missing Features (No implementation covers these):
 
 **Moderation & Admin (highest-value gap)**:
+
 1. **Mod Queue** — No modqueue access, no reports listing, no mod log
 2. **Moderation Actions** — No ban, mute, remove, approve, spam, distinguish
 3. **AutoModerator** — No config reading/writing
@@ -388,39 +410,15 @@ This creates a massive opportunity: a truly comprehensive Reddit MCP server woul
 5. **Ban Evasion Filters** — No access to ban evasion detection
 6. **Crowd Control** — No crowd control settings management
 
-**Content Management**:
-7. **Flair Management** — No setting/editing user or post flair (CRUD)
-8. **Polls** — No creating or reading poll data
-9. **Crossposting** — No cross-post support
-10. **Content Tagging** — No NSFW/spoiler marking tools
-11. **Post Pinning** — No sticky/pin management
-12. **Scheduled Posts** — No scheduling functionality
-13. **Collections** — No subreddit collections management
-14. **Post Requirements** — No reading/enforcing submission requirements
+**Content Management**: 7. **Flair Management** — No setting/editing user or post flair (CRUD) 8. **Polls** — No creating or reading poll data 9. **Crossposting** — No cross-post support 10. **Content Tagging** — No NSFW/spoiler marking tools 11. **Post Pinning** — No sticky/pin management 12. **Scheduled Posts** — No scheduling functionality 13. **Collections** — No subreddit collections management 14. **Post Requirements** — No reading/enforcing submission requirements
 
-**Community Management**:
-15. **Community Settings** — No subreddit settings read/write
-16. **Subreddit Styling** — No style/banner/icon management
-17. **Widget Management** — No sidebar widget CRUD
-18. **Emojis** — No custom subreddit emoji management
+**Community Management**: 15. **Community Settings** — No subreddit settings read/write 16. **Subreddit Styling** — No style/banner/icon management 17. **Widget Management** — No sidebar widget CRUD 18. **Emojis** — No custom subreddit emoji management
 
-**Communication**:
-19. **Private Messages** — No inbox/PM access (some intentionally exclude)
-20. **Chat** — No Reddit chat integration
-21. **Notifications** — No notification management
+**Communication**: 19. **Private Messages** — No inbox/PM access (some intentionally exclude) 20. **Chat** — No Reddit chat integration 21. **Notifications** — No notification management
 
-**User Features**:
-22. **Voting** — No upvoting/downvoting (intentionally excluded by all due to Reddit policy)
-23. **Awards/Gilding** — No awarding or award info
-24. **Friends/Blocked** — No friend/block list management
-25. **Saved/Hidden Management** — Only netixc has `get_saved_posts`; none manage hidden
-26. **User Trophies** — No trophy/karma breakdown info
-27. **Multireddits** — No multi management
+**User Features**: 22. **Voting** — No upvoting/downvoting (intentionally excluded by all due to Reddit policy) 23. **Awards/Gilding** — No awarding or award info 24. **Friends/Blocked** — No friend/block list management 25. **Saved/Hidden Management** — Only netixc has `get_saved_posts`; none manage hidden 26. **User Trophies** — No trophy/karma breakdown info 27. **Multireddits** — No multi management
 
-**Content Types**:
-28. **Live Threads** — No live thread creation, updates, or monitoring
-29. **Wiki Management** — Only PyPI `reddit-mcp-server` can *read* wikis; none can edit
-30. **Report Management** — No reporting functionality
+**Content Types**: 28. **Live Threads** — No live thread creation, updates, or monitoring 29. **Wiki Management** — Only PyPI `reddit-mcp-server` can _read_ wikis; none can edit 30. **Report Management** — No reporting functionality
 
 ### Partially Covered Features:
 
@@ -435,19 +433,19 @@ This creates a massive opportunity: a truly comprehensive Reddit MCP server woul
 
 ## Innovative Approaches Worth Adopting
 
-| Innovation | Source | Value | Adoption Difficulty |
-|-----------|--------|-------|-------------------|
-| **Semantic vector search** across 20K+ subreddits | Dialog (ChromaDB) | Unique differentiator for discovery | High (requires vector DB) |
-| **Safe mode** with configurable anti-spam levels | jordanburke | Essential for policy compliance | Low |
-| **Bot disclosure footer** | jordanburke | Reddit policy compliance | Trivial |
-| **Hexagonal architecture** | eliasbiondo | Clean, testable, maintainable | Medium |
-| **LLM-optimized output** formatting | reddit-mcp-buddy | Better AI consumption of data | Low |
-| **MCP Resources + Prompts** (not just tools) | Dialog | Richer MCP integration | Low |
-| **Historical content access** via PullPush | pullpush-mcp | Unique data source | Low |
-| **3-tier auth** (anonymous → app → user) | jordanburke, reddit-mcp-buddy | Maximum flexibility | Medium |
-| **Subreddit deep metadata** (rules, mods, traffic, wiki) | PyPI market research | Comprehensive subreddit intel | Low (PRAW supports this) |
-| **Feed management** for persistent research | Dialog | Research workflow support | Medium |
-| **Data export** (JSON/CSV) | PyPI market research, Dialog | Analysis pipeline integration | Low |
+| Innovation                                               | Source                        | Value                               | Adoption Difficulty       |
+| -------------------------------------------------------- | ----------------------------- | ----------------------------------- | ------------------------- |
+| **Semantic vector search** across 20K+ subreddits        | Dialog (ChromaDB)             | Unique differentiator for discovery | High (requires vector DB) |
+| **Safe mode** with configurable anti-spam levels         | jordanburke                   | Essential for policy compliance     | Low                       |
+| **Bot disclosure footer**                                | jordanburke                   | Reddit policy compliance            | Trivial                   |
+| **Hexagonal architecture**                               | eliasbiondo                   | Clean, testable, maintainable       | Medium                    |
+| **LLM-optimized output** formatting                      | reddit-mcp-buddy              | Better AI consumption of data       | Low                       |
+| **MCP Resources + Prompts** (not just tools)             | Dialog                        | Richer MCP integration              | Low                       |
+| **Historical content access** via PullPush               | pullpush-mcp                  | Unique data source                  | Low                       |
+| **3-tier auth** (anonymous → app → user)                 | jordanburke, reddit-mcp-buddy | Maximum flexibility                 | Medium                    |
+| **Subreddit deep metadata** (rules, mods, traffic, wiki) | PyPI market research          | Comprehensive subreddit intel       | Low (PRAW supports this)  |
+| **Feed management** for persistent research              | Dialog                        | Research workflow support           | Medium                    |
+| **Data export** (JSON/CSV)                               | PyPI market research, Dialog  | Analysis pipeline integration       | Low                       |
 
 ---
 
@@ -458,6 +456,7 @@ This creates a massive opportunity: a truly comprehensive Reddit MCP server woul
 **The answer is clear: COMPREHENSIVE COVERAGE.** Every existing implementation covers 5-20 tools focusing on the same features. Our server should cover 50-100+ tools spanning the full Reddit API.
 
 ### Priority 1: Immediate Differentiators (What nobody has)
+
 1. **Full Moderation Suite** — mod queue, ban/mute/unban, approve/remove, mod log, AutoModerator config, user notes, distinguished comments
 2. **Flair Management** — user flair CRUD, post flair CRUD, flair templates
 3. **Wiki CRUD** — read AND write/edit wiki pages
@@ -470,6 +469,7 @@ This creates a massive opportunity: a truly comprehensive Reddit MCP server woul
 10. **Poll Creation** — create and read poll data
 
 ### Priority 2: Must-Have Baseline (Match the best existing implementations)
+
 1. Full CRUD (create, read, edit, delete) for posts and comments
 2. Multi-sort browsing (hot, new, top, rising, controversial, best)
 3. Search (subreddit-scoped and site-wide)
@@ -482,6 +482,7 @@ This creates a massive opportunity: a truly comprehensive Reddit MCP server woul
 10. Multiple transports (stdio + HTTP/SSE)
 
 ### Priority 3: Nice-to-Have Advanced Features
+
 1. MCP Resources for subreddit data and user profiles
 2. MCP Prompts for guided workflows (research, moderation, content creation)
 3. Historical data via PullPush integration
@@ -494,6 +495,7 @@ This creates a massive opportunity: a truly comprehensive Reddit MCP server woul
 10. Custom emoji management
 
 ### Architecture Recommendations
+
 - **Use all three MCP primitives**: Tools + Resources + Prompts (only Dialog does this currently)
 - **Adopt hexagonal architecture** (a la eliasbiondo) for clean separation of concerns
 - **Implement 3-tier auth** (anonymous → app → user) with graceful degradation
@@ -505,6 +507,7 @@ This creates a massive opportunity: a truly comprehensive Reddit MCP server woul
 ## Sources
 
 ### Primary Repositories Analyzed (12)
+
 1. [karanb192/reddit-mcp-buddy](https://github.com/karanb192/reddit-mcp-buddy) — TypeScript, 570+ stars (accessed 2026-03-27)
 2. [adhikasp/mcp-reddit](https://github.com/adhikasp/mcp-reddit) — Python, 377 stars (accessed 2026-03-27)
 3. [Arindam200/reddit-mcp](https://github.com/Arindam200/reddit-mcp) — Python, 272 stars (accessed 2026-03-27)
@@ -519,6 +522,7 @@ This creates a massive opportunity: a truly comprehensive Reddit MCP server woul
 12. [mkerchenski/RedditAdsMcp](https://github.com/mkerchenski/RedditAdsMcp) — C#, 1 star (accessed 2026-03-27)
 
 ### GitHub Issues Analyzed (5 repos)
+
 13. [reddit-mcp-buddy issues](https://github.com/karanb192/reddit-mcp-buddy/issues) — 2 open (API policy) (accessed 2026-03-27)
 14. [mcp-reddit issues](https://github.com/adhikasp/mcp-reddit/issues) — 3 open (security, feeds, stability) (accessed 2026-03-27)
 15. [reddit-mcp issues](https://github.com/Arindam200/reddit-mcp/issues) — 2 open (comments, auth) (accessed 2026-03-27)
@@ -526,6 +530,7 @@ This creates a massive opportunity: a truly comprehensive Reddit MCP server woul
 17. [jordanburke issues](https://github.com/jordanburke/reddit-mcp-server/issues) — 0 open (clean!) (accessed 2026-03-27)
 
 ### Package Registries (5)
+
 18. [reddit-mcp-server on npm](https://www.npmjs.com/package/reddit-mcp-server) — v1.2.1 (accessed 2026-03-27)
 19. [systemprompt-mcp-reddit on npm](https://www.npmjs.com/package/systemprompt-mcp-reddit) (accessed 2026-03-27)
 20. [reddit-mcp-server on PyPI](https://pypi.org/project/reddit-mcp-server/) — v1.2.0 (accessed 2026-03-27)
@@ -533,6 +538,7 @@ This creates a massive opportunity: a truly comprehensive Reddit MCP server woul
 22. [reddit-mcp-tool on PyPI](https://pypi.org/project/reddit-mcp-tool/) (accessed 2026-03-27)
 
 ### Directories & Listings (5)
+
 23. [PulseMCP Reddit servers](https://www.pulsemcp.com/servers?q=reddit) — 39 Reddit-related servers listed (accessed 2026-03-27)
 24. [Glama MCP Registry](https://glama.ai/mcp/servers) (accessed 2026-03-27)
 25. [Awesome MCP Servers (wong2)](https://github.com/wong2/awesome-mcp-servers) (accessed 2026-03-27)
@@ -540,5 +546,6 @@ This creates a massive opportunity: a truly comprehensive Reddit MCP server woul
 27. [Apify Reddit MCP Server](https://apify.com/mcp/reddit-mcp-server) (accessed 2026-03-27)
 
 ### Community & Analysis
+
 28. [Awesome MCP Servers directory](https://mcp-awesome.com/) — 1200+ servers cataloged (accessed 2026-03-27)
 29. [Apify MCP platform](https://mcp.apify.com/) — Multiple Reddit actors (accessed 2026-03-27)

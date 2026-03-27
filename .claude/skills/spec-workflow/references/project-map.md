@@ -22,6 +22,7 @@ specs/
 ```
 
 Each epic folder contains:
+
 - `EPIC.md` — goal, context, research refs, task index table
 - `EXX-TYY-task-name.md` — self-contained task ticket
 
