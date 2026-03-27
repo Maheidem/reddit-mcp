@@ -1,6 +1,6 @@
 {
   "name": "@marcos-heidemann/reddit-mcp",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "The most comprehensive MCP server for Reddit — read, write, and moderate with 25+ tools",
   "type": "module",
   "bin": {
