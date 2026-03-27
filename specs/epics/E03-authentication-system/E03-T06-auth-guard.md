@@ -17,16 +17,25 @@ Build `src/reddit/auth-guard.ts`: utility to verify current auth tier supports r
 4. Can check for specific OAuth scopes
 
 ## Definition of Ready
-- [ ] Dependencies completed
-- [ ] Research sections read: FINAL-CONSOLIDATED-RESEARCH.md section 3 (tier capabilities); research/06-oauth-and-mcp-architecture.md (guard pattern)
-- [ ] Acceptance criteria reviewed and clear
+- [ ] E03-T02 (Auth Manager Core) is Done — guard queries the auth manager for current tier
+- [ ] Research read: FINAL-CONSOLIDATED-RESEARCH.md section 3.1 (Three-Tier Auth Strategy) — understand tier hierarchy: anon < app-only < user
+- [ ] Research read: FINAL-CONSOLIDATED-RESEARCH.md section 3.3 (OAuth Scopes) — understand which scopes map to which capabilities
+- [ ] Research read: FINAL-CONSOLIDATED-RESEARCH.md section 7.3 (Error Handling Strategy) — guard errors should return `isError: true` for recoverable tool errors
+- [ ] Research read: research/06-oauth-and-mcp-architecture.md — guard pattern and tier capability matrix
+- [ ] Understand the guard is used by individual tools (E04-E06) to check auth before making API calls
+- [ ] Understand error messages must name specific env vars needed (e.g., "Set REDDIT_USERNAME and REDDIT_PASSWORD")
 
 ## Definition of Done
-- [ ] All acceptance criteria met
-- [ ] `tsc --noEmit` passes
-- [ ] Tests written and passing
+- [ ] `requireAuth("user")` throws if current tier is anon or app-only
+- [ ] `requireAuth("app")` throws if current tier is anon, passes for app-only and user
+- [ ] `requireAuth("anon")` always succeeds (all tiers satisfy anonymous requirement)
+- [ ] Scope checking function verifies specific OAuth scopes were granted
+- [ ] Error messages name the specific env vars needed to upgrade to the required tier
+- [ ] Guard errors are structured for MCP `isError: true` response pattern
+- [ ] `tsc --noEmit` passes with zero errors
+- [ ] Unit tests cover all tier combinations: anon requesting user (fail), anon requesting anon (pass), app-only requesting user (fail), user requesting user (pass), scope check pass/fail
 - [ ] No lint warnings introduced
-- [ ] Public API exported from barrel file
+- [ ] Public API exported from `src/reddit/index.ts` barrel file
 
 ## Out of Scope
 Per-tool scope configuration (tools declare their own requirements).

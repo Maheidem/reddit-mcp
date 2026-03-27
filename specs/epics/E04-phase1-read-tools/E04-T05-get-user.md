@@ -17,16 +17,29 @@ Get user profile, posts, and comments. Uses `GET /user/{username}/about`, `/subm
 4. `history` scope used for posts/comments endpoints
 
 ## Definition of Ready
-- [ ] Dependencies completed
-- [ ] Research sections read: FINAL-CONSOLIDATED-RESEARCH.md sections 2, 10; research/01-reddit-official-api.md (user endpoints); research/10-tool-inventory.md
-- [ ] Acceptance criteria reviewed and clear
+- [ ] E02 (Core Infrastructure) is Done — HTTP client, rate limiter, error parser, types available
+- [ ] E03 (Authentication System) is Done — auth manager and auth guard available; `history` scope needed for posts/comments endpoints
+- [ ] Research read: FINAL-CONSOLIDATED-RESEARCH.md section 2.2 (Endpoint Catalog) — Users: 12+ endpoints including profile, history, trophies
+- [ ] Research read: FINAL-CONSOLIDATED-RESEARCH.md section 2.3 (Thing Types) — t2 (Account) fullname format
+- [ ] Research read: FINAL-CONSOLIDATED-RESEARCH.md section 10.1 (Phase 1 Read Tools) — `get_user`, `get_user_posts`, `get_user_comments` tools: auth=anon
+- [ ] Research read: FINAL-CONSOLIDATED-RESEARCH.md section 11.9 (Deleted Content Detection) — `author="[deleted]"` for user-deleted content
+- [ ] Research read: research/01-reddit-official-api.md — `GET /user/{username}/about`, `/submitted`, `/comments` endpoint details
+- [ ] Understand suspended users return minimal data with `is_suspended: true`; shadow-banned and deleted users return 404
 
 ## Definition of Done
-- [ ] All acceptance criteria met
-- [ ] `tsc --noEmit` passes
-- [ ] Tests written and passing
+- [ ] `get_user` tool registered with `McpServer.tool()` — returns karma breakdown, cake day, account age
+- [ ] `get_user_posts` tool registered with `McpServer.tool()` — lists user's submitted posts with sort and pagination
+- [ ] `get_user_comments` tool registered with `McpServer.tool()` — lists user's comments with sort and pagination
+- [ ] Posts and comments support sort (hot/new/top) and `after` cursor pagination
+- [ ] Suspended users handled gracefully — returns `is_suspended` status, not a crash
+- [ ] Deleted/shadow-banned users (404 response) return clear error with `isError: true`
+- [ ] `history` scope used when making authenticated requests to posts/comments endpoints
+- [ ] Zod schemas validate all params with LLM-readable descriptions
+- [ ] `raw_json=1` included in requests
+- [ ] `tsc --noEmit` passes with zero errors
+- [ ] Unit tests cover: normal user profile, suspended user, deleted user (404), user posts with pagination, user comments
 - [ ] No lint warnings introduced
-- [ ] Public API exported from barrel file
+- [ ] Public API exported from `src/tools/read/index.ts` barrel file
 
 ## Out of Scope
 User's saved/hidden/upvoted content (requires target user's auth).

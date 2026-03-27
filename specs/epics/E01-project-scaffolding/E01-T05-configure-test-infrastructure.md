@@ -16,16 +16,24 @@ Set up vitest with TypeScript support. Create first test using `InMemoryTranspor
 3. Test uses vitest `describe`/`it`/`expect`
 
 ## Definition of Ready
-- [ ] Dependencies completed
-- [ ] Research sections read: research/09-typescript-mcp-sdk-deep-dive.md (testing section)
-- [ ] Acceptance criteria reviewed and clear
+- [ ] Dependency: E01-T03 (Wire STDIO Transport) is Done -- `McpServer` with `reddit_ping` tool must exist to write a test against
+- [ ] Research: Read research/09-typescript-mcp-sdk-deep-dive.md section 7 -- Testing Patterns (testing pyramid, `InMemoryTransport` pattern, mocking, CLI testing)
+- [ ] Research: Read research/09-typescript-mcp-sdk-deep-dive.md section 2 -- Server Construction Patterns (understand `McpServer` API used in test setup)
+- [ ] Understand: `InMemoryTransport` from `@modelcontextprotocol/sdk/inMemory.js` creates linked client/server pair for in-process testing
+- [ ] Understand: `Client` from `@modelcontextprotocol/sdk/client/index.js` is used to call tools in tests
+- [ ] Understand: This test pattern (InMemoryTransport + Client) becomes the template for all future tool tests
+- [ ] ACs reviewed: 3 acceptance criteria covering npm test, in-memory client test, vitest usage
 
 ## Definition of Done
-- [ ] All acceptance criteria met
-- [ ] `tsc --noEmit` passes
-- [ ] Tests written and passing
+- [ ] AC1: `npm test` runs vitest and passes
+- [ ] AC2: Test creates an in-memory MCP client via `InMemoryTransport.createLinkedPair()`, connects, calls `reddit_ping`, asserts on the response
+- [ ] AC3: Test uses vitest `describe`/`it`/`expect` pattern
+- [ ] `vitest.config.ts` created with TypeScript support enabled
+- [ ] `package.json` has `"test"` script pointing to vitest
+- [ ] Test file located at `src/__tests__/server.test.ts`
+- [ ] `tsc --noEmit` passes with zero errors
 - [ ] No lint warnings introduced
-- [ ] Public API exported from barrel file
+- [ ] Test establishes the reusable pattern for all future MCP tool tests
 
 ## Out of Scope
 Integration or E2E test patterns (those come in E08).

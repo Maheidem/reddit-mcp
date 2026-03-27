@@ -18,15 +18,25 @@ Approve item from modqueue. Remove item with optional `spam` flag. Uses `POST /a
 5. Handles "already approved/removed" gracefully (not crash)
 
 ## Definition of Ready
-- [ ] Dependencies completed
-- [ ] Research sections read: FINAL section 9; research/05-reddit-moderation-apis.md
+- [ ] E02 (Core Infrastructure) is Done -- HTTP client and error parser available
+- [ ] E03 (Authentication System) is Done -- Tier 3 auth guard with scope checking available
+- [ ] Research read: FINAL-CONSOLIDATED-RESEARCH.md section 9.2 (Approve/Remove: `POST /api/approve`, `POST /api/remove` with spam flag)
+- [ ] Research read: research/05-reddit-moderation-apis.md section 1.1 (Core Content Actions -- approve/remove endpoints, parameters, scope `modposts`)
+- [ ] Research read: FINAL-CONSOLIDATED-RESEARCH.md section 11.2 (response format: both return empty `{}` on success)
+- [ ] Understand idempotent behavior: approving already-approved or removing already-removed items is a no-op (not an error)
+- [ ] Understand `spam=true` on remove trains Reddit's spam filter for that subreddit
 - [ ] Acceptance criteria reviewed and clear
 
 ## Definition of Done
-- [ ] All acceptance criteria met
+- [ ] `approve` accepts fullname (t1_xxx or t3_xxx) and approves the item from modqueue
+- [ ] `remove` accepts fullname with optional `spam: true` flag to train spam filter
+- [ ] Both require Tier 3 auth with `modposts` scope -- auth guard validates mod scope
+- [ ] Returns confirmation of action taken (success message even though API returns empty `{}`)
+- [ ] Handles "already approved/removed" gracefully -- no crash, returns success
+- [ ] Proper error for non-mods: clear message when user lacks moderator permissions
+- [ ] `api_type=json` included on POST requests
+- [ ] Zod schemas validate params with descriptions for both tools
 - [ ] `tsc --noEmit` passes
-- [ ] Tests written and passing
-- [ ] No lint warnings introduced
 - [ ] Public API exported from barrel file
 
 ## Out of Scope

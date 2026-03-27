@@ -16,16 +16,20 @@ Create `src/` with subdirectories: `reddit/`, `tools/`, `resources/`, `prompts/`
 3. `src/index.ts` entry point exists and is referenced by `package.json` bin
 
 ## Definition of Ready
-- [ ] Dependencies completed
-- [ ] Research sections read: research/09-typescript-mcp-sdk-deep-dive.md (project structure section)
-- [ ] Acceptance criteria reviewed and clear
+- [ ] Dependency: E01-T01 (Initialize npm Project and TypeScript) is Done -- package.json and tsconfig.json must exist to compile barrel files
+- [ ] Research: Read research/09-typescript-mcp-sdk-deep-dive.md section 9 -- Production Deployment (file structure showing `src/reddit/`, `src/tools/`, `src/resources/`, `src/prompts/`, `src/utils/`)
+- [ ] Research: Read FINAL-CONSOLIDATED-RESEARCH.md section 7.1 -- System Architecture diagram (understand which layers map to which directories)
+- [ ] Understand: Barrel files (`index.ts`) use placeholder exports only at this stage -- no implementation code
+- [ ] Understand: `src/index.ts` is the entry point referenced by `package.json` `"bin"` field
+- [ ] ACs reviewed: 3 acceptance criteria covering directory tree, barrel files, entry point
 
 ## Definition of Done
-- [ ] All acceptance criteria met
-- [ ] `tsc --noEmit` passes
-- [ ] Tests written and passing
+- [ ] AC1: Directory tree matches prescribed layout: `src/reddit/`, `src/tools/`, `src/resources/`, `src/prompts/`, `src/utils/`
+- [ ] AC2: Each subdirectory has an `index.ts` barrel file with placeholder exports
+- [ ] AC3: `src/index.ts` entry point exists and is referenced by `package.json` `"bin"` field
+- [ ] `tsc --noEmit` passes with zero errors (all barrels compile)
+- [ ] `npm run build` succeeds
 - [ ] No lint warnings introduced
-- [ ] Public API exported from barrel file
 
 ## Out of Scope
 Actual implementation code. Barrels should have placeholder exports only.

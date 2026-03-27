@@ -17,16 +17,22 @@ Test content validation (length limits, Unicode), bot disclosure, duplicate dete
 4. Duplicate detection hash match tested
 
 ## Definition of Ready
-- [ ] Dependencies completed
-- [ ] Research sections read: FINAL section 8; research/08-reddit-content-formatting.md
-- [ ] Acceptance criteria reviewed and clear
+- [ ] E05-T01 (content validation) and E05-T02 (bot disclosure + duplicate detection) are Done and stable
+- [ ] FINAL section 8 read: content length limits (title 300, selftext 40000, comment 10000)
+- [ ] research/08-reddit-content-formatting.md read: Unicode handling, Snudown markdown specifics
+- [ ] Vitest testing patterns for boundary-value testing understood
+- [ ] Bot footer format and custom footer via env var behavior understood
 
 ## Definition of Done
-- [ ] All acceptance criteria met
-- [ ] `tsc --noEmit` passes
-- [ ] Tests written and passing
-- [ ] No lint warnings introduced
-- [ ] Public API exported from barrel file
+- [ ] Boundary tests at exact character limits: 300/40000/10000 chars pass, 301/40001/10001 chars fail
+- [ ] Unicode emoji counted correctly as 1 character (test with single emoji, ZWJ sequences, CJK characters)
+- [ ] Bot footer tests: default footer text appended, custom footer via env var, footer format correct
+- [ ] Duplicate detection tests: same title+subreddit within window rejected, different title passes, expired window allows resubmission
+- [ ] Edge cases covered: empty strings, whitespace-only content, null/undefined inputs
+- [ ] No flaky tests -- deterministic inputs, no timing dependencies
+- [ ] Tests run in under 5 seconds total
+- [ ] `tsc --noEmit` passes with zero errors
+- [ ] No new lint warnings introduced
 
 ## Out of Scope
 Snudown rendering tests.

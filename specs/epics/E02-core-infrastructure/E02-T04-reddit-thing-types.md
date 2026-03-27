@@ -17,16 +17,28 @@ Build `src/reddit/types.ts`: TypeScript types for Thing (t1-t6), Listing, Post, 
 4. Post type detection helpers: `isGallery()`, `isPoll()`, `isVideo()`, `isCrosspost()`
 
 ## Definition of Ready
-- [ ] Dependencies completed
-- [ ] Research sections read: FINAL-CONSOLIDATED-RESEARCH.md section 2; research/01-reddit-official-api.md (Thing types); research/07-api-edge-cases-and-gotchas.md (quirks)
-- [ ] Acceptance criteria reviewed and clear
+- [ ] Dependency: E02-T01 (Reddit HTTP Client Foundation) is Done -- types need client context for how responses are shaped
+- [ ] Research: Read FINAL-CONSOLIDATED-RESEARCH.md section 2.3 -- Thing Types (t1=Comment, t2=Account, t3=Link/Post, t4=Message, t5=Subreddit, t6=Award; fullname format `tX_{id36}`)
+- [ ] Research: Read FINAL-CONSOLIDATED-RESEARCH.md section 2.2 -- Endpoint Catalog (understand which data shapes come from which endpoints)
+- [ ] Research: Read FINAL-CONSOLIDATED-RESEARCH.md section 8.1 -- Post Types and Detection (no single field determines post type; detection logic table)
+- [ ] Research: Read FINAL-CONSOLIDATED-RESEARCH.md section 11.4 -- The `replies` Field Problem (`""` empty string, not null, when no replies)
+- [ ] Research: Read FINAL-CONSOLIDATED-RESEARCH.md section 11.5 -- Null vs Missing vs Empty String (`edited` is `false` or float timestamp, `author` is `"[deleted]"` string)
+- [ ] Research: Read FINAL-CONSOLIDATED-RESEARCH.md section 11.7 -- Field Naming Inconsistencies (`over_18` on posts vs `over18` on subreddits)
+- [ ] Research: Read research/07-api-edge-cases-and-gotchas.md section 3.1 -- Response Format Inconsistencies (post type detection, field naming, `replies` field)
+- [ ] Understand: Listings wrap arrays of Things with pagination cursors (`before`/`after`) and hard limit of ~1000 items
+- [ ] ACs reviewed: 4 acceptance criteria covering types, replies quirk, edited quirk, and post type detection helpers
 
 ## Definition of Done
-- [ ] All acceptance criteria met
-- [ ] `tsc --noEmit` passes
-- [ ] Tests written and passing
+- [ ] AC1: TypeScript types defined for Post, Comment, Subreddit, User, Message, Listing with proper kind prefixes
+- [ ] AC2: `replies` field typed as `Listing | ""` (empty string, not null/undefined)
+- [ ] AC3: `edited` field typed as `boolean | number` (false when never edited, Unix timestamp when edited)
+- [ ] AC4: Post type detection helpers implemented: `isGallery()`, `isPoll()`, `isVideo()`, `isCrosspost()` using correct field checks
+- [ ] `tsc --noEmit` passes with zero errors
+- [ ] Unit tests cover: type guard return values for each post type, edge cases (missing fields, empty strings)
+- [ ] `over_18` used on Post types, `over18` used on Subreddit types (matching Reddit's inconsistent naming)
+- [ ] Exported from `src/reddit/index.ts` barrel file
+- [ ] TSDoc on all public types and type guard functions
 - [ ] No lint warnings introduced
-- [ ] Public API exported from barrel file
 
 ## Out of Scope
 Runtime validation (Zod schemas are per-tool).

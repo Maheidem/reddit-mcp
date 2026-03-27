@@ -18,16 +18,22 @@ Spawn server as subprocess, connect via STDIO, call 3 tools (1 read, 1 write, 1 
 5. Runs in CI without real Reddit credentials
 
 ## Definition of Ready
-- [ ] Dependencies completed
-- [ ] Research sections read: research/09-typescript-mcp-sdk-deep-dive.md (subprocess transport)
-- [ ] Acceptance criteria reviewed and clear
+- [ ] E08-T04 (integration tests) is Done -- integration test patterns established and passing
+- [ ] research/09-typescript-mcp-sdk-deep-dive.md subprocess transport section read
+- [ ] FINAL section 7.4 read: E2E testing with subprocess transport for full STDIO roundtrip
+- [ ] Subprocess spawning pattern understood: `child_process.spawn('node', ['dist/index.js'])` with STDIO pipes
+- [ ] Test mode mechanism understood: `REDDIT_MCP_TEST_MODE=true` env var enables mock responses without real credentials
+- [ ] Build step dependency understood: `tsc` must run before E2E tests since they use `dist/`
 
 ## Definition of Done
-- [ ] All acceptance criteria met
-- [ ] `tsc --noEmit` passes
-- [ ] Tests written and passing
-- [ ] No lint warnings introduced
-- [ ] Public API exported from barrel file
+- [ ] Server starts as subprocess via `node dist/index.js` and accepts MCP client connection over STDIO
+- [ ] Tests cover full lifecycle: spawn -> initialize -> list_tools -> call_tool (1 read, 1 write, 1 mod) -> shutdown
+- [ ] Server shuts down cleanly with no zombie processes (teardown kills subprocess on timeout, handles SIGTERM)
+- [ ] Tests run in CI without real Reddit credentials (uses `REDDIT_MCP_TEST_MODE=true`)
+- [ ] Tool call responses contain expected data structure from mock responses
+- [ ] Test teardown is robust: subprocess killed even on test failure/timeout
+- [ ] `tsc --noEmit` passes with zero errors
+- [ ] No new lint warnings introduced
 
 ## Out of Scope
 Real Reddit API calls, performance testing.

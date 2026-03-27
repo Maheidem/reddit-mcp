@@ -17,16 +17,23 @@ Test all 3 auth tiers. Mock token endpoint. Verify 50-min refresh. Test tier det
 4. Test env var parsing edge cases (partial config, invalid values)
 
 ## Definition of Ready
-- [ ] Dependencies completed
-- [ ] Research sections read: FINAL section 7.4; research/06-oauth-and-mcp-architecture.md (auth)
-- [ ] Acceptance criteria reviewed and clear
+- [ ] E03 (Authentication System) is Done: auth manager, all 3 tiers, auth guard, and wiring are stable
+- [ ] FINAL section 3 read: 3-tier progressive auth (anonymous, app-only, full OAuth)
+- [ ] research/06-oauth-and-mcp-architecture.md auth section read: tier detection from env vars, degradation chain
+- [ ] Vitest mocking patterns understood: `vi.fn()` for fetch (token endpoint), `vi.useFakeTimers()` for 50-min refresh
+- [ ] Tier detection logic understood: Tier 3 = client_id + client_secret + refresh_token, Tier 2 = client_id + client_secret, Tier 1 = nothing
 
 ## Definition of Done
-- [ ] All acceptance criteria met
-- [ ] `tsc --noEmit` passes
-- [ ] Tests written and passing
-- [ ] No lint warnings introduced
-- [ ] Public API exported from barrel file
+- [ ] Tests for each tier's token acquisition flow: Tier 1 (no token), Tier 2 (client credentials grant), Tier 3 (refresh_token grant)
+- [ ] Test for auto-refresh at 50-minute mark using `vi.useFakeTimers()` (not 60 minutes)
+- [ ] Test for graceful degradation chain: Tier 3 fails -> falls back to Tier 2 -> falls back to Tier 1
+- [ ] Test env var parsing edge cases: empty strings, whitespace-only values, partial config, missing vars
+- [ ] Token endpoint mocked with `vi.fn()` -- no real Reddit OAuth calls
+- [ ] Auth guard tests: correct tier detected from env, unauthorized tool calls rejected with clear error
+- [ ] No flaky tests -- all timing-dependent tests use fake timers
+- [ ] Tests run in under 5 seconds total
+- [ ] `tsc --noEmit` passes with zero errors
+- [ ] No new lint warnings introduced
 
 ## Out of Scope
 Real Reddit OAuth calls.

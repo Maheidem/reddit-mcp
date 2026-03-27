@@ -18,15 +18,24 @@ Edit self-post body or comment text (`POST /api/editusertext`). Delete own post 
 5. Error on attempting to edit/delete others' content
 
 ## Definition of Ready
-- [ ] Dependencies completed
-- [ ] Research sections read: FINAL section 8; research/07-api-edge-cases-and-gotchas.md
+- [ ] E03 (Authentication System) is Done -- Tier 3 auth guard available
+- [ ] Research read: FINAL-CONSOLIDATED-RESEARCH.md section 8.3 (body 40K limit for self-posts, 10K for comments)
+- [ ] Research read: FINAL-CONSOLIDATED-RESEARCH.md section 11.2 (response format inconsistencies: `{"json": {"data": {...}}}`)
+- [ ] Research read: research/07-api-edge-cases-and-gotchas.md section 3 (HTTP status surprises, error format variations)
+- [ ] Understand `POST /api/editusertext` endpoint: requires `edit` OAuth scope, edits body of self-posts and comments
+- [ ] Understand `POST /api/del` endpoint: requires `edit` scope, permanent deletion, cannot be undone
+- [ ] Understand that Reddit API does not distinguish "not your content" from other errors -- returns generic error
 - [ ] Acceptance criteria reviewed and clear
 
 ## Definition of Done
-- [ ] All acceptance criteria met
+- [ ] `edit_text` replaces body text with content validation applied (<=40K for posts, <=10K for comments)
+- [ ] `edit_text` re-appends bot footer after the new body text (preserves bot disclosure)
+- [ ] `delete_content` permanently removes own post or comment
+- [ ] Both require Tier 3 auth (full user OAuth) with `edit` scope -- auth guard rejects anon/app-only
+- [ ] Graceful error on attempting to edit/delete others' content
+- [ ] Safety layer enforced before API call on edit operations
+- [ ] Zod schemas validate params with descriptions: fullname (t1_/t3_ prefix), new body text
 - [ ] `tsc --noEmit` passes
-- [ ] Tests written and passing
-- [ ] No lint warnings introduced
 - [ ] Public API exported from barrel file
 
 ## Out of Scope

@@ -17,16 +17,30 @@ Register all 12 read tools in `src/tools/read/index.ts`. Wire into `server.ts`. 
 4. No duplicate tool names
 
 ## Definition of Ready
-- [ ] Dependencies completed
-- [ ] Research sections read: research/09-typescript-mcp-sdk-deep-dive.md (tool registration); research/10-tool-inventory.md (tool names and descriptions)
-- [ ] Acceptance criteria reviewed and clear
+- [ ] E04-T01 (Search Tool) is Done
+- [ ] E04-T02 (Get Post and Comments Tools) is Done
+- [ ] E04-T03 (Get Subreddit and Rules Tools) is Done
+- [ ] E04-T04 (Get Subreddit Posts Tool) is Done
+- [ ] E04-T05 (Get User, Posts, and Comments Tools) is Done
+- [ ] E04-T06 (Get Trending and Wiki Page Tools) is Done
+- [ ] E04-T07 (Get Me Tool) is Done
+- [ ] Research read: research/09-typescript-mcp-sdk-deep-dive.md — `McpServer.tool()` registration API, tool listing, high-level vs low-level API
+- [ ] Research read: research/10-tool-inventory.md — all 12 tool names, descriptions, and auth levels
+- [ ] Research read: FINAL-CONSOLIDATED-RESEARCH.md section 10.5 (Naming Convention) — `{action}_{resource}` pattern
+- [ ] Understand the full list of 12 tools: search, get_post, get_comments, get_subreddit, get_subreddit_rules, get_subreddit_posts, get_user, get_user_posts, get_user_comments, get_trending, get_wiki_page, get_me
 
 ## Definition of Done
-- [ ] All acceptance criteria met
-- [ ] `tsc --noEmit` passes
-- [ ] Tests written and passing
+- [ ] All 12 read tools listed by MCP Inspector when server starts
+- [ ] Tool descriptions are clear, concise, and under 200 characters each
+- [ ] Zod schemas have proper descriptions for all parameters across all 12 tools
+- [ ] No duplicate tool names in the registry
+- [ ] `registerReadTools(server)` function wires all 12 tools into McpServer
+- [ ] `server.ts` calls `registerReadTools()` during server setup
+- [ ] No tools from write or mod categories included
+- [ ] `tsc --noEmit` passes with zero errors
+- [ ] Registration test verifies all 12 tools are registered with correct names
 - [ ] No lint warnings introduced
-- [ ] Public API exported from barrel file
+- [ ] Public API exported from `src/tools/read/index.ts` barrel file
 
 ## Out of Scope
 Write or mod tool registration.

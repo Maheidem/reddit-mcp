@@ -17,16 +17,25 @@ Implement anonymous path: installed client credentials grant (no secret needed, 
 4. Graceful degradation to `.json` suffix fallback
 
 ## Definition of Ready
-- [ ] Dependencies completed
-- [ ] Research sections read: FINAL-CONSOLIDATED-RESEARCH.md section 3 (Tier 1); research/01-reddit-official-api.md (installed client grant)
-- [ ] Acceptance criteria reviewed and clear
+- [ ] E03-T02 (Auth Manager Core) is Done — anonymous grant implements the `TokenGrant` interface
+- [ ] Research read: FINAL-CONSOLIDATED-RESEARCH.md section 3.1 (Three-Tier Auth Strategy) — Tier 1 details: ~10 req/min, read-only, no credentials needed
+- [ ] Research read: FINAL-CONSOLIDATED-RESEARCH.md section 2.1 (API Structure) — understand base URL difference: `https://www.reddit.com` with `.json` suffix for unauthenticated fallback
+- [ ] Research read: FINAL-CONSOLIDATED-RESEARCH.md section 4.1 (Rate Limit Rules) — unauthenticated rate is 10 RPM per IP
+- [ ] Research read: research/01-reddit-official-api.md — installed client grant flow (device ID, no secret)
+- [ ] Understand the two paths: installed client credentials grant (primary) and `.json` suffix fallback (last resort)
+- [ ] Understand that this tier has significantly lower rate limits (~10 RPM) than authenticated tiers (100 QPM)
 
 ## Definition of Done
-- [ ] All acceptance criteria met
-- [ ] `tsc --noEmit` passes
-- [ ] Tests written and passing
+- [ ] Works with zero env vars configured — no credentials required
+- [ ] Can fetch public subreddit data at Tier 1
+- [ ] Correctly identifies as read-only tier via `getAuthTier()`
+- [ ] Graceful degradation: falls back to `.json` suffix on `https://www.reddit.com` if installed client grant fails
+- [ ] Implements `TokenGrant` interface from E03-T02
+- [ ] No credentials or tokens logged in anonymous path
+- [ ] `tsc --noEmit` passes with zero errors
+- [ ] Unit tests cover: successful anonymous auth, fallback to `.json` suffix, read-only tier identification
 - [ ] No lint warnings introduced
-- [ ] Public API exported from barrel file
+- [ ] Public API exported from `src/reddit/index.ts` barrel file
 
 ## Out of Scope
 Write operations at this tier.

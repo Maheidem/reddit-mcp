@@ -18,15 +18,26 @@ Read moderator notes for a user in a subreddit. Handle special 30 QPM rate limit
 5. Pagination supported
 
 ## Definition of Ready
-- [ ] Dependencies completed
-- [ ] Research sections read: FINAL section 9; research/05-reddit-moderation-apis.md
+- [ ] E02 (Core Infrastructure) is Done -- HTTP client and rate limiter available (rate limiter must support per-endpoint overrides)
+- [ ] E03 (Authentication System) is Done -- Tier 3 auth guard with scope checking available
+- [ ] Research read: FINAL-CONSOLIDATED-RESEARCH.md section 9.3 (Mod Notes Detail -- `GET /api/mod/notes`, 30 QPM special rate limit, 250 char max, 8 label types)
+- [ ] Research read: research/05-reddit-moderation-apis.md section 10 (User Notes / Mod Notes -- GET/POST/DELETE endpoints, note labels, constraints: 250 chars, 1000 notes per user per subreddit, 30 QPM)
+- [ ] Research read: research/05-reddit-moderation-apis.md section 16 (OAuth Scopes -- `modnote` required, requires "Manage Users" moderator permission)
+- [ ] Understand special rate limit: 30 QPM for mod notes endpoint (vs. standard 100 QPM) -- requires per-endpoint limiter configuration in E02-T02
+- [ ] Understand note labels enum: BOT_BAN, PERMA_BAN, BAN, ABUSE_WARNING, SPAM_WARNING, SPAM_WATCH, SOLID_CONTRIBUTOR, HELPFUL_USER
 - [ ] Acceptance criteria reviewed and clear
 
 ## Definition of Done
-- [ ] All acceptance criteria met
+- [ ] Returns mod notes for user+subreddit pair with note text, label, timestamp, and linked content
+- [ ] Rate limiter enforces 30 QPM for this endpoint (not the standard 100 QPM)
+- [ ] Note labels correctly parsed and validated against known enum values (BOT_BAN, PERMA_BAN, BAN, ABUSE_WARNING, SPAM_WARNING, SPAM_WATCH, SOLID_CONTRIBUTOR, HELPFUL_USER)
+- [ ] Requires Tier 3 auth with `modnote` scope -- auth guard validates mod scope
+- [ ] Pagination supported via `before` cursor
+- [ ] Proper error for non-mods: clear message when user lacks moderator permissions or "Manage Users" permission
+- [ ] `raw_json=1` parameter included on GET request
+- [ ] Zod schema validates params with descriptions: `subreddit`, `user`, `filter`, `before`
+- [ ] Per-endpoint rate limit override configured in rate limiter (modify `src/reddit/rate-limiter.ts`)
 - [ ] `tsc --noEmit` passes
-- [ ] Tests written and passing
-- [ ] No lint warnings introduced
 - [ ] Public API exported from barrel file
 
 ## Out of Scope

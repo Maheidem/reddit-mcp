@@ -18,15 +18,25 @@ Get moderation action history. Params: `subreddit`, `mod` (filter by moderator),
 5. Requires `modlog` scope
 
 ## Definition of Ready
-- [ ] Dependencies completed
-- [ ] Research sections read: FINAL section 9; research/05-reddit-moderation-apis.md
+- [ ] E02 (Core Infrastructure) is Done -- HTTP client and rate limiter available
+- [ ] E03 (Authentication System) is Done -- Tier 3 auth guard with scope checking available
+- [ ] Research read: FINAL-CONSOLIDATED-RESEARCH.md section 9.2 (Mod Log: `GET /r/{sub}/about/log` -- 43 action types)
+- [ ] Research read: research/05-reddit-moderation-apis.md section 9 (Mod Log -- endpoint, filter params, 43+ action types with categories, mod log entry object structure, 90-day data retention)
+- [ ] Research read: research/05-reddit-moderation-apis.md section 16 (OAuth Scopes -- `modlog` required)
+- [ ] Understand mod log entry fields: `id`, `created_utc`, `mod`, `action`, `target_fullname`, `target_author`, `details`, `description`
+- [ ] Understand 43 action type categories: content (15), user management (8), moderator management (5), settings (1), wiki (7), rules (3)
 - [ ] Acceptance criteria reviewed and clear
 
 ## Definition of Done
-- [ ] All acceptance criteria met
+- [ ] Returns mod actions with timestamps, moderator username, target, and details
+- [ ] Filters by action type (e.g., `banuser`, `removelink`, `approvecomment`) validated against known action types
+- [ ] Filters by moderator username via `mod` parameter
+- [ ] Pagination works via `after`/`before` cursors with configurable `limit` (max 500)
+- [ ] Requires Tier 3 auth with `modlog` scope -- auth guard validates mod scope
+- [ ] Proper error for non-mods: clear message when user lacks moderator permissions
+- [ ] `raw_json=1` parameter included on GET request
+- [ ] Zod schema validates params with descriptions: `subreddit`, `mod`, `type`, `limit`, `after`
 - [ ] `tsc --noEmit` passes
-- [ ] Tests written and passing
-- [ ] No lint warnings introduced
 - [ ] Public API exported from barrel file
 
 ## Out of Scope

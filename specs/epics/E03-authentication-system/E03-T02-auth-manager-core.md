@@ -18,16 +18,26 @@ Build `src/reddit/auth.ts`: `RedditAuthManager` class with `getAccessToken()`. C
 5. Unit test with mocked time verifies refresh timing
 
 ## Definition of Ready
-- [ ] Dependencies completed
-- [ ] Research sections read: FINAL-CONSOLIDATED-RESEARCH.md section 3; research/06-oauth-and-mcp-architecture.md (token lifecycle)
-- [ ] Acceptance criteria reviewed and clear
+- [ ] E03-T01 (Configuration and Environment Loading) is Done — auth manager consumes `RedditConfig`
+- [ ] Research read: FINAL-CONSOLIDATED-RESEARCH.md section 3.4 (Token Management) — understand 50-min refresh, in-memory storage, token lifecycle code pattern
+- [ ] Research read: FINAL-CONSOLIDATED-RESEARCH.md section 3.1 (Three-Tier Auth Strategy) — understand what each tier can do
+- [ ] Research read: research/06-oauth-and-mcp-architecture.md — token lifecycle details, grant strategy pattern
+- [ ] Understand that refresh tokens are permanent for script apps (never expire)
+- [ ] Understand the `TokenGrant` interface pattern: tier strategies (T03-T05) plug into this manager
+- [ ] Understand Trail of Bits finding: tokens must never be persisted to disk
 
 ## Definition of Done
-- [ ] All acceptance criteria met
-- [ ] `tsc --noEmit` passes
-- [ ] Tests written and passing
+- [ ] `getAccessToken()` returns cached token when not expired
+- [ ] Auto-refresh triggers at 50-minute mark (not 60) to avoid race conditions
+- [ ] Tokens stored in memory only — no disk writes, no `localStorage`, no file I/O
+- [ ] Token values never appear in log output or error messages
+- [ ] Refresh failures throw clear error with retry guidance (e.g., "Token refresh failed. Check credentials and retry.")
+- [ ] `TokenGrant` interface defined for tier strategies to implement (used by T03-T05)
+- [ ] `tsc --noEmit` passes with zero errors
+- [ ] Unit tests with mocked time (`vi.useFakeTimers`) verify refresh triggers at 50 min, not before
+- [ ] Unit tests verify cached token returned when still valid
 - [ ] No lint warnings introduced
-- [ ] Public API exported from barrel file
+- [ ] Public API exported from `src/reddit/index.ts` barrel file
 
 ## Out of Scope
 Specific grant type implementations (T03-T05). This is the framework they plug into.

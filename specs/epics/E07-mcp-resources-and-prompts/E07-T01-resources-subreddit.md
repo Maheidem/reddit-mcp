@@ -18,16 +18,23 @@ Implement `reddit://subreddit/{name}/info` and `reddit://subreddit/{name}/rules`
 5. MCP Inspector shows both resources
 
 ## Definition of Ready
-- [ ] Dependencies completed
-- [ ] Research sections read: FINAL section 12; research/09-typescript-mcp-sdk-deep-dive.md (resource registration)
-- [ ] Acceptance criteria reviewed and clear
+- [ ] E04-T03 (get_subreddit tool) is Done and its API call logic is reusable
+- [ ] MCP SDK resource registration pattern understood (`server.resource()` with URI templates)
+- [ ] FINAL section 12.1 read: URI schemes `reddit://subreddit/{name}/info` and `reddit://subreddit/{name}/rules`
+- [ ] research/09-typescript-mcp-sdk-deep-dive.md resource registration section read
+- [ ] Understand how resources differ from tools (cacheable, read-only, structured data)
+- [ ] `src/resources/` directory location and barrel export pattern decided
 
 ## Definition of Done
-- [ ] All acceptance criteria met
-- [ ] `tsc --noEmit` passes
-- [ ] Tests written and passing
-- [ ] No lint warnings introduced
-- [ ] Public API exported from barrel file
+- [ ] `reddit://subreddit/{name}/info` resource registered with `server.resource()` and returns JSON with subscribers, description, creation date
+- [ ] `reddit://subreddit/{name}/rules` resource registered and returns structured rules array
+- [ ] Both URI templates correctly parameterized with `{name}` placeholder
+- [ ] Resources reuse existing Reddit API call logic from E04-T03 (no duplicate HTTP calls)
+- [ ] MCP Inspector shows both resources and they return valid JSON responses
+- [ ] Unit tests cover both resources: valid subreddit, nonexistent subreddit error
+- [ ] Resources exported from `src/resources/index.ts` barrel file
+- [ ] `tsc --noEmit` passes with zero errors
+- [ ] No new lint warnings introduced
 
 ## Out of Scope
 Subreddit settings or mod-only data.

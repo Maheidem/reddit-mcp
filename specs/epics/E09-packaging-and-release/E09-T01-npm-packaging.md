@@ -18,16 +18,23 @@ Finalize `package.json`: `bin` entry, `files` whitelist, `engines`, `keywords`, 
 5. `prepublishOnly` runs build + test
 
 ## Definition of Ready
-- [ ] Dependencies completed
-- [ ] Research sections read: FINAL sections 6, 7; research/09
-- [ ] Acceptance criteria reviewed and clear
+- [ ] E04 (Read Tools), E05 (Write Tools), and E06 (Mod Tools) are Done -- all 25 tools functional
+- [ ] FINAL section 6 read: technology stack decisions (TypeScript, direct HTTP, MCP SDK)
+- [ ] FINAL section 7.2 read: transport strategy (STDIO primary, Streamable HTTP optional)
+- [ ] research/09-typescript-mcp-sdk-deep-dive.md read: packaging patterns for MCP servers
+- [ ] npm `bin`, `files`, `engines`, and `prepublishOnly` configuration patterns understood
+- [ ] Package name `reddit-mcp-server` availability on npm checked
 
 ## Definition of Done
-- [ ] All acceptance criteria met
-- [ ] `tsc --noEmit` passes
-- [ ] Tests written and passing
-- [ ] No lint warnings introduced
-- [ ] Public API exported from barrel file
+- [ ] `npm pack --dry-run` produces clean tarball with no tests, research, specs, or .github included
+- [ ] `npx reddit-mcp-server` starts the server successfully (bin entry points to compiled JS with shebang)
+- [ ] `files` field whitelists only production artifacts (dist/, README, LICENSE, CHANGELOG)
+- [ ] `engines` field specifies `"node": ">=18"`
+- [ ] `prepublishOnly` script runs `npm run build && npm test` before any publish
+- [ ] `package.json` has complete metadata: `description`, `keywords`, `repository`, `license`, `author`
+- [ ] `src/index.ts` has `#!/usr/bin/env node` shebang line for npx execution
+- [ ] `tsc --noEmit` passes with zero errors
+- [ ] No new lint warnings introduced
 
 ## Out of Scope
 npm publish automation (manual for v1.0)

@@ -18,15 +18,24 @@ List items needing mod review (reported + spam-filtered). Params: `subreddit`, `
 5. Clear error when user is not a mod of the subreddit
 
 ## Definition of Ready
-- [ ] Dependencies completed
-- [ ] Research sections read: FINAL section 9; research/05-reddit-moderation-apis.md
+- [ ] E02 (Core Infrastructure) is Done -- HTTP client, rate limiter, and error parser available
+- [ ] E03 (Authentication System) is Done -- Tier 3 auth guard with scope checking available
+- [ ] Research read: FINAL-CONSOLIDATED-RESEARCH.md section 9.2 (Modqueue: `GET /r/{sub}/about/modqueue` -- reported + spam-filtered items)
+- [ ] Research read: research/05-reddit-moderation-apis.md section 3 (Mod Queue -- 5 queue endpoints, parameters, response format with `num_reports`, `mod_reports`, `user_reports`)
+- [ ] Research read: research/05-reddit-moderation-apis.md section 16 (OAuth Scopes -- `modposts` + `read` required for modqueue)
+- [ ] Understand modqueue response format: standard Reddit listing with `data.children[]`, includes report fields
+- [ ] Understand non-mod behavior: 403 response when user is not a moderator of the subreddit
 - [ ] Acceptance criteria reviewed and clear
 
 ## Definition of Done
-- [ ] All acceptance criteria met
+- [ ] Returns list of modqueue items with report reasons (`num_reports`, `mod_reports`, `user_reports`)
+- [ ] Filters by type: `links` (posts only), `comments` (comments only), or all (default)
+- [ ] Pagination via `after` cursor works correctly with standard listing format
+- [ ] Requires Tier 3 auth with `modposts` + `read` scopes -- auth guard validates mod scope
+- [ ] Clear error message when user is not a moderator: "you are not a moderator of this subreddit" (detected from 403)
+- [ ] Zod schema validates params with descriptions: `subreddit`, `type`, `limit`, `after`
+- [ ] `raw_json=1` parameter included on GET request
 - [ ] `tsc --noEmit` passes
-- [ ] Tests written and passing
-- [ ] No lint warnings introduced
 - [ ] Public API exported from barrel file
 
 ## Out of Scope

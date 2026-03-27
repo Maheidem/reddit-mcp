@@ -17,16 +17,24 @@ For each tool category (read, write, mod), create integration tests using real `
 4. Tests verify error responses use `isError: true`
 
 ## Definition of Ready
-- [ ] Dependencies completed
-- [ ] Research sections read: research/09-typescript-mcp-sdk-deep-dive.md (InMemoryTransport section)
-- [ ] Acceptance criteria reviewed and clear
+- [ ] E04 (Read Tools), E05 (Write Tools), and E06 (Mod Tools) are all Done -- all 25 tools implemented
+- [ ] research/09-typescript-mcp-sdk-deep-dive.md InMemoryTransport section read: setup pattern for McpServer + InMemoryTransport
+- [ ] FINAL section 7.4 read: testing strategy with InMemoryTransport for CI-friendly integration tests
+- [ ] Understand test helper pattern: shared setup of McpServer + InMemoryTransport + mocked RedditClient
+- [ ] Zod schema validation error format understood (for testing invalid input rejection)
+- [ ] MCP `isError: true` error response format understood (FINAL section 7.3)
 
 ## Definition of Done
-- [ ] All acceptance criteria met
-- [ ] `tsc --noEmit` passes
-- [ ] Tests written and passing
-- [ ] No lint warnings introduced
-- [ ] Public API exported from barrel file
+- [ ] At least 1 integration test per tool (25 minimum across read, write, and mod categories)
+- [ ] All tests use `InMemoryTransport` -- zero network calls, no real Reddit API interaction
+- [ ] Shared test helper (`tests/helpers/test-server.ts`) sets up McpServer + InMemoryTransport + mocked client
+- [ ] Tests verify full tool round-trip: construct args -> send via transport -> validate response shape
+- [ ] Tests verify Zod schema validation rejects bad inputs with meaningful error messages
+- [ ] Tests verify error responses use `isError: true` for recoverable errors
+- [ ] Both success and error paths tested for each tool category
+- [ ] Mock Reddit API responses are realistic (match actual Reddit response shapes)
+- [ ] `tsc --noEmit` passes with zero errors
+- [ ] No new lint warnings introduced
 
 ## Out of Scope
 Real Reddit API calls.

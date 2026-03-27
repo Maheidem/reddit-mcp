@@ -18,16 +18,28 @@ Implement password grant (all 4 vars). 100 QPM, full read/write/mod. Request all
 5. Scope list configurable for Phase 2/3 expansion
 
 ## Definition of Ready
-- [ ] Dependencies completed
-- [ ] Research sections read: FINAL-CONSOLIDATED-RESEARCH.md section 3 (Tier 3); research/06-oauth-and-mcp-architecture.md (password grant)
-- [ ] Acceptance criteria reviewed and clear
+- [ ] E03-T02 (Auth Manager Core) is Done — full OAuth grant implements the `TokenGrant` interface
+- [ ] Research read: FINAL-CONSOLIDATED-RESEARCH.md section 3.1 (Three-Tier Auth Strategy) — Tier 3 details: 100 QPM, full read/write/mod, all 22 scopes available
+- [ ] Research read: FINAL-CONSOLIDATED-RESEARCH.md section 3.2 (OAuth2 App Types) — script app type with password grant (resource owner)
+- [ ] Research read: FINAL-CONSOLIDATED-RESEARCH.md section 3.3 (OAuth Scopes) — 12 Phase 1 scopes: `read identity submit edit vote privatemessages history wikiread modposts modcontributors modlog modnote`
+- [ ] Research read: FINAL-CONSOLIDATED-RESEARCH.md section 3.4 (Token Management) — refresh tokens are permanent for script apps
+- [ ] Research read: research/06-oauth-and-mcp-architecture.md — password grant flow details
+- [ ] Understand password grant requires: HTTP Basic Auth (CLIENT_ID:CLIENT_SECRET) + POST body with `grant_type=password`, `username`, `password`, and `scope`
 
 ## Definition of Done
-- [ ] All acceptance criteria met
-- [ ] `tsc --noEmit` passes
-- [ ] Tests written and passing
+- [ ] Authenticates with `grant_type=password` to `https://www.reddit.com/api/v1/access_token`
+- [ ] Requests all 12 Phase 1 scopes as space-separated string in request body
+- [ ] Uses HTTP Basic Auth header with base64-encoded `CLIENT_ID:CLIENT_SECRET`
+- [ ] Username and password sent in POST body (not URL params)
+- [ ] Returns access token that enables write and moderation endpoints
+- [ ] `getAuthTier()` returns `"user"` for this grant type
+- [ ] Scope list defined as extensible constant for Phase 2/3 expansion
+- [ ] Implements `TokenGrant` interface from E03-T02
+- [ ] Credentials (username, password, client secret) never logged or exposed in error messages
+- [ ] `tsc --noEmit` passes with zero errors
+- [ ] Unit tests cover: successful auth, scope string formatting, tier identification, credential handling in request body
 - [ ] No lint warnings introduced
-- [ ] Public API exported from barrel file
+- [ ] Public API exported from `src/reddit/index.ts` barrel file
 
 ## Out of Scope
 Web app auth code grant (that's Phase 2+ / E09-T05).

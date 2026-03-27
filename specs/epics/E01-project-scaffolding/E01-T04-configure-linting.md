@@ -16,16 +16,22 @@ Add ESLint (flat config) and Prettier. Configure for TypeScript ESM. Add `lint` 
 3. ESLint enforces `no-unused-vars`, `no-explicit-any`, `consistent-type-imports`
 
 ## Definition of Ready
-- [ ] Dependencies completed
-- [ ] Research sections read: FINAL-CONSOLIDATED-RESEARCH.md section 7 (tooling decisions)
-- [ ] Acceptance criteria reviewed and clear
+- [ ] Dependency: E01-T01 (Initialize npm Project and TypeScript) is Done -- package.json must exist for adding lint/format dev dependencies and scripts
+- [ ] Research: Read FINAL-CONSOLIDATED-RESEARCH.md section 6 -- Technology Stack Decision (TypeScript 5.x, ESM requirements)
+- [ ] Understand: ESLint v9+ uses flat config (`eslint.config.js`), not legacy `.eslintrc` format
+- [ ] Understand: Prettier and ESLint must not conflict -- use `eslint-config-prettier` or equivalent
+- [ ] Understand: TypeScript ESM projects need ESLint configured for `"type": "module"` and NodeNext module resolution
+- [ ] ACs reviewed: 3 acceptance criteria covering lint pass, format command, and specific lint rules
 
 ## Definition of Done
-- [ ] All acceptance criteria met
-- [ ] `tsc --noEmit` passes
-- [ ] Tests written and passing
-- [ ] No lint warnings introduced
-- [ ] Public API exported from barrel file
+- [ ] AC1: `npm run lint` passes on all existing project code without errors
+- [ ] AC2: `npm run format` auto-formats code using Prettier
+- [ ] AC3: ESLint enforces `no-unused-vars`, `no-explicit-any`, `consistent-type-imports`
+- [ ] `eslint.config.js` uses flat config format (ESLint v9+)
+- [ ] `.prettierrc` configuration file created
+- [ ] `package.json` updated with `lint` and `format` scripts and all lint/format dev dependencies
+- [ ] Prettier and ESLint do not conflict on any existing files
+- [ ] `tsc --noEmit` still passes after adding configuration
 
 ## Out of Scope
 Pre-commit hooks (can add later).

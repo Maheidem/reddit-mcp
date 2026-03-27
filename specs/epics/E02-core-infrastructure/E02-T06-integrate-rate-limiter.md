@@ -17,16 +17,26 @@ Wire `RedditRateLimiter` into `RedditClient`. Every request calls `acquire()` be
 4. Integration test with mocked fetch verifies full flow
 
 ## Definition of Ready
-- [ ] Dependencies completed
-- [ ] Research sections read: FINAL-CONSOLIDATED-RESEARCH.md section 4 (rate limiting strategy)
-- [ ] Acceptance criteria reviewed and clear
+- [ ] Dependency: E02-T01 (Reddit HTTP Client Foundation) is Done -- `RedditClient` class must exist to wire rate limiter into
+- [ ] Dependency: E02-T02 (Token Bucket Rate Limiter) is Done -- `TokenBucketRateLimiter` with `acquire()` and `updateFromHeaders()` must exist
+- [ ] Dependency: E02-T03 (Reddit Error Parser) is Done -- `parseRedditResponse()` must exist to run after each response
+- [ ] Research: Read FINAL-CONSOLIDATED-RESEARCH.md section 4.3 -- Token Bucket Implementation (full flow: acquire -> fetch -> updateFromHeaders -> parse)
+- [ ] Research: Read FINAL-CONSOLIDATED-RESEARCH.md section 4.4 -- Safety Layer (pre-emptive warnings at < 10 remaining)
+- [ ] Research: Read research/09-typescript-mcp-sdk-deep-dive.md section 6 -- Rate Limiting Propagation (communicating rate limits to LLM, pre-emptive warning pattern, header reading)
+- [ ] Research: Read research/09-typescript-mcp-sdk-deep-dive.md section 10 -- Reddit API Client Skeleton (reference implementation showing full request flow with rate limiter and headers)
+- [ ] Understand: The request flow is: `acquire()` -> `fetch()` -> `updateFromHeaders()` -> `parseRedditResponse()` -> return
+- [ ] Understand: Warning about low remaining tokens should be a string that tools can append to their MCP response
+- [ ] ACs reviewed: 4 acceptance criteria covering acquire before request, updateFromHeaders after response, low-token warning, and integration test
 
 ## Definition of Done
-- [ ] All acceptance criteria met
-- [ ] `tsc --noEmit` passes
-- [ ] Tests written and passing
+- [ ] AC1: Client calls `acquire()` before each HTTP request (blocks if rate limited)
+- [ ] AC2: Client calls `updateFromHeaders()` after each response using `X-Ratelimit-Used`, `X-Ratelimit-Remaining`, `X-Ratelimit-Reset` headers
+- [ ] AC3: When remaining < 10, a warning string is available for tools to append to results
+- [ ] AC4: Integration test with mocked `fetch` verifies the full flow: acquire -> fetch -> updateFromHeaders -> parseErrors -> return
+- [ ] `tsc --noEmit` passes with zero errors
+- [ ] Integration test covers: normal request flow, rate limit header propagation, low-token warning generation, error parsing on non-OK responses
+- [ ] `RedditClient` public API unchanged (existing tests still pass)
 - [ ] No lint warnings introduced
-- [ ] Public API exported from barrel file
 
 ## Out of Scope
 Auth header injection (E03-T07).

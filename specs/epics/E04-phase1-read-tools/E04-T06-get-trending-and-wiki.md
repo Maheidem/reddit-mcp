@@ -17,16 +17,27 @@ Get popular subreddits and read wiki pages. Uses `GET /subreddits/popular` and `
 4. `wikiread` scope used for wiki endpoint
 
 ## Definition of Ready
-- [ ] Dependencies completed
-- [ ] Research sections read: FINAL-CONSOLIDATED-RESEARCH.md sections 2, 10; research/01-reddit-official-api.md (subreddit listing, wiki endpoints); research/10-tool-inventory.md
-- [ ] Acceptance criteria reviewed and clear
+- [ ] E02 (Core Infrastructure) is Done — HTTP client, rate limiter, error parser, types available
+- [ ] E03 (Authentication System) is Done — auth manager and auth guard available; `wikiread` scope needed for wiki endpoint
+- [ ] Research read: FINAL-CONSOLIDATED-RESEARCH.md section 2.2 (Endpoint Catalog) — Subreddits: 16+ endpoints; Wiki: 10 endpoints
+- [ ] Research read: FINAL-CONSOLIDATED-RESEARCH.md section 10.1 (Phase 1 Read Tools) — `get_trending` (auth=anon) and `get_wiki_page` (auth=anon) tool specs
+- [ ] Research read: research/01-reddit-official-api.md — `GET /subreddits/popular` and `GET /r/{sub}/wiki/{page}` endpoint details
+- [ ] Understand wiki page content is in `data.content_md` field of the response
+- [ ] Understand wiki page names are case-sensitive and some subreddits have wiki disabled
 
 ## Definition of Done
-- [ ] All acceptance criteria met
-- [ ] `tsc --noEmit` passes
-- [ ] Tests written and passing
+- [ ] `get_trending` tool registered with `McpServer.tool()` — returns popular subreddits with subscriber counts and descriptions
+- [ ] `get_wiki_page` tool registered with `McpServer.tool()` — returns wiki page content as markdown text
+- [ ] Wiki page not found returns clear error with `isError: true`
+- [ ] Wiki disabled on subreddit handled gracefully with `isError: true`
+- [ ] `wikiread` scope used for wiki endpoint when authenticated
+- [ ] Trending endpoint returns Listing with pagination support
+- [ ] Zod schemas validate all params with LLM-readable descriptions
+- [ ] `raw_json=1` included in requests
+- [ ] `tsc --noEmit` passes with zero errors
+- [ ] Unit tests cover: trending list retrieval, wiki page retrieval, wiki not found, wiki disabled on subreddit
 - [ ] No lint warnings introduced
-- [ ] Public API exported from barrel file
+- [ ] Public API exported from `src/tools/read/index.ts` barrel file
 
 ## Out of Scope
 Wiki editing (Phase 3), subreddit discovery/search.

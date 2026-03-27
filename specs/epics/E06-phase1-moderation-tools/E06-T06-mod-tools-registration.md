@@ -17,16 +17,26 @@ Register all 6 mod tools. Wire auth guards requiring `user` tier. Integration te
 4. Tool descriptions explicitly mention mod-only access
 
 ## Definition of Ready
-- [ ] Dependencies completed
-- [ ] Research sections read: research/09-typescript-mcp-sdk-deep-dive.md (tool registration)
-- [ ] Acceptance criteria reviewed and clear
+- [ ] E06-T01 (`get_modqueue`) is Done
+- [ ] E06-T02 (`approve` and `remove`) is Done
+- [ ] E06-T03 (`ban_user`) is Done
+- [ ] E06-T04 (`get_mod_log`) is Done
+- [ ] E06-T05 (`get_mod_notes`) is Done
+- [ ] Research read: research/09-typescript-mcp-sdk-deep-dive.md (McpServer tool registration, Zod v4 schemas, tool naming conventions)
+- [ ] Research read: research/10-tool-inventory.md Phase 1 Moderation Tools (6 tools: get_modqueue, approve, remove, ban_user, get_mod_log, get_mod_notes)
+- [ ] Understand registration pattern established in E04-T08 and E05-T07 -- mirror the same approach
 
 ## Definition of Done
-- [ ] All acceptance criteria met
+- [ ] All 6 mod tools registered and listed by MCP Inspector: get_modqueue, approve, remove, ban_user, get_mod_log, get_mod_notes
+- [ ] Tool count matches spec: exactly 6 mod tools registered
+- [ ] Auth guard rejects all 6 mod tools when auth tier is not Tier 3 (user OAuth)
+- [ ] Scope errors are specific per tool (e.g., "requires modposts scope", "requires modcontributors scope", "requires modlog scope", "requires modnote scope")
+- [ ] Tool descriptions explicitly mention mod-only access in every tool's MCP description
+- [ ] Integration test verifies scope checking for each distinct required scope (modposts, modcontributors, modlog, modnote)
+- [ ] Barrel file `src/tools/mod/index.ts` exports all mod tools
+- [ ] Server wiring in `src/server.ts` registers mod tools
 - [ ] `tsc --noEmit` passes
-- [ ] Tests written and passing
 - [ ] No lint warnings introduced
-- [ ] Public API exported from barrel file
 
 ## Out of Scope
 Phase 2/3 mod tools.

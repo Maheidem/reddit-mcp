@@ -19,15 +19,26 @@ Submit text or link post. Params: `subreddit`, `title`, `text` (self), `url` (li
 6. Handles Reddit errors (rate limit, subreddit restrictions, banned)
 
 ## Definition of Ready
-- [ ] Dependencies completed
-- [ ] Research sections read: FINAL section 8; research/08-reddit-content-formatting.md; research/07-api-edge-cases-and-gotchas.md
+- [ ] E05-T01 (Safety Layer -- Content Validation) is Done -- content validation functions available
+- [ ] E05-T02 (Safety Layer -- Bot Disclosure) is Done -- bot footer and duplicate detection available
+- [ ] E03 (Authentication System) is Done -- Tier 3 (user OAuth) auth guard and token management available
+- [ ] Research read: FINAL-CONSOLIDATED-RESEARCH.md section 8.2 (Snudown Markdown -- always use `text` param, not RTJSON)
+- [ ] Research read: FINAL-CONSOLIDATED-RESEARCH.md section 11.1 (always include `api_type=json` on POST requests)
+- [ ] Research read: research/08-reddit-content-formatting.md section 4 (title 300 chars, body 40K chars)
+- [ ] Research read: research/07-api-edge-cases-and-gotchas.md section 2 (response format: `{"json": {"data": {...}}}`)
+- [ ] Understand `POST /api/submit` endpoint: `kind` = `self` or `link`, requires `submit` OAuth scope
 - [ ] Acceptance criteria reviewed and clear
 
 ## Definition of Done
-- [ ] All acceptance criteria met
+- [ ] Text post created with `kind=self` and body content; link post created with `kind=link` and URL
+- [ ] Safety layer enforced before API call: title validated (<=300, non-empty), body validated (<=40K)
+- [ ] Bot disclosure footer appended to text post body (NOT to link posts which have no body)
+- [ ] Duplicate detection active: title+subreddit checked before submission
+- [ ] Requires Tier 3 auth (full user OAuth) with `submit` scope -- auth guard rejects anon/app-only
+- [ ] Returns post fullname (`t3_xxx`) and permalink URL on success
+- [ ] Handles Reddit API errors: rate limit (429), subreddit restrictions, banned user, wrapped JSON error format
+- [ ] Zod schema validates all params with descriptions: `subreddit`, `title`, `text`, `url`, `flair_id`, `nsfw`, `spoiler`
 - [ ] `tsc --noEmit` passes
-- [ ] Tests written and passing
-- [ ] No lint warnings introduced
 - [ ] Public API exported from barrel file
 
 ## Out of Scope

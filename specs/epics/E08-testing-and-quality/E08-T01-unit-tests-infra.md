@@ -17,16 +17,23 @@ Full unit test suite for `src/reddit/client.ts`, `rate-limiter.ts`, `errors.ts`.
 4. 90%+ branch coverage on these 3 files
 
 ## Definition of Ready
-- [ ] Dependencies completed
-- [ ] Research sections read: FINAL section 7.4; research/09-typescript-mcp-sdk-deep-dive.md (testing)
-- [ ] Acceptance criteria reviewed and clear
+- [ ] E02 (Core Infrastructure) is Done: `client.ts`, `rate-limiter.ts`, `errors.ts` exist and are stable
+- [ ] FINAL section 7.3 read: all 4 Reddit error formats understood (HTTP error, JSON errors, jQuery callback, empty success)
+- [ ] FINAL section 7.4 read: testing strategy with vitest + mocked fetch
+- [ ] Vitest mocking patterns understood: `vi.fn()` for fetch, `vi.useFakeTimers()` for timing
+- [ ] Token bucket rate limiter internals understood: refill rate, burst capacity, header sync with `X-Ratelimit-*`
+- [ ] `raw_json=1` GET injection and `api_type=json` POST injection behavior understood
 
 ## Definition of Done
-- [ ] All acceptance criteria met
-- [ ] `tsc --noEmit` passes
-- [ ] Tests written and passing
-- [ ] No lint warnings introduced
-- [ ] Public API exported from barrel file
+- [ ] Client tests verify: correct headers (`User-Agent`, `Authorization`), URL construction, `raw_json=1` injection on GET, `api_type=json` on POST
+- [ ] Rate limiter tests verify: token consumption, blocking when exhausted, refill math with fake timers, header sync from Reddit's `X-Ratelimit-*` response headers
+- [ ] Error parser tests cover all 4 Reddit error formats: `{"message":"Forbidden","error":403}`, `{"json":{"errors":[...]}}`, jQuery callback format, empty success `{}`
+- [ ] 90%+ branch coverage on `client.ts`, `rate-limiter.ts`, and `errors.ts`
+- [ ] All mocks are realistic (mock responses match actual Reddit API response shapes)
+- [ ] No flaky tests -- timing tests use `vi.useFakeTimers()`, not real delays
+- [ ] Tests run in under 5 seconds total
+- [ ] `tsc --noEmit` passes with zero errors
+- [ ] No new lint warnings introduced
 
 ## Out of Scope
 Integration-level testing (E08-T04).

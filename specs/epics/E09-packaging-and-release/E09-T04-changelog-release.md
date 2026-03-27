@@ -16,16 +16,20 @@ Create CHANGELOG.md. Document release process. Add `release` npm script.
 3. First entry documents v1.0.0 feature set
 
 ## Definition of Ready
-- [ ] Dependencies completed
-- [ ] Research sections read: FINAL sections 6, 7
-- [ ] Acceptance criteria reviewed and clear
+- [ ] E09-T01 (npm packaging) is Done -- version number and package metadata finalized
+- [ ] FINAL section 10 read: complete tool inventory for v1.0.0 feature list
+- [ ] FINAL section 12 read: resources and prompts list for v1.0.0 feature documentation
+- [ ] Keep a Changelog format understood: https://keepachangelog.com/
+- [ ] Semver versioning rules understood for v1.0.0 initial release
 
 ## Definition of Done
-- [ ] All acceptance criteria met
-- [ ] `tsc --noEmit` passes
-- [ ] Tests written and passing
-- [ ] No lint warnings introduced
-- [ ] Public API exported from barrel file
+- [ ] `CHANGELOG.md` follows Keep a Changelog format with `## [Unreleased]` and `## [1.0.0]` sections
+- [ ] v1.0.0 entry lists all 25 tools, 6 resources, 4 prompts, 3 auth tiers, and transport modes
+- [ ] CHANGELOG categorizes changes correctly: Added, Changed, Fixed, etc.
+- [ ] `package.json` has `release` npm script that runs build -> test -> version bump
+- [ ] Release script uses `npm version` for semver bumps (not manual editing)
+- [ ] `tsc --noEmit` passes with zero errors
+- [ ] No new lint warnings introduced
 
 ## Out of Scope
 Automated publishing, semantic-release

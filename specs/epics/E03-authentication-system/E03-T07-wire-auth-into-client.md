@@ -17,16 +17,25 @@ Integrate `RedditAuthManager` into `RedditClient`. Every request gets `Authoriza
 4. Integration test verifies header injection with mocked auth
 
 ## Definition of Ready
-- [ ] Dependencies completed
-- [ ] Research sections read: FINAL-CONSOLIDATED-RESEARCH.md section 3 (auth integration); research/06-oauth-and-mcp-architecture.md (client wiring)
-- [ ] Acceptance criteria reviewed and clear
+- [ ] E02-T06 (Core Infrastructure Integration) is Done — client has rate limiter and error parser wired in
+- [ ] E03-T02 (Auth Manager Core) is Done — auth manager provides `getAccessToken()` and tier info
+- [ ] Research read: FINAL-CONSOLIDATED-RESEARCH.md section 3.4 (Token Management) — understand transparent token refresh before requests
+- [ ] Research read: FINAL-CONSOLIDATED-RESEARCH.md section 7.1 (System Architecture) — understand request flow: getToken() -> acquire() -> fetch(with Bearer header) -> updateFromHeaders() -> parseErrors() -> return
+- [ ] Research read: FINAL-CONSOLIDATED-RESEARCH.md section 11.1 (Critical Parameters) — `raw_json=1` on GET, `api_type=json` on POST must be added at this layer
+- [ ] Research read: research/06-oauth-and-mcp-architecture.md — client wiring pattern, base URL switching by tier
+- [ ] Understand anonymous tier uses different base URL (`https://www.reddit.com` with `.json` suffix) vs authenticated (`https://oauth.reddit.com`)
 
 ## Definition of Done
-- [ ] All acceptance criteria met
-- [ ] `tsc --noEmit` passes
-- [ ] Tests written and passing
+- [ ] All outgoing requests include `Authorization: Bearer {token}` header (except anonymous `.json` fallback)
+- [ ] Token refresh happens transparently — callers never see expired token errors
+- [ ] Auth tier determines base URL: `https://oauth.reddit.com` for authenticated, `https://www.reddit.com` for anonymous fallback
+- [ ] Integration test verifies Bearer header injection with mocked auth manager
+- [ ] Integration test verifies transparent token refresh mid-session
+- [ ] Token values never appear in log output or error messages
+- [ ] `tsc --noEmit` passes with zero errors
+- [ ] Tests written and passing (integration tests with mocked auth manager)
 - [ ] No lint warnings introduced
-- [ ] Public API exported from barrel file
+- [ ] Public API maintained in `src/reddit/index.ts` barrel file
 
 ## Out of Scope
 Tier-specific endpoint routing.

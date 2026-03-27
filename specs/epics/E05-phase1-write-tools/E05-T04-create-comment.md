@@ -19,15 +19,25 @@ Reply to post or comment. Reply to private message. Both use `POST /api/comment`
 6. Returns comment/reply fullname
 
 ## Definition of Ready
-- [ ] Dependencies completed
-- [ ] Research sections read: FINAL section 8; research/08-reddit-content-formatting.md
+- [ ] E05-T01 (Safety Layer -- Content Validation) is Done -- comment body validation (10K limit) available
+- [ ] E05-T02 (Safety Layer -- Bot Disclosure) is Done -- bot footer appending available
+- [ ] E03 (Authentication System) is Done -- Tier 3 auth guard available
+- [ ] Research read: FINAL-CONSOLIDATED-RESEARCH.md section 8.3 (comment limit: 10,000 chars, message limit: 10,000 chars)
+- [ ] Research read: research/08-reddit-content-formatting.md section 4.1 (comment char limit, validation behavior)
+- [ ] Understand `POST /api/comment` endpoint: parent fullname determines type -- t3_ (post), t1_ (comment reply), t4_ (message reply)
+- [ ] Understand scopes: `submit` for comments, `privatemessages` for message replies
 - [ ] Acceptance criteria reviewed and clear
 
 ## Definition of Done
-- [ ] All acceptance criteria met
+- [ ] `create_comment` comments on post (t3_xxx parent) and replies to comment (t1_xxx parent)
+- [ ] `reply_message` replies to private message (t4_xxx parent) using `privatemessages` scope
+- [ ] Safety layer enforced before API call: body validated (<=10K chars)
+- [ ] Bot disclosure footer appended to all comment and reply content
+- [ ] Requires Tier 3 auth (full user OAuth) -- auth guard rejects anon/app-only
+- [ ] Returns comment/reply fullname on success
+- [ ] Zod schemas validate all params with descriptions for both tools
+- [ ] Handles Reddit API errors: wrapped JSON format, rate limits, archived posts
 - [ ] `tsc --noEmit` passes
-- [ ] Tests written and passing
-- [ ] No lint warnings introduced
 - [ ] Public API exported from barrel file
 
 ## Out of Scope

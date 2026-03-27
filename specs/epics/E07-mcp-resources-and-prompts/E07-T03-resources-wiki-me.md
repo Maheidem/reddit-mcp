@@ -17,16 +17,24 @@ Implement `reddit://subreddit/{name}/wiki/{page}` and `reddit://me`. Wiki conten
 4. Both registered as resource templates
 
 ## Definition of Ready
-- [ ] Dependencies completed
-- [ ] Research sections read: FINAL section 12; research/09-typescript-mcp-sdk-deep-dive.md (resource registration)
-- [ ] Acceptance criteria reviewed and clear
+- [ ] E04-T06 (get_wiki_page tool) is Done and its API call logic is reusable
+- [ ] E04-T07 (get_me tool) is Done and its API call logic is reusable
+- [ ] MCP SDK resource registration pattern understood (`server.resource()` with URI templates)
+- [ ] FINAL section 12.1 read: URI schemes `reddit://subreddit/{name}/wiki/{page}` and `reddit://me`
+- [ ] Auth-gating pattern understood: `reddit://me` requires Tier 3 auth, must return clear error when unauthenticated
+- [ ] research/06-oauth-and-mcp-architecture.md auth tiers section read
 
 ## Definition of Done
-- [ ] All acceptance criteria met
-- [ ] `tsc --noEmit` passes
-- [ ] Tests written and passing
-- [ ] No lint warnings introduced
-- [ ] Public API exported from barrel file
+- [ ] `reddit://subreddit/{name}/wiki/{page}` resource registered and returns wiki page content as markdown text
+- [ ] `reddit://me` resource registered and returns authenticated user's profile as structured JSON
+- [ ] `reddit://me` returns a clear, descriptive error message (not a crash) when user is unauthenticated
+- [ ] Wiki resource reuses E04-T06 API call logic; me resource reuses E04-T07 logic
+- [ ] URI templates correctly parameterized (`{name}`, `{page}` for wiki; no params for me)
+- [ ] MCP Inspector shows both resources and they return expected data
+- [ ] Unit tests cover: valid wiki page, nonexistent wiki page, authenticated me, unauthenticated me error path
+- [ ] Resources exported from `src/resources/index.ts` barrel file
+- [ ] `tsc --noEmit` passes with zero errors
+- [ ] No new lint warnings introduced
 
 ## Out of Scope
 Wiki revision history.

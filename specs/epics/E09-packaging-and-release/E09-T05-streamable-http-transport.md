@@ -17,16 +17,23 @@ Add Streamable HTTP transport for hosted deployments. Behind `--transport http` 
 4. STDIO remains default when no flag
 
 ## Definition of Ready
-- [ ] Dependencies completed
-- [ ] Research sections read: FINAL sections 6, 7; research/09
-- [ ] Acceptance criteria reviewed and clear
+- [ ] E04 (Read Tools), E05 (Write Tools), and E06 (Mod Tools) are Done -- server functional over STDIO
+- [ ] FINAL section 7.2 read: Streamable HTTP is MCP-recommended transport for non-STDIO deployments; SSE deprecated March 2025
+- [ ] research/09-typescript-mcp-sdk-deep-dive.md read: MCP SDK HTTP transport setup, express/hono integration
+- [ ] DNS rebinding protection requirements understood: validate Host header against allowed origins
+- [ ] CLI argument parsing pattern decided: `--transport http` flag, `--port` flag (default 3000)
 
 ## Definition of Done
-- [ ] All acceptance criteria met
-- [ ] `tsc --noEmit` passes
-- [ ] Tests written and passing
-- [ ] No lint warnings introduced
-- [ ] Public API exported from barrel file
+- [ ] Server starts in HTTP mode with `--transport http` flag and listens on configured port
+- [ ] Server uses Streamable HTTP protocol (not deprecated SSE)
+- [ ] DNS rebinding protection enabled: Host header validated against allowed origins
+- [ ] STDIO remains the default transport when no `--transport` flag is provided
+- [ ] `--port` flag configures the HTTP listen port (defaults to 3000)
+- [ ] Tests verify: HTTP mode starts, STDIO mode still works, invalid transport flag rejected
+- [ ] Transport module exported from appropriate barrel file
+- [ ] `tsc --noEmit` passes with zero errors
+- [ ] No new lint warnings introduced
+- [ ] HTTP transport dependency (express or hono) added to `package.json`
 
 ## Out of Scope
 SSE transport (deprecated March 2025)

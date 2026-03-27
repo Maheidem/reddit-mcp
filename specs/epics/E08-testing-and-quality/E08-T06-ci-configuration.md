@@ -18,16 +18,22 @@ Create GitHub Actions workflow: lint -> type-check -> unit tests -> integration 
 5. Node 18 and 20 matrix
 
 ## Definition of Ready
-- [ ] Dependencies completed
-- [ ] Research sections read: GitHub Actions docs for Node.js projects
-- [ ] Acceptance criteria reviewed and clear
+- [ ] E08-T01, E08-T02, E08-T03 (unit test suites) are Done and passing
+- [ ] E08-T04 (integration tests) is Done and passing
+- [ ] GitHub Actions workflow syntax understood: `actions/setup-node@v4`, matrix strategy, caching
+- [ ] Pipeline ordering decided: install -> lint -> type-check -> unit tests -> integration tests (fail fast)
+- [ ] Node version matrix confirmed: [18, 20]
 
 ## Definition of Done
-- [ ] All acceptance criteria met
-- [ ] `tsc --noEmit` passes
-- [ ] Tests written and passing
-- [ ] No lint warnings introduced
-- [ ] Public API exported from barrel file
+- [ ] `.github/workflows/ci.yml` created with valid GitHub Actions syntax
+- [ ] CI triggers on push to main and on pull requests
+- [ ] Pipeline fails fast: lint and type-check run before tests (if lint fails, tests don't run)
+- [ ] Node modules cached using `actions/setup-node@v4` with cache key based on `package-lock.json` hash
+- [ ] Matrix strategy runs all steps on Node 18 and Node 20
+- [ ] All existing test suites (unit + integration) pass in CI
+- [ ] Workflow runs green on a real push (verified by running the workflow)
+- [ ] No dev/test artifacts or secrets leaking in CI logs
+- [ ] `tsc --noEmit` passes with zero errors
 
 ## Out of Scope
 Deployment, npm publish automation.

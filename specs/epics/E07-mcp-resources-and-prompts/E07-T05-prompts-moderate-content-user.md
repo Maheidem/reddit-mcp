@@ -18,16 +18,24 @@ Three workflow prompts: `reddit_moderate` (review modqueue), `reddit_content_pla
 5. `reddit_user_analysis` references get_user, get_user_posts, get_user_comments
 
 ## Definition of Ready
-- [ ] Dependencies completed
-- [ ] Research sections read: FINAL section 12; research/06-oauth-and-mcp-architecture.md (prompts section)
-- [ ] Acceptance criteria reviewed and clear
+- [ ] E04 (Phase 1 Read Tools) is Done -- prompts reference read tools by name
+- [ ] E05 (Phase 1 Write Tools) is Done -- `reddit_content_plan` references write tools
+- [ ] E06 (Phase 1 Mod Tools) is Done -- `reddit_moderate` references `approve`, `remove`, `ban_user`, `get_modqueue`
+- [ ] FINAL section 12.2 read: all 3 prompt definitions, parameters, and descriptions
+- [ ] research/06-oauth-and-mcp-architecture.md prompts section read
+- [ ] MCP SDK prompt registration pattern and Zod parameter validation understood
 
 ## Definition of Done
-- [ ] All acceptance criteria met
-- [ ] `tsc --noEmit` passes
-- [ ] Tests written and passing
-- [ ] No lint warnings introduced
-- [ ] Public API exported from barrel file
+- [ ] `reddit_moderate` prompt registered: params `subreddit`, references mod tools (`get_modqueue`, `approve`, `remove`, `ban_user`)
+- [ ] `reddit_content_plan` prompt registered: params `subreddit`, `goal`, guides research -> analysis -> content creation workflow
+- [ ] `reddit_user_analysis` prompt registered: params `username`, references `get_user`, `get_user_posts`, `get_user_comments`
+- [ ] All 3 prompts visible in MCP Inspector with correct parameter schemas
+- [ ] Each prompt generates genuinely useful multi-step workflow guidance (not just a single tool call wrapper)
+- [ ] Zod validation rejects invalid/missing required parameters for all 3 prompts
+- [ ] Unit tests verify: parameter validation, template rendering, correct tool name references in output
+- [ ] All 3 prompts exported from `src/prompts/index.ts` barrel file
+- [ ] `tsc --noEmit` passes with zero errors
+- [ ] No new lint warnings introduced
 
 ## Out of Scope
 Complex multi-step workflows.
