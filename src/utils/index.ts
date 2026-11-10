@@ -22,3 +22,5 @@ export {
   DuplicateDetector,
 } from "./safety.js";
 export type { ValidationResult } from "./safety.js";
+export { resolvePaths } from "./paths.js";
+export type { McpPaths } from "./paths.js";

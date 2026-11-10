@@ -21,6 +21,7 @@
 | [E09](epics/E09-packaging-and-release/EPIC.md)     | Packaging & Release      |   5   | Done        | 5/5      |
 | [E10](epics/E10-phase2-extended-tools/EPIC.md)     | Phase 2 Extended Tools   |  TBD  | Future      | —        |
 | [E11](epics/E11-phase3-power-user-tools/EPIC.md)   | Phase 3 Power User Tools |  TBD  | Future      | —        |
+| [E12](epics/E12-deployment-and-containerization/EPIC.md) | Deployment & Containerization |   1   | Done        | 1/1      |
 
 **Phase 1 Total**: 56 tasks | **Estimated**: 108-190 hours
 

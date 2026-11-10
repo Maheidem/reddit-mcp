@@ -19,9 +19,11 @@ E01 Project Scaffolding
  │
  └──────────────────────────────────────────────────────> E09 Packaging & Release
                                                            │
-                                                           └──> E10 Phase 2 (future)
-                                                                  │
-                                                                  └──> E11 Phase 3 (future)
+                                                           ├──> E10 Phase 2 (future)
+                                                           │      │
+                                                           │      └──> E11 Phase 3 (future)
+                                                           │
+                                                           └──> E12 Deployment & Containerization
 ```
 
 ### Legend

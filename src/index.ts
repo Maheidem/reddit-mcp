@@ -3,22 +3,18 @@
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { createServer } from "./server.js";
 import { startHttpTransport } from "./transport/index.js";
-
-/** Parse a CLI flag value: `--flag value` or `--flag=value`. */
-function getFlag(args: string[], flag: string): string | undefined {
-  const eqIdx = args.findIndex((a) => a.startsWith(`${flag}=`));
-  if (eqIdx !== -1) return args[eqIdx].split("=")[1];
-  const idx = args.indexOf(flag);
-  if (idx !== -1 && idx + 1 < args.length) return args[idx + 1];
-  return undefined;
-}
+import { getFlag, resolveHttpOptions } from "./cli.js";
 
 /**
  * Reddit MCP Server — entry point.
  *
  * Supports two transports:
  *   - STDIO (default): `npx @marcos-heidemann/reddit-mcp`
- *   - HTTP:            `npx @marcos-heidemann/reddit-mcp --transport http [--port 3000]`
+ *   - HTTP:            `npx @marcos-heidemann/reddit-mcp --transport http [--host 0.0.0.0] [--port 3000]`
+ *
+ * HTTP bind precedence (host and port): CLI flag > env var > default.
+ *   --host / MCP_HTTP_HOST  (default: 127.0.0.1)
+ *   --port / MCP_HTTP_PORT  (default: 3000)
  */
 async function main(): Promise<void> {
   const args = process.argv.slice(2);
@@ -30,13 +26,12 @@ async function main(): Promise<void> {
   }
 
   if (transport === "http") {
-    const portStr = getFlag(args, "--port");
-    const port = portStr ? parseInt(portStr, 10) : undefined;
-    if (portStr && (isNaN(port!) || port! < 1 || port! > 65535)) {
-      console.error(`reddit-mcp-server: invalid port "${portStr}". Must be 1-65535.`);
+    const { host, port, error } = resolveHttpOptions(args);
+    if (error) {
+      console.error(error);
       process.exit(1);
     }
-    await startHttpTransport(createServer, { port });
+    await startHttpTransport(createServer, { port, host });
   } else {
     // Default: STDIO transport
     const server = createServer();
